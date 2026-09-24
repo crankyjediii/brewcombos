@@ -60,9 +60,10 @@ export default async function handler(req, res) {
           model,
           temperature: 0.9,
           max_tokens: 1500,
+          // One user message instead of system + user: some free models
+          // (Gemma on Google's provider, for example) reject system prompts with a 400.
           messages: [
-            { role: 'system', content: systemPrompt(custom) },
-            { role: 'user', content: userPrompt(vibe, kind, sf) },
+            { role: 'user', content: `${systemPrompt(custom)}\n\n---\n\n${userPrompt(vibe, kind, sf)}` },
           ],
         }),
         signal: AbortSignal.timeout(25_000),
