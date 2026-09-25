@@ -1,5 +1,5 @@
 // GET /card.png?drink=energy&temp=iced&f=Strawberry,Peach&n=Name  ->  1200x630 PNG preview for a shared drink.
-// Add &format=story for a 1080x1920 image for stories (&l=day labels it "Drink of the day").
+// Add &format=story for a 1080x1920 image for stories (&l=day labels it "Drink of the day"), &format=pin for 1000x1500 Pinterest.
 // The same query always draws the same image, so the CDN keeps it for a year.
 import { comboFromQuery } from '../lib/menu.js';
 import { cardPNG, cleanName } from '../lib/card.js';
