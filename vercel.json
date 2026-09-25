@@ -1,5 +1,8 @@
 {
   "functions": {
-    "api/mix.js": { "maxDuration": 60 }
-  }
+    "api/mix.js": {
+      "maxDuration": 60
+    }
+  },
+  "trailingSlash": false
 }

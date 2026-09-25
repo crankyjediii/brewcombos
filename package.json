@@ -4,6 +4,10 @@
   "type": "module",
   "scripts": {
     "test": "node --test test/*.test.js",
-    "test:live": "node --env-file=.env.local test/live.js"
+    "test:live": "node --env-file=.env.local test/live.js",
+    "pages": "node scripts/build-pages.js"
+  },
+  "dependencies": {
+    "@vercel/analytics": "^2.0.1"
   }
 }

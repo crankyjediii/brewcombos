@@ -5,10 +5,14 @@ Live at https://brewcombos.com
 Turn a vibe into a 7 Brew drink, or pick flavors and get the exact words to order it.
 
 ```
-index.html      the whole front end
-lib/menu.js     drinks, flavors, extras, order wording, AI prompt (shared by page + API)
-api/mix.js      serverless function that calls OpenRouter with your key
-test/           unit tests for the menu logic and the API (no network needed)
+index.html        the app (vibe mixer + builder)
+assets/site.css   styles for every page
+lib/menu.js       drinks, flavors, extras, order wording, AI prompt (shared by page + API)
+lib/cup.js        the cup drawing, shared by the app and the drink pages
+lib/drinks.js     named combos that get their own page
+scripts/build-pages.js   generates drinks/*, the collection pages and sitemap.xml
+api/mix.js        serverless function that calls OpenRouter with your key
+test/             unit tests (no network needed)
 ```
 
 ## Settings
@@ -57,6 +61,16 @@ npm run test:live   # sends real vibes through the API with the key in .env.loca
 ```
 
 The API turns off model "reasoning" on purpose. Reasoning models otherwise think for 20 to 30 seconds before answering and hit the timeout; with it off, a reply takes about 5 seconds.
+
+## Drink pages
+
+`/drinks/<slug>` pages, the `/drinks` index, the collection pages (energy, coffee, sugar-free, ...) and `sitemap.xml` are generated from `lib/drinks.js`. After editing that file, or anything that changes order wording:
+
+```
+npm run pages
+```
+
+Commit the generated files; Vercel serves them as plain HTML. `npm test` fails if they are out of date.
 
 ## Editing the menu
 
