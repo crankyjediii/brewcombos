@@ -4,7 +4,7 @@
       "maxDuration": 60
     },
     "api/card.js": {
-      "includeFiles": "lib/fonts/**",
+      "includeFiles": "{lib/fonts/**,node_modules/harfbuzzjs/hb.wasm,node_modules/satori/yoga.wasm}",
       "memory": 1024
     }
   },

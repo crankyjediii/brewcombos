@@ -58,3 +58,8 @@ test('titles for unnamed drinks fit on the card', () => {
   assert.equal(cleanName('  Sunset   Sprint!  '), 'Sunset Sprint!');
   assert.equal(cleanName('x'.repeat(80)).length, 40);
 });
+
+test('the share page does not load the image libraries', async () => {
+  const { readFileSync } = await import('node:fs');
+  assert.doesNotMatch(readFileSync('api/share.js', 'utf8'), /from '[^']*(card\.js|satori|resvg)/);
+});

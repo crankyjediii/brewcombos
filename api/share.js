@@ -1,7 +1,7 @@
 // GET /s?drink=energy&temp=iced&f=Strawberry,Peach&n=Name  ->  a page for a shared drink.
 // The link preview (title, order line, drink image) is what makes a shared link worth tapping.
+// Keep this free of lib/card.js: the image libraries are heavy and only api/card.js bundles their files.
 import * as M from '../lib/menu.js';
-import { comboTitle, cleanName } from '../lib/card.js';
 import { SITE, esc, page, cup, copyBtn, shareBtn } from '../lib/layout.js';
 import { cardURL } from '../scripts/build-pages.js';
 import { COMBOS } from '../lib/drinks.js';
@@ -14,8 +14,8 @@ export default function handler(req, res) {
     res.setHeader('Location', '/');
     return res.end();
   }
-  const name = cleanName(url.searchParams.get('n'));
-  const title = comboTitle(o, name);
+  const name = M.cleanName(url.searchParams.get('n'));
+  const title = M.comboTitle(o, name);
   const line = M.orderLine(o);
   const query = M.comboToQuery(o) + (name ? `&n=${encodeURIComponent(name)}` : '');
 
