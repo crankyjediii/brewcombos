@@ -87,7 +87,7 @@
         <p class="label">Coffee</p>
         <h1>Toasted Marshmallow Cold Brew</h1>
         <p class="lede">One flavor is all it needs. Toasted marshmallow gives cold brew a campfire sweetness without much sugar.</p>
-        <div class="say">
+        <div class="say" id="order">
           <p class="label">Say this at the window</p>
           <p class="line">Can I get a medium cold brew with toasted marshmallow, plus a splash of oat milk?</p>
           <div class="actions">
@@ -96,6 +96,7 @@
             <button class="btn quiet" type="button" data-share="/drinks/toasted-marshmallow-cold-brew" data-title="Toasted Marshmallow Cold Brew" data-text="Can I get a medium cold brew with toasted marshmallow, plus a splash of oat milk?" data-card="https://brewcombos.com/card.png?drink=coldbrew&amp;temp=iced&amp;size=medium&amp;milk=oat&amp;f=Toasted+Marshmallow&amp;n=Toasted%20Marshmallow%20Cold%20Brew" data-story="https://brewcombos.com/card.png?drink=coldbrew&amp;temp=iced&amp;size=medium&amp;milk=oat&amp;f=Toasted+Marshmallow&amp;n=Toasted%20Marshmallow%20Cold%20Brew&amp;format=story" data-filename="toasted-marshmallow-cold-brew.png">Share</button>
           </div>
         </div>
+        <p class="prefs-note" id="prefs-note" hidden></p>
         
       </div>
     </article>
@@ -103,11 +104,11 @@
     <div class="drink-more">
       <section aria-labelledby="in-h">
         <h2 id="in-h">What's in it</h2>
-        <dl class="facts"><div><dt>Base</dt><dd>Cold Brew · smooth, coffee-forward</dd></div><div><dt>Size</dt><dd>Medium</dd></div><div><dt>Temperature</dt><dd>Iced</dd></div><div><dt>Milk</dt><dd>Oat</dd></div><div><dt>Flavors</dt><dd><ul class="flavors-inline"><li><span class="sw" style="--c:#EFD9B5"></span>Toasted Marshmallow</li></ul></dd></div><div><dt>Caffeine</dt><dd>Yes</dd></div></dl>
+        <dl class="facts" id="facts"><div><dt>Base</dt><dd>Cold Brew · smooth, coffee-forward</dd></div><div><dt>Size</dt><dd>Medium</dd></div><div><dt>Temperature</dt><dd>Iced</dd></div><div><dt>Milk</dt><dd>Oat</dd></div><div><dt>Flavors</dt><dd><ul class="flavors-inline"><li><span class="sw" style="--c:#EFD9B5"></span>Toasted Marshmallow</li></ul></dd></div><div><dt>Caffeine</dt><dd>Yes</dd></div></dl>
       </section>
       <section aria-labelledby="var-h">
         <h2 id="var-h">Other ways to order it</h2>
-        <ul class="variations">
+        <ul class="variations" id="variations">
           <li><p class="label">Sugar-free</p><p>Can I get a medium cold brew with sugar-free toasted marshmallow, plus a splash of oat milk?</p><button class="btn" type="button" data-say="Can I get a medium cold brew with sugar-free toasted marshmallow, plus a splash of oat milk?"><span class="idle">Copy</span><span class="ok">Copied</span></button></li>
           <li><p class="label">Large</p><p>Can I get a large cold brew with toasted marshmallow, plus a splash of oat milk?</p><button class="btn" type="button" data-say="Can I get a large cold brew with toasted marshmallow, plus a splash of oat milk?"><span class="idle">Copy</span><span class="ok">Copied</span></button></li>
         </ul>
@@ -119,27 +120,28 @@
       <ol class="combo-list">
     <li><a href="/drinks/salted-caramel-cold-brew">
       <span class="mini" aria-hidden="true" style="--a:#5C3720;--b:#B9772F;--c:#B9772F"></span>
-      <span class="nm"><b>Salted Caramel Cold Brew</b><span>Medium Cold Brew, cream</span></span>
-      <span class="ln">Can I get a medium cold brew with salted caramel, plus a splash of cream and soft top?</span>
+      <span class="nm"><b>Salted Caramel Cold Brew</b><span data-q="drink=coldbrew&amp;temp=iced&amp;size=medium&amp;milk=cream&amp;f=Salted+Caramel&amp;x=softtop" data-show="base">Medium Cold Brew, cream</span></span>
+      <span class="ln" data-q="drink=coldbrew&amp;temp=iced&amp;size=medium&amp;milk=cream&amp;f=Salted+Caramel&amp;x=softtop">Can I get a medium cold brew with salted caramel, plus a splash of cream and soft top?</span>
     </a></li>
     <li><a href="/drinks/irish-cream-cold-brew">
       <span class="mini" aria-hidden="true" style="--a:#5C3720;--b:#D8BE93;--c:#F1E2B3"></span>
-      <span class="nm"><b>Irish Cream Cold Brew</b><span>Medium Cold Brew</span></span>
-      <span class="ln">Can I get a medium cold brew with irish cream and vanilla, plus cold foam?</span>
+      <span class="nm"><b>Irish Cream Cold Brew</b><span data-q="drink=coldbrew&amp;temp=iced&amp;size=medium&amp;milk=none&amp;f=Irish+Cream%2CVanilla&amp;x=coldfoam" data-show="base">Medium Cold Brew</span></span>
+      <span class="ln" data-q="drink=coldbrew&amp;temp=iced&amp;size=medium&amp;milk=none&amp;f=Irish+Cream%2CVanilla&amp;x=coldfoam">Can I get a medium cold brew with irish cream and vanilla, plus cold foam?</span>
     </a></li>
     <li><a href="/drinks/chocolate-hazelnut-mocha">
       <span class="mini" aria-hidden="true" style="--a:#8C5B3D;--b:#9A6A3E;--c:#9A6A3E"></span>
-      <span class="nm"><b>Chocolate Hazelnut Mocha</b><span>Medium iced Mocha</span></span>
-      <span class="ln">Can I get a medium iced mocha with hazelnut, plus whipped cream?</span>
+      <span class="nm"><b>Chocolate Hazelnut Mocha</b><span data-q="drink=mocha&amp;temp=iced&amp;size=medium&amp;milk=whole&amp;f=Hazelnut&amp;x=whip" data-show="base">Medium iced Mocha</span></span>
+      <span class="ln" data-q="drink=mocha&amp;temp=iced&amp;size=medium&amp;milk=whole&amp;f=Hazelnut&amp;x=whip">Can I get a medium iced mocha with hazelnut, plus whipped cream?</span>
     </a></li>
     <li><a href="/drinks/coconut-almond-mocha">
       <span class="mini" aria-hidden="true" style="--a:#8C5B3D;--b:#F5F2EA;--c:#E2C9A0"></span>
-      <span class="nm"><b>Coconut Almond Mocha</b><span>Medium iced Mocha, almond milk</span></span>
-      <span class="ln">Can I get a medium iced almond milk mocha with coconut and almond?</span>
+      <span class="nm"><b>Coconut Almond Mocha</b><span data-q="drink=mocha&amp;temp=iced&amp;size=medium&amp;milk=almond&amp;f=Coconut%2CAlmond" data-show="base">Medium iced Mocha, almond milk</span></span>
+      <span class="ln" data-q="drink=mocha&amp;temp=iced&amp;size=medium&amp;milk=almond&amp;f=Coconut%2CAlmond">Can I get a medium iced almond milk mocha with coconut and almond?</span>
     </a></li>
   </ol>
     </section>
 
+    <script type="application/json" id="combo-data">{"slug":"toasted-marshmallow-cold-brew","name":"Toasted Marshmallow Cold Brew","combo":{"drink":"coldbrew","temp":"iced","size":"medium","milk":"oat","flavors":["Toasted Marshmallow"],"extras":[],"sweet":"regular","sf":false}}</script>
     <aside class="nudge">
       <p><strong>Not quite your mood?</strong> Describe it in a few words and get three drinks made for it.</p>
       <a class="btn primary" href="/">Mix from a vibe</a>
@@ -157,6 +159,7 @@ document.addEventListener('click', async e => {
 </script>
 <script type="module" src="/assets/settings.js"></script>
 <script type="module" src="/assets/share.js"></script>
+<script type="module" src="/assets/drink-page.js"></script>
 <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments) };</script>
 <script defer src="/_vercel/insights/script.js"></script>
 </body>

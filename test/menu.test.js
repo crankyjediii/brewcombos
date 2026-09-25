@@ -195,3 +195,17 @@ test('applyPrefs: size, milk where allowed, sugar-free', () => {
   assert.equal(sf.sf, true);
   assert.equal(sf.sweet, 'regular');
 });
+
+test('orderFacts and orderVariations follow the combo', () => {
+  const o = combo({ drink: 'latte', milk: 'oat', flavors: ['Vanilla'], sweet: 'half' });
+  const facts = Object.fromEntries(M.orderFacts(o));
+  assert.equal(facts.Size, 'Medium');
+  assert.equal(facts.Milk, 'Oat');
+  assert.deepEqual(facts.Flavors, ['Vanilla']);
+  assert.equal(facts.Sweetness, 'half sweet');
+  assert.equal(facts.Caffeine, 'Yes');
+  assert.equal(Object.fromEntries(M.orderFacts({ ...o, sf: true })).Syrups, 'Sugar-free');
+  assert.deepEqual(M.orderVariations(o).map(v => v[0]), ['Sugar-free', 'Hot', 'Chiller', 'Large']);
+  assert.deepEqual(M.orderVariations(M.fixCombo({ ...o, size: 'large', sf: true })).map(v => v[0]), ['Hot', 'Chiller']);
+  assert.deepEqual(M.orderVariations(combo({ extras: ['whip'] })).map(v => v[0]), ['Hot', 'Chiller', 'Large']);  // whip: no sugar-free version
+});

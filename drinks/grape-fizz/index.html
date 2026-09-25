@@ -87,7 +87,7 @@
         <p class="label">No caffeine</p>
         <h1>Grape Fizz</h1>
         <p class="lede">Just grape in sparkling soda. A clean, nostalgic grape soda.</p>
-        <div class="say">
+        <div class="say" id="order">
           <p class="label">Say this at the window</p>
           <p class="line">Can I get a medium Fizz with grape?</p>
           <div class="actions">
@@ -96,6 +96,7 @@
             <button class="btn quiet" type="button" data-share="/drinks/grape-fizz" data-title="Grape Fizz" data-text="Can I get a medium Fizz with grape?" data-card="https://brewcombos.com/card.png?drink=fizz&amp;temp=iced&amp;size=medium&amp;f=Grape&amp;n=Grape%20Fizz" data-story="https://brewcombos.com/card.png?drink=fizz&amp;temp=iced&amp;size=medium&amp;f=Grape&amp;n=Grape%20Fizz&amp;format=story" data-filename="grape-fizz.png">Share</button>
           </div>
         </div>
+        <p class="prefs-note" id="prefs-note" hidden></p>
         
       </div>
     </article>
@@ -103,11 +104,11 @@
     <div class="drink-more">
       <section aria-labelledby="in-h">
         <h2 id="in-h">What's in it</h2>
-        <dl class="facts"><div><dt>Base</dt><dd>Fizz · sparkling, no caffeine</dd></div><div><dt>Size</dt><dd>Medium</dd></div><div><dt>Temperature</dt><dd>Iced</dd></div><div><dt>Flavors</dt><dd><ul class="flavors-inline"><li><span class="sw" style="--c:#7B3FA8"></span>Grape</li></ul></dd></div><div><dt>Caffeine</dt><dd>None</dd></div></dl>
+        <dl class="facts" id="facts"><div><dt>Base</dt><dd>Fizz · sparkling, no caffeine</dd></div><div><dt>Size</dt><dd>Medium</dd></div><div><dt>Temperature</dt><dd>Iced</dd></div><div><dt>Flavors</dt><dd><ul class="flavors-inline"><li><span class="sw" style="--c:#7B3FA8"></span>Grape</li></ul></dd></div><div><dt>Caffeine</dt><dd>None</dd></div></dl>
       </section>
       <section aria-labelledby="var-h">
         <h2 id="var-h">Other ways to order it</h2>
-        <ul class="variations">
+        <ul class="variations" id="variations">
           <li><p class="label">Sugar-free</p><p>Can I get a medium Fizz with sugar-free grape?</p><button class="btn" type="button" data-say="Can I get a medium Fizz with sugar-free grape?"><span class="idle">Copy</span><span class="ok">Copied</span></button></li>
           <li><p class="label">Large</p><p>Can I get a large Fizz with grape?</p><button class="btn" type="button" data-say="Can I get a large Fizz with grape?"><span class="idle">Copy</span><span class="ok">Copied</span></button></li>
         </ul>
@@ -119,27 +120,28 @@
       <ol class="combo-list">
     <li><a href="/drinks/strawberry-banana-smoothie">
       <span class="mini" aria-hidden="true" style="--a:#F0506E;--b:#F3E07A;--c:#F3E07A"></span>
-      <span class="nm"><b>Strawberry Banana Smoothie</b><span>Medium Smoothie · no caffeine</span></span>
-      <span class="ln">Can I get a medium smoothie with strawberry and banana?</span>
+      <span class="nm"><b>Strawberry Banana Smoothie</b><span data-q="drink=smoothie&amp;temp=frozen&amp;size=medium&amp;f=Strawberry%2CBanana" data-show="base" data-suffix=" · no caffeine">Medium Smoothie · no caffeine</span></span>
+      <span class="ln" data-q="drink=smoothie&amp;temp=frozen&amp;size=medium&amp;f=Strawberry%2CBanana">Can I get a medium smoothie with strawberry and banana?</span>
     </a></li>
     <li><a href="/drinks/mango-pineapple-smoothie">
       <span class="mini" aria-hidden="true" style="--a:#FFB938;--b:#F7D33E;--c:#F7D33E"></span>
-      <span class="nm"><b>Mango Pineapple Smoothie</b><span>Medium Smoothie · no caffeine</span></span>
-      <span class="ln">Can I get a medium smoothie with mango and pineapple?</span>
+      <span class="nm"><b>Mango Pineapple Smoothie</b><span data-q="drink=smoothie&amp;temp=frozen&amp;size=medium&amp;f=Mango%2CPineapple" data-show="base" data-suffix=" · no caffeine">Medium Smoothie · no caffeine</span></span>
+      <span class="ln" data-q="drink=smoothie&amp;temp=frozen&amp;size=medium&amp;f=Mango%2CPineapple">Can I get a medium smoothie with mango and pineapple?</span>
     </a></li>
     <li><a href="/drinks/pina-colada-smoothie">
       <span class="mini" aria-hidden="true" style="--a:#F7D33E;--b:#F5F2EA;--c:#F5F2EA"></span>
-      <span class="nm"><b>Piña Colada Smoothie</b><span>Medium Smoothie · no caffeine</span></span>
-      <span class="ln">Can I get a medium smoothie with pineapple and coconut, plus whipped cream?</span>
+      <span class="nm"><b>Piña Colada Smoothie</b><span data-q="drink=smoothie&amp;temp=frozen&amp;size=medium&amp;f=Pineapple%2CCoconut&amp;x=whip" data-show="base" data-suffix=" · no caffeine">Medium Smoothie · no caffeine</span></span>
+      <span class="ln" data-q="drink=smoothie&amp;temp=frozen&amp;size=medium&amp;f=Pineapple%2CCoconut&amp;x=whip">Can I get a medium smoothie with pineapple and coconut, plus whipped cream?</span>
     </a></li>
     <li><a href="/drinks/raspberry-peach-smoothie">
       <span class="mini" aria-hidden="true" style="--a:#D8315B;--b:#FFAD7A;--c:#FFAD7A"></span>
-      <span class="nm"><b>Raspberry Peach Smoothie</b><span>Medium Smoothie · no caffeine</span></span>
-      <span class="ln">Can I get a medium smoothie with raspberry and peach?</span>
+      <span class="nm"><b>Raspberry Peach Smoothie</b><span data-q="drink=smoothie&amp;temp=frozen&amp;size=medium&amp;f=Raspberry%2CPeach" data-show="base" data-suffix=" · no caffeine">Medium Smoothie · no caffeine</span></span>
+      <span class="ln" data-q="drink=smoothie&amp;temp=frozen&amp;size=medium&amp;f=Raspberry%2CPeach">Can I get a medium smoothie with raspberry and peach?</span>
     </a></li>
   </ol>
     </section>
 
+    <script type="application/json" id="combo-data">{"slug":"grape-fizz","name":"Grape Fizz","combo":{"drink":"fizz","temp":"iced","size":"medium","milk":"","flavors":["Grape"],"extras":[],"sweet":"regular","sf":false}}</script>
     <aside class="nudge">
       <p><strong>Not quite your mood?</strong> Describe it in a few words and get three drinks made for it.</p>
       <a class="btn primary" href="/">Mix from a vibe</a>
@@ -157,6 +159,7 @@ document.addEventListener('click', async e => {
 </script>
 <script type="module" src="/assets/settings.js"></script>
 <script type="module" src="/assets/share.js"></script>
+<script type="module" src="/assets/drink-page.js"></script>
 <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments) };</script>
 <script defer src="/_vercel/insights/script.js"></script>
 </body>

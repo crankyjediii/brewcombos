@@ -451,3 +451,6 @@ header .settings-btn:hover{color:var(--ink)}
   .daily .cup{width:60px}
   .daily > div:last-child{grid-column:1 / -1;margin-top:10px}
 }
+.prefs-note{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 14px;margin:14px 0 0;font-size:.9rem;color:var(--muted);max-width:560px}
+.prefs-note[hidden]{display:none}
+.prefs-note .text-btn{font-size:.9rem;color:var(--ink)}

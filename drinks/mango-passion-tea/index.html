@@ -87,7 +87,7 @@
         <p class="label">Tea, chai &amp; matcha</p>
         <h1>Mango Passion Tea</h1>
         <p class="lede">Iced tea with mango and passion fruit. Fruity without being as sweet as a soda.</p>
-        <div class="say">
+        <div class="say" id="order">
           <p class="label">Say this at the window</p>
           <p class="line">Can I get a medium iced tea with mango and passion fruit?</p>
           <div class="actions">
@@ -96,6 +96,7 @@
             <button class="btn quiet" type="button" data-share="/drinks/mango-passion-tea" data-title="Mango Passion Tea" data-text="Can I get a medium iced tea with mango and passion fruit?" data-card="https://brewcombos.com/card.png?drink=tea&amp;temp=iced&amp;size=medium&amp;f=Mango%2CPassion+Fruit&amp;n=Mango%20Passion%20Tea" data-story="https://brewcombos.com/card.png?drink=tea&amp;temp=iced&amp;size=medium&amp;f=Mango%2CPassion+Fruit&amp;n=Mango%20Passion%20Tea&amp;format=story" data-filename="mango-passion-tea.png">Share</button>
           </div>
         </div>
+        <p class="prefs-note" id="prefs-note" hidden></p>
         
       </div>
     </article>
@@ -103,11 +104,11 @@
     <div class="drink-more">
       <section aria-labelledby="in-h">
         <h2 id="in-h">What's in it</h2>
-        <dl class="facts"><div><dt>Base</dt><dd>Tea · brewed tea</dd></div><div><dt>Size</dt><dd>Medium</dd></div><div><dt>Temperature</dt><dd>Iced</dd></div><div><dt>Flavors</dt><dd><ul class="flavors-inline"><li><span class="sw" style="--c:#FFB938"></span>Mango</li><li><span class="sw" style="--c:#F58C3A"></span>Passion Fruit</li></ul></dd></div><div><dt>Caffeine</dt><dd>Yes</dd></div></dl>
+        <dl class="facts" id="facts"><div><dt>Base</dt><dd>Tea · brewed tea</dd></div><div><dt>Size</dt><dd>Medium</dd></div><div><dt>Temperature</dt><dd>Iced</dd></div><div><dt>Flavors</dt><dd><ul class="flavors-inline"><li><span class="sw" style="--c:#FFB938"></span>Mango</li><li><span class="sw" style="--c:#F58C3A"></span>Passion Fruit</li></ul></dd></div><div><dt>Caffeine</dt><dd>Yes</dd></div></dl>
       </section>
       <section aria-labelledby="var-h">
         <h2 id="var-h">Other ways to order it</h2>
-        <ul class="variations">
+        <ul class="variations" id="variations">
           <li><p class="label">Sugar-free</p><p>Can I get a medium iced tea with sugar-free mango and sugar-free passion fruit?</p><button class="btn" type="button" data-say="Can I get a medium iced tea with sugar-free mango and sugar-free passion fruit?"><span class="idle">Copy</span><span class="ok">Copied</span></button></li>
           <li><p class="label">Hot</p><p>Can I get a medium hot tea with mango and passion fruit?</p><button class="btn" type="button" data-say="Can I get a medium hot tea with mango and passion fruit?"><span class="idle">Copy</span><span class="ok">Copied</span></button></li>
           <li><p class="label">Large</p><p>Can I get a large iced tea with mango and passion fruit?</p><button class="btn" type="button" data-say="Can I get a large iced tea with mango and passion fruit?"><span class="idle">Copy</span><span class="ok">Copied</span></button></li>
@@ -120,27 +121,28 @@
       <ol class="combo-list">
     <li><a href="/drinks/peach-iced-tea">
       <span class="mini" aria-hidden="true" style="--a:#FFAD7A;--b:#FFAD7A;--c:#FFAD7A"></span>
-      <span class="nm"><b>Peach Iced Tea</b><span>Medium iced Tea</span></span>
-      <span class="ln">Can I get a medium iced tea with peach, plus light ice?</span>
+      <span class="nm"><b>Peach Iced Tea</b><span data-q="drink=tea&amp;temp=iced&amp;size=medium&amp;f=Peach&amp;x=lightice" data-show="base">Medium iced Tea</span></span>
+      <span class="ln" data-q="drink=tea&amp;temp=iced&amp;size=medium&amp;f=Peach&amp;x=lightice">Can I get a medium iced tea with peach, plus light ice?</span>
     </a></li>
     <li><a href="/drinks/dirty-chai">
       <span class="mini" aria-hidden="true" style="--a:#C99C6E;--b:#A0602D;--c:#A0602D"></span>
-      <span class="nm"><b>Dirty Chai</b><span>Medium iced Chai, oat milk</span></span>
-      <span class="ln">Can I get a medium iced oat milk chai with brown sugar cinnamon, plus an extra shot?</span>
+      <span class="nm"><b>Dirty Chai</b><span data-q="drink=chai&amp;temp=iced&amp;size=medium&amp;milk=oat&amp;f=Brown+Sugar+Cinnamon&amp;x=shot" data-show="base">Medium iced Chai, oat milk</span></span>
+      <span class="ln" data-q="drink=chai&amp;temp=iced&amp;size=medium&amp;milk=oat&amp;f=Brown+Sugar+Cinnamon&amp;x=shot">Can I get a medium iced oat milk chai with brown sugar cinnamon, plus an extra shot?</span>
     </a></li>
     <li><a href="/drinks/french-vanilla-chai">
       <span class="mini" aria-hidden="true" style="--a:#C99C6E;--b:#EBD39A;--c:#EBD39A"></span>
-      <span class="nm"><b>French Vanilla Chai</b><span>Medium hot Chai</span></span>
-      <span class="ln">Can I get a medium hot chai with french vanilla, plus whipped cream?</span>
+      <span class="nm"><b>French Vanilla Chai</b><span data-q="drink=chai&amp;temp=hot&amp;size=medium&amp;milk=whole&amp;f=French+Vanilla&amp;x=whip" data-show="base">Medium hot Chai</span></span>
+      <span class="ln" data-q="drink=chai&amp;temp=hot&amp;size=medium&amp;milk=whole&amp;f=French+Vanilla&amp;x=whip">Can I get a medium hot chai with french vanilla, plus whipped cream?</span>
     </a></li>
     <li><a href="/drinks/pumpkin-chai">
       <span class="mini" aria-hidden="true" style="--a:#C99C6E;--b:#D9772B;--c:#D9772B"></span>
-      <span class="nm"><b>Pumpkin Chai</b><span>Medium iced Chai</span></span>
-      <span class="ln">Can I get a medium iced chai with pumpkin spice, plus soft top?</span>
+      <span class="nm"><b>Pumpkin Chai</b><span data-q="drink=chai&amp;temp=iced&amp;size=medium&amp;milk=whole&amp;f=Pumpkin+Spice&amp;x=softtop" data-show="base">Medium iced Chai</span></span>
+      <span class="ln" data-q="drink=chai&amp;temp=iced&amp;size=medium&amp;milk=whole&amp;f=Pumpkin+Spice&amp;x=softtop">Can I get a medium iced chai with pumpkin spice, plus soft top?</span>
     </a></li>
   </ol>
     </section>
 
+    <script type="application/json" id="combo-data">{"slug":"mango-passion-tea","name":"Mango Passion Tea","combo":{"drink":"tea","temp":"iced","size":"medium","milk":"","flavors":["Mango","Passion Fruit"],"extras":[],"sweet":"regular","sf":false}}</script>
     <aside class="nudge">
       <p><strong>Not quite your mood?</strong> Describe it in a few words and get three drinks made for it.</p>
       <a class="btn primary" href="/">Mix from a vibe</a>
@@ -158,6 +160,7 @@ document.addEventListener('click', async e => {
 </script>
 <script type="module" src="/assets/settings.js"></script>
 <script type="module" src="/assets/share.js"></script>
+<script type="module" src="/assets/drink-page.js"></script>
 <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments) };</script>
 <script defer src="/_vercel/insights/script.js"></script>
 </body>

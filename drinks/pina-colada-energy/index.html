@@ -87,7 +87,7 @@
         <p class="label">Energy</p>
         <h1>Piña Colada Energy</h1>
         <p class="lede">Pineapple, coconut and cream: the beach-bar classic, minus the rum, plus caffeine.</p>
-        <div class="say">
+        <div class="say" id="order">
           <p class="label">Say this at the window</p>
           <p class="line">Can I get a medium 7 Energy with pineapple and coconut, plus a splash of cream?</p>
           <div class="actions">
@@ -96,6 +96,7 @@
             <button class="btn quiet" type="button" data-share="/drinks/pina-colada-energy" data-title="Piña Colada Energy" data-text="Can I get a medium 7 Energy with pineapple and coconut, plus a splash of cream?" data-card="https://brewcombos.com/card.png?drink=energy&amp;temp=iced&amp;size=medium&amp;f=Pineapple%2CCoconut&amp;x=cream&amp;n=Pi%C3%B1a%20Colada%20Energy" data-story="https://brewcombos.com/card.png?drink=energy&amp;temp=iced&amp;size=medium&amp;f=Pineapple%2CCoconut&amp;x=cream&amp;n=Pi%C3%B1a%20Colada%20Energy&amp;format=story" data-filename="pi-a-colada-energy.png">Share</button>
           </div>
         </div>
+        <p class="prefs-note" id="prefs-note" hidden></p>
         
       </div>
     </article>
@@ -103,11 +104,11 @@
     <div class="drink-more">
       <section aria-labelledby="in-h">
         <h2 id="in-h">What's in it</h2>
-        <dl class="facts"><div><dt>Base</dt><dd>7 Energy · house energy drink</dd></div><div><dt>Size</dt><dd>Medium</dd></div><div><dt>Temperature</dt><dd>Iced</dd></div><div><dt>Flavors</dt><dd><ul class="flavors-inline"><li><span class="sw" style="--c:#F7D33E"></span>Pineapple</li><li><span class="sw" style="--c:#F5F2EA"></span>Coconut</li></ul></dd></div><div><dt>Extras</dt><dd>Splash of cream</dd></div><div><dt>Caffeine</dt><dd>Yes</dd></div></dl>
+        <dl class="facts" id="facts"><div><dt>Base</dt><dd>7 Energy · house energy drink</dd></div><div><dt>Size</dt><dd>Medium</dd></div><div><dt>Temperature</dt><dd>Iced</dd></div><div><dt>Flavors</dt><dd><ul class="flavors-inline"><li><span class="sw" style="--c:#F7D33E"></span>Pineapple</li><li><span class="sw" style="--c:#F5F2EA"></span>Coconut</li></ul></dd></div><div><dt>Extras</dt><dd>Splash of cream</dd></div><div><dt>Caffeine</dt><dd>Yes</dd></div></dl>
       </section>
       <section aria-labelledby="var-h">
         <h2 id="var-h">Other ways to order it</h2>
-        <ul class="variations">
+        <ul class="variations" id="variations">
           <li><p class="label">Sugar-free</p><p>Can I get a medium sugar-free 7 Energy with pineapple and coconut, plus a splash of cream?</p><button class="btn" type="button" data-say="Can I get a medium sugar-free 7 Energy with pineapple and coconut, plus a splash of cream?"><span class="idle">Copy</span><span class="ok">Copied</span></button></li>
           <li><p class="label">Chiller</p><p>Can I get a medium 7 Energy chiller with pineapple and coconut, plus a splash of cream?</p><button class="btn" type="button" data-say="Can I get a medium 7 Energy chiller with pineapple and coconut, plus a splash of cream?"><span class="idle">Copy</span><span class="ok">Copied</span></button></li>
           <li><p class="label">Large</p><p>Can I get a large 7 Energy with pineapple and coconut, plus a splash of cream?</p><button class="btn" type="button" data-say="Can I get a large 7 Energy with pineapple and coconut, plus a splash of cream?"><span class="idle">Copy</span><span class="ok">Copied</span></button></li>
@@ -120,27 +121,28 @@
       <ol class="combo-list">
     <li><a href="/drinks/green-apple-peach-energy">
       <span class="mini" aria-hidden="true" style="--a:#8CD34B;--b:#FFAD7A;--c:#FFAD7A"></span>
-      <span class="nm"><b>Green Apple Peach Energy</b><span>Medium iced 7 Energy</span></span>
-      <span class="ln">Can I get a medium 7 Energy with green apple and peach?</span>
+      <span class="nm"><b>Green Apple Peach Energy</b><span data-q="drink=energy&amp;temp=iced&amp;size=medium&amp;f=Green+Apple%2CPeach" data-show="base">Medium iced 7 Energy</span></span>
+      <span class="ln" data-q="drink=energy&amp;temp=iced&amp;size=medium&amp;f=Green+Apple%2CPeach">Can I get a medium 7 Energy with green apple and peach?</span>
     </a></li>
     <li><a href="/drinks/berry-blast-energy-chiller">
       <span class="mini" aria-hidden="true" style="--a:#D8315B;--b:#5A2B6E;--c:#F0506E"></span>
-      <span class="nm"><b>Berry Blast Energy Chiller</b><span>Medium 7 Energy Chiller</span></span>
-      <span class="ln">Can I get a medium 7 Energy chiller with raspberry, blackberry, and strawberry, plus soft top?</span>
+      <span class="nm"><b>Berry Blast Energy Chiller</b><span data-q="drink=energy&amp;temp=frozen&amp;size=medium&amp;f=Raspberry%2CBlackberry%2CStrawberry&amp;x=softtop" data-show="base">Medium 7 Energy Chiller</span></span>
+      <span class="ln" data-q="drink=energy&amp;temp=frozen&amp;size=medium&amp;f=Raspberry%2CBlackberry%2CStrawberry&amp;x=softtop">Can I get a medium 7 Energy chiller with raspberry, blackberry, and strawberry, plus soft top?</span>
     </a></li>
     <li><a href="/drinks/mango-peach-energy-chiller">
       <span class="mini" aria-hidden="true" style="--a:#FFB938;--b:#FFAD7A;--c:#FFAD7A"></span>
-      <span class="nm"><b>Mango Peach Energy Chiller</b><span>Medium 7 Energy Chiller</span></span>
-      <span class="ln">Can I get a medium 7 Energy chiller with mango and peach?</span>
+      <span class="nm"><b>Mango Peach Energy Chiller</b><span data-q="drink=energy&amp;temp=frozen&amp;size=medium&amp;f=Mango%2CPeach" data-show="base">Medium 7 Energy Chiller</span></span>
+      <span class="ln" data-q="drink=energy&amp;temp=frozen&amp;size=medium&amp;f=Mango%2CPeach">Can I get a medium 7 Energy chiller with mango and peach?</span>
     </a></li>
     <li><a href="/drinks/orange-cream-energy">
       <span class="mini" aria-hidden="true" style="--a:#FF8A2A;--b:#F1E2B3;--c:#F1E2B3"></span>
-      <span class="nm"><b>Orange Cream Energy</b><span>Medium iced 7 Energy</span></span>
-      <span class="ln">Can I get a medium 7 Energy with orange and vanilla, plus a splash of cream?</span>
+      <span class="nm"><b>Orange Cream Energy</b><span data-q="drink=energy&amp;temp=iced&amp;size=medium&amp;f=Orange%2CVanilla&amp;x=cream" data-show="base">Medium iced 7 Energy</span></span>
+      <span class="ln" data-q="drink=energy&amp;temp=iced&amp;size=medium&amp;f=Orange%2CVanilla&amp;x=cream">Can I get a medium 7 Energy with orange and vanilla, plus a splash of cream?</span>
     </a></li>
   </ol>
     </section>
 
+    <script type="application/json" id="combo-data">{"slug":"pina-colada-energy","name":"Piña Colada Energy","combo":{"drink":"energy","temp":"iced","size":"medium","milk":"","flavors":["Pineapple","Coconut"],"extras":["cream"],"sweet":"regular","sf":false}}</script>
     <aside class="nudge">
       <p><strong>Not quite your mood?</strong> Describe it in a few words and get three drinks made for it.</p>
       <a class="btn primary" href="/">Mix from a vibe</a>
@@ -158,6 +160,7 @@ document.addEventListener('click', async e => {
 </script>
 <script type="module" src="/assets/settings.js"></script>
 <script type="module" src="/assets/share.js"></script>
+<script type="module" src="/assets/drink-page.js"></script>
 <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments) };</script>
 <script defer src="/_vercel/insights/script.js"></script>
 </body>

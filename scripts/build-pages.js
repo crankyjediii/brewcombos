@@ -6,7 +6,7 @@ import { writeFileSync, mkdirSync, rmSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import * as M from '../lib/menu.js';
-import { SITE, esc, page, cup, mini, swatches, copyBtn, shareBtn, resetCups } from '../lib/layout.js';
+import { SITE, esc, page, cup, mini, copyBtn, shareBtn, resetCups, factsHTML, variationsHTML } from '../lib/layout.js';
 import { COMBOS, GROUPS } from '../lib/drinks.js';
 
 const UPDATED = '2026-09-24';
@@ -17,19 +17,21 @@ const D = c => M.DRINK[c.combo.drink];
 const inGroup = (g, c) => g.fits(c.combo, D(c));
 const PRIMARY = GROUPS.filter(g => ['energy', 'coffee', 'tea-chai-matcha', 'no-caffeine'].includes(g.slug));
 const primaryOf = c => PRIMARY.find(g => inGroup(g, c));
-const sfOk = c => GROUPS.find(g => g.sugarFree).fits(c.combo, D(c));
 const caffeine = c => D(c).cat !== 'nocaf';
 export const cardURL = (o, name) => `${SITE}/card.png?${M.comboToQuery(o)}${name ? `&n=${encodeURIComponent(name)}` : ''}`;
 
 const sayLine = o => sfLine(o, false);
 function sfLine(o, sf) { return M.orderLine(M.fixCombo({ ...o, sf })) }
 
+// data-q lets assets/drink-page.js redraw the line with the visitor's saved settings
+const listQuery = (c, sf) => M.comboToQuery(M.fixCombo({ ...c.combo, sf }));
+
 function comboList(list, { sugarFree = false } = {}) {
   return `<ol class="combo-list">${list.map(c => `
     <li><a href="/drinks/${c.slug}">
       ${mini(c.combo)}
-      <span class="nm"><b>${esc(c.name)}</b><span>${esc(M.baseLabel(c.combo))}${caffeine(c) ? '' : ' · no caffeine'}</span></span>
-      <span class="ln">${esc(sfLine(c.combo, sugarFree))}</span>
+      <span class="nm"><b>${esc(c.name)}</b><span data-q="${esc(listQuery(c, sugarFree))}" data-show="base"${caffeine(c) ? '' : ' data-suffix=" · no caffeine"'}>${esc(M.baseLabel(c.combo))}${caffeine(c) ? '' : ' · no caffeine'}</span></span>
+      <span class="ln" data-q="${esc(listQuery(c, sugarFree))}">${esc(sfLine(c.combo, sugarFree))}</span>
     </a></li>`).join('')}
   </ol>`;
 }
@@ -46,23 +48,6 @@ function drinkPage(c, i) {
   const group = primaryOf(c);
   const seasonal = o.flavors.some(f => (M.FLAVORS.find(x => x.name === f) || {}).family === 'seasonal');
 
-  const facts = [
-    ['Base', `${d.name} · ${d.desc.toLowerCase()}`],
-    ['Size', M.baseLabel(o).split(' ')[0]],
-    ['Temperature', M.TEMP_LABELS[o.temp]],
-  ];
-  if (d.milk === 'fixed') facts.push(['Milk', 'Half & half']);
-  else if (o.milk && o.milk !== 'none') facts.push(['Milk', (M.MILKS[d.milk].find(m => m[0] === o.milk) || [, o.milk])[1]]);
-  facts.push(['Flavors', swatches(o.flavors)]);
-  if (o.extras.length) facts.push(['Extras', o.extras.map(x => M.EXTRA[x].label).join(', ')]);
-  if (o.sweet !== 'regular') facts.push(['Sweetness', M.SWEETS.find(w => w[0] === o.sweet)[2]]);
-  facts.push(['Caffeine', caffeine(c) ? 'Yes' : 'None']);
-
-  const variations = [];
-  if (sfOk(c)) variations.push(['Sugar-free', sfLine(o, true)]);
-  for (const t of d.temps.filter(t => t !== o.temp)) variations.push([M.TEMP_LABELS[t], M.orderLine(M.fixCombo({ ...o, temp: t }))]);
-  if (o.size !== 'large') variations.push(['Large', M.orderLine(M.fixCombo({ ...o, size: 'large' }))]);
-
   const same = drinks.filter(x => x !== c && primaryOf(x) === group);
   const start = same.length ? i % same.length : 0;
   const related = [...same.slice(start), ...same.slice(0, start)].slice(0, 4);
@@ -75,7 +60,7 @@ function drinkPage(c, i) {
         <p class="label">${esc(group.short)}${seasonal ? ' · seasonal' : ''}</p>
         <h1>${esc(c.name)}</h1>
         <p class="lede">${esc(c.blurb)}</p>
-        <div class="say">
+        <div class="say" id="order">
           <p class="label">Say this at the window</p>
           <p class="line">${esc(line)}</p>
           <div class="actions">
@@ -84,6 +69,7 @@ function drinkPage(c, i) {
             ${shareBtn(`/drinks/${c.slug}`, c.name, line, cardURL(o, c.name))}
           </div>
         </div>
+        <p class="prefs-note" id="prefs-note" hidden></p>
         ${seasonal ? '<p class="note">Seasonal flavor: not every stand carries it year-round. If yours is out, ask what\'s close.</p>' : ''}
       </div>
     </article>
@@ -91,12 +77,11 @@ function drinkPage(c, i) {
     <div class="drink-more">
       <section aria-labelledby="in-h">
         <h2 id="in-h">What's in it</h2>
-        <dl class="facts">${facts.map(([k, v]) => `<div><dt>${k}</dt><dd>${k === 'Flavors' ? v : esc(v)}</dd></div>`).join('')}</dl>
+        <dl class="facts" id="facts">${factsHTML(o)}</dl>
       </section>
       <section aria-labelledby="var-h">
         <h2 id="var-h">Other ways to order it</h2>
-        <ul class="variations">${variations.map(([k, v]) => `
-          <li><p class="label">${esc(k)}</p><p>${esc(v)}</p>${copyBtn(v, 'Copy')}</li>`).join('')}
+        <ul class="variations" id="variations">${variationsHTML(o)}
         </ul>
       </section>
     </div>
@@ -106,6 +91,7 @@ function drinkPage(c, i) {
       ${comboList(related)}
     </section>
 
+    <script type="application/json" id="combo-data">${JSON.stringify({ slug: c.slug, name: c.name, combo: o }).replace(/</g, '\\u003c')}</script>
     <aside class="nudge">
       <p><strong>Not quite your mood?</strong> Describe it in a few words and get three drinks made for it.</p>
       <a class="btn primary" href="/">Mix from a vibe</a>

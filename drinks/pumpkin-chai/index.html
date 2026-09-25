@@ -87,7 +87,7 @@
         <p class="label">Tea, chai &amp; matcha · seasonal</p>
         <h1>Pumpkin Chai</h1>
         <p class="lede">Pumpkin spice and chai share most of the same spices, so they blend together. Soft top on an iced one is the move.</p>
-        <div class="say">
+        <div class="say" id="order">
           <p class="label">Say this at the window</p>
           <p class="line">Can I get a medium iced chai with pumpkin spice, plus soft top?</p>
           <div class="actions">
@@ -96,6 +96,7 @@
             <button class="btn quiet" type="button" data-share="/drinks/pumpkin-chai" data-title="Pumpkin Chai" data-text="Can I get a medium iced chai with pumpkin spice, plus soft top?" data-card="https://brewcombos.com/card.png?drink=chai&amp;temp=iced&amp;size=medium&amp;milk=whole&amp;f=Pumpkin+Spice&amp;x=softtop&amp;n=Pumpkin%20Chai" data-story="https://brewcombos.com/card.png?drink=chai&amp;temp=iced&amp;size=medium&amp;milk=whole&amp;f=Pumpkin+Spice&amp;x=softtop&amp;n=Pumpkin%20Chai&amp;format=story" data-filename="pumpkin-chai.png">Share</button>
           </div>
         </div>
+        <p class="prefs-note" id="prefs-note" hidden></p>
         <p class="note">Seasonal flavor: not every stand carries it year-round. If yours is out, ask what's close.</p>
       </div>
     </article>
@@ -103,11 +104,11 @@
     <div class="drink-more">
       <section aria-labelledby="in-h">
         <h2 id="in-h">What's in it</h2>
-        <dl class="facts"><div><dt>Base</dt><dd>Chai · spiced tea latte</dd></div><div><dt>Size</dt><dd>Medium</dd></div><div><dt>Temperature</dt><dd>Iced</dd></div><div><dt>Milk</dt><dd>Whole</dd></div><div><dt>Flavors</dt><dd><ul class="flavors-inline"><li><span class="sw" style="--c:#D9772B"></span>Pumpkin Spice</li></ul></dd></div><div><dt>Extras</dt><dd>Soft top</dd></div><div><dt>Caffeine</dt><dd>Yes</dd></div></dl>
+        <dl class="facts" id="facts"><div><dt>Base</dt><dd>Chai · spiced tea latte</dd></div><div><dt>Size</dt><dd>Medium</dd></div><div><dt>Temperature</dt><dd>Iced</dd></div><div><dt>Milk</dt><dd>Whole</dd></div><div><dt>Flavors</dt><dd><ul class="flavors-inline"><li><span class="sw" style="--c:#D9772B"></span>Pumpkin Spice</li></ul></dd></div><div><dt>Extras</dt><dd>Soft top</dd></div><div><dt>Caffeine</dt><dd>Yes</dd></div></dl>
       </section>
       <section aria-labelledby="var-h">
         <h2 id="var-h">Other ways to order it</h2>
-        <ul class="variations">
+        <ul class="variations" id="variations">
           <li><p class="label">Sugar-free</p><p>Can I get a medium iced chai with sugar-free pumpkin spice, plus soft top?</p><button class="btn" type="button" data-say="Can I get a medium iced chai with sugar-free pumpkin spice, plus soft top?"><span class="idle">Copy</span><span class="ok">Copied</span></button></li>
           <li><p class="label">Hot</p><p>Can I get a medium hot chai with pumpkin spice?</p><button class="btn" type="button" data-say="Can I get a medium hot chai with pumpkin spice?"><span class="idle">Copy</span><span class="ok">Copied</span></button></li>
           <li><p class="label">Chiller</p><p>Can I get a medium chai chiller with pumpkin spice, plus soft top?</p><button class="btn" type="button" data-say="Can I get a medium chai chiller with pumpkin spice, plus soft top?"><span class="idle">Copy</span><span class="ok">Copied</span></button></li>
@@ -121,27 +122,28 @@
       <ol class="combo-list">
     <li><a href="/drinks/french-vanilla-chai">
       <span class="mini" aria-hidden="true" style="--a:#C99C6E;--b:#EBD39A;--c:#EBD39A"></span>
-      <span class="nm"><b>French Vanilla Chai</b><span>Medium hot Chai</span></span>
-      <span class="ln">Can I get a medium hot chai with french vanilla, plus whipped cream?</span>
+      <span class="nm"><b>French Vanilla Chai</b><span data-q="drink=chai&amp;temp=hot&amp;size=medium&amp;milk=whole&amp;f=French+Vanilla&amp;x=whip" data-show="base">Medium hot Chai</span></span>
+      <span class="ln" data-q="drink=chai&amp;temp=hot&amp;size=medium&amp;milk=whole&amp;f=French+Vanilla&amp;x=whip">Can I get a medium hot chai with french vanilla, plus whipped cream?</span>
     </a></li>
     <li><a href="/drinks/strawberry-matcha">
       <span class="mini" aria-hidden="true" style="--a:#9CBF69;--b:#F0506E;--c:#F1E2B3"></span>
-      <span class="nm"><b>Strawberry Matcha</b><span>Medium iced Matcha, oat milk</span></span>
-      <span class="ln">Can I get a medium iced oat milk matcha with strawberry and vanilla?</span>
+      <span class="nm"><b>Strawberry Matcha</b><span data-q="drink=matcha&amp;temp=iced&amp;size=medium&amp;milk=oat&amp;f=Strawberry%2CVanilla" data-show="base">Medium iced Matcha, oat milk</span></span>
+      <span class="ln" data-q="drink=matcha&amp;temp=iced&amp;size=medium&amp;milk=oat&amp;f=Strawberry%2CVanilla">Can I get a medium iced oat milk matcha with strawberry and vanilla?</span>
     </a></li>
     <li><a href="/drinks/lavender-matcha">
       <span class="mini" aria-hidden="true" style="--a:#9CBF69;--b:#B9A3E3;--c:#F1E2B3"></span>
-      <span class="nm"><b>Lavender Matcha</b><span>Medium iced Matcha, almond milk</span></span>
-      <span class="ln">Can I get a medium iced almond milk matcha with lavender and vanilla, plus cold foam and half sweet?</span>
+      <span class="nm"><b>Lavender Matcha</b><span data-q="drink=matcha&amp;temp=iced&amp;size=medium&amp;milk=almond&amp;f=Lavender%2CVanilla&amp;x=coldfoam&amp;sweet=half" data-show="base">Medium iced Matcha, almond milk</span></span>
+      <span class="ln" data-q="drink=matcha&amp;temp=iced&amp;size=medium&amp;milk=almond&amp;f=Lavender%2CVanilla&amp;x=coldfoam&amp;sweet=half">Can I get a medium iced almond milk matcha with lavender and vanilla, plus cold foam and half sweet?</span>
     </a></li>
     <li><a href="/drinks/coconut-matcha">
       <span class="mini" aria-hidden="true" style="--a:#9CBF69;--b:#F5F2EA;--c:#F1E2B3"></span>
-      <span class="nm"><b>Coconut Matcha</b><span>Medium iced Matcha, coconut milk</span></span>
-      <span class="ln">Can I get a medium iced coconut milk matcha with coconut and vanilla?</span>
+      <span class="nm"><b>Coconut Matcha</b><span data-q="drink=matcha&amp;temp=iced&amp;size=medium&amp;milk=coconut&amp;f=Coconut%2CVanilla" data-show="base">Medium iced Matcha, coconut milk</span></span>
+      <span class="ln" data-q="drink=matcha&amp;temp=iced&amp;size=medium&amp;milk=coconut&amp;f=Coconut%2CVanilla">Can I get a medium iced coconut milk matcha with coconut and vanilla?</span>
     </a></li>
   </ol>
     </section>
 
+    <script type="application/json" id="combo-data">{"slug":"pumpkin-chai","name":"Pumpkin Chai","combo":{"drink":"chai","temp":"iced","size":"medium","milk":"whole","flavors":["Pumpkin Spice"],"extras":["softtop"],"sweet":"regular","sf":false}}</script>
     <aside class="nudge">
       <p><strong>Not quite your mood?</strong> Describe it in a few words and get three drinks made for it.</p>
       <a class="btn primary" href="/">Mix from a vibe</a>
@@ -159,6 +161,7 @@ document.addEventListener('click', async e => {
 </script>
 <script type="module" src="/assets/settings.js"></script>
 <script type="module" src="/assets/share.js"></script>
+<script type="module" src="/assets/drink-page.js"></script>
 <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments) };</script>
 <script defer src="/_vercel/insights/script.js"></script>
 </body>

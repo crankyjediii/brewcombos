@@ -87,7 +87,7 @@
         <p class="label">No caffeine</p>
         <h1>Blackberry Lemonade Chiller</h1>
         <p class="lede">Blackberry and raspberry blended into lemonade. A frozen, tart, caffeine-free treat for kids and adults.</p>
-        <div class="say">
+        <div class="say" id="order">
           <p class="label">Say this at the window</p>
           <p class="line">Can I get a medium lemonade chiller with blackberry and raspberry?</p>
           <div class="actions">
@@ -96,6 +96,7 @@
             <button class="btn quiet" type="button" data-share="/drinks/blackberry-lemonade-chiller" data-title="Blackberry Lemonade Chiller" data-text="Can I get a medium lemonade chiller with blackberry and raspberry?" data-card="https://brewcombos.com/card.png?drink=lemonade&amp;temp=frozen&amp;size=medium&amp;f=Blackberry%2CRaspberry&amp;n=Blackberry%20Lemonade%20Chiller" data-story="https://brewcombos.com/card.png?drink=lemonade&amp;temp=frozen&amp;size=medium&amp;f=Blackberry%2CRaspberry&amp;n=Blackberry%20Lemonade%20Chiller&amp;format=story" data-filename="blackberry-lemonade-chiller.png">Share</button>
           </div>
         </div>
+        <p class="prefs-note" id="prefs-note" hidden></p>
         
       </div>
     </article>
@@ -103,11 +104,11 @@
     <div class="drink-more">
       <section aria-labelledby="in-h">
         <h2 id="in-h">What's in it</h2>
-        <dl class="facts"><div><dt>Base</dt><dd>Lemonade · tart and bright</dd></div><div><dt>Size</dt><dd>Medium</dd></div><div><dt>Temperature</dt><dd>Chiller</dd></div><div><dt>Flavors</dt><dd><ul class="flavors-inline"><li><span class="sw" style="--c:#5A2B6E"></span>Blackberry</li><li><span class="sw" style="--c:#D8315B"></span>Raspberry</li></ul></dd></div><div><dt>Caffeine</dt><dd>None</dd></div></dl>
+        <dl class="facts" id="facts"><div><dt>Base</dt><dd>Lemonade · tart and bright</dd></div><div><dt>Size</dt><dd>Medium</dd></div><div><dt>Temperature</dt><dd>Chiller</dd></div><div><dt>Flavors</dt><dd><ul class="flavors-inline"><li><span class="sw" style="--c:#5A2B6E"></span>Blackberry</li><li><span class="sw" style="--c:#D8315B"></span>Raspberry</li></ul></dd></div><div><dt>Caffeine</dt><dd>None</dd></div></dl>
       </section>
       <section aria-labelledby="var-h">
         <h2 id="var-h">Other ways to order it</h2>
-        <ul class="variations">
+        <ul class="variations" id="variations">
           <li><p class="label">Sugar-free</p><p>Can I get a medium lemonade chiller with sugar-free blackberry and sugar-free raspberry?</p><button class="btn" type="button" data-say="Can I get a medium lemonade chiller with sugar-free blackberry and sugar-free raspberry?"><span class="idle">Copy</span><span class="ok">Copied</span></button></li>
           <li><p class="label">Iced</p><p>Can I get a medium lemonade with blackberry and raspberry?</p><button class="btn" type="button" data-say="Can I get a medium lemonade with blackberry and raspberry?"><span class="idle">Copy</span><span class="ok">Copied</span></button></li>
           <li><p class="label">Large</p><p>Can I get a large lemonade chiller with blackberry and raspberry?</p><button class="btn" type="button" data-say="Can I get a large lemonade chiller with blackberry and raspberry?"><span class="idle">Copy</span><span class="ok">Copied</span></button></li>
@@ -120,27 +121,28 @@
       <ol class="combo-list">
     <li><a href="/drinks/mango-passion-lemonade">
       <span class="mini" aria-hidden="true" style="--a:#FFB938;--b:#F58C3A;--c:#F58C3A"></span>
-      <span class="nm"><b>Mango Passion Lemonade</b><span>Medium iced Lemonade · no caffeine</span></span>
-      <span class="ln">Can I get a medium lemonade with mango and passion fruit?</span>
+      <span class="nm"><b>Mango Passion Lemonade</b><span data-q="drink=lemonade&amp;temp=iced&amp;size=medium&amp;f=Mango%2CPassion+Fruit" data-show="base" data-suffix=" · no caffeine">Medium iced Lemonade · no caffeine</span></span>
+      <span class="ln" data-q="drink=lemonade&amp;temp=iced&amp;size=medium&amp;f=Mango%2CPassion+Fruit">Can I get a medium lemonade with mango and passion fruit?</span>
     </a></li>
     <li><a href="/drinks/cherry-lime-fizz">
       <span class="mini" aria-hidden="true" style="--a:#C4163B;--b:#9FDB4A;--c:#9FDB4A"></span>
-      <span class="nm"><b>Cherry Lime Fizz</b><span>Medium Fizz · no caffeine</span></span>
-      <span class="ln">Can I get a medium Fizz with cherry and lime, plus a splash of cream?</span>
+      <span class="nm"><b>Cherry Lime Fizz</b><span data-q="drink=fizz&amp;temp=iced&amp;size=medium&amp;f=Cherry%2CLime&amp;x=cream" data-show="base" data-suffix=" · no caffeine">Medium Fizz · no caffeine</span></span>
+      <span class="ln" data-q="drink=fizz&amp;temp=iced&amp;size=medium&amp;f=Cherry%2CLime&amp;x=cream">Can I get a medium Fizz with cherry and lime, plus a splash of cream?</span>
     </a></li>
     <li><a href="/drinks/blue-raspberry-cream-soda">
       <span class="mini" aria-hidden="true" style="--a:#2F9BEA;--b:#F1E2B3;--c:#F1E2B3"></span>
-      <span class="nm"><b>Blue Raspberry Cream Soda</b><span>Medium Fizz · no caffeine</span></span>
-      <span class="ln">Can I get a medium Fizz with blue raspberry and vanilla, plus a splash of cream?</span>
+      <span class="nm"><b>Blue Raspberry Cream Soda</b><span data-q="drink=fizz&amp;temp=iced&amp;size=medium&amp;f=Blue+Raspberry%2CVanilla&amp;x=cream" data-show="base" data-suffix=" · no caffeine">Medium Fizz · no caffeine</span></span>
+      <span class="ln" data-q="drink=fizz&amp;temp=iced&amp;size=medium&amp;f=Blue+Raspberry%2CVanilla&amp;x=cream">Can I get a medium Fizz with blue raspberry and vanilla, plus a splash of cream?</span>
     </a></li>
     <li><a href="/drinks/watermelon-kiwi-fizz">
       <span class="mini" aria-hidden="true" style="--a:#FF6F86;--b:#9AC943;--c:#9AC943"></span>
-      <span class="nm"><b>Watermelon Kiwi Fizz</b><span>Medium Fizz · no caffeine</span></span>
-      <span class="ln">Can I get a medium Fizz with watermelon and kiwi?</span>
+      <span class="nm"><b>Watermelon Kiwi Fizz</b><span data-q="drink=fizz&amp;temp=iced&amp;size=medium&amp;f=Watermelon%2CKiwi" data-show="base" data-suffix=" · no caffeine">Medium Fizz · no caffeine</span></span>
+      <span class="ln" data-q="drink=fizz&amp;temp=iced&amp;size=medium&amp;f=Watermelon%2CKiwi">Can I get a medium Fizz with watermelon and kiwi?</span>
     </a></li>
   </ol>
     </section>
 
+    <script type="application/json" id="combo-data">{"slug":"blackberry-lemonade-chiller","name":"Blackberry Lemonade Chiller","combo":{"drink":"lemonade","temp":"frozen","size":"medium","milk":"","flavors":["Blackberry","Raspberry"],"extras":[],"sweet":"regular","sf":false}}</script>
     <aside class="nudge">
       <p><strong>Not quite your mood?</strong> Describe it in a few words and get three drinks made for it.</p>
       <a class="btn primary" href="/">Mix from a vibe</a>
@@ -158,6 +160,7 @@ document.addEventListener('click', async e => {
 </script>
 <script type="module" src="/assets/settings.js"></script>
 <script type="module" src="/assets/share.js"></script>
+<script type="module" src="/assets/drink-page.js"></script>
 <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments) };</script>
 <script defer src="/_vercel/insights/script.js"></script>
 </body>

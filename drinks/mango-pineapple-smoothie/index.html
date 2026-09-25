@@ -87,7 +87,7 @@
         <p class="label">No caffeine</p>
         <h1>Mango Pineapple Smoothie</h1>
         <p class="lede">Tropical and thick. Tastes like a mango sorbet.</p>
-        <div class="say">
+        <div class="say" id="order">
           <p class="label">Say this at the window</p>
           <p class="line">Can I get a medium smoothie with mango and pineapple?</p>
           <div class="actions">
@@ -96,6 +96,7 @@
             <button class="btn quiet" type="button" data-share="/drinks/mango-pineapple-smoothie" data-title="Mango Pineapple Smoothie" data-text="Can I get a medium smoothie with mango and pineapple?" data-card="https://brewcombos.com/card.png?drink=smoothie&amp;temp=frozen&amp;size=medium&amp;f=Mango%2CPineapple&amp;n=Mango%20Pineapple%20Smoothie" data-story="https://brewcombos.com/card.png?drink=smoothie&amp;temp=frozen&amp;size=medium&amp;f=Mango%2CPineapple&amp;n=Mango%20Pineapple%20Smoothie&amp;format=story" data-filename="mango-pineapple-smoothie.png">Share</button>
           </div>
         </div>
+        <p class="prefs-note" id="prefs-note" hidden></p>
         
       </div>
     </article>
@@ -103,11 +104,11 @@
     <div class="drink-more">
       <section aria-labelledby="in-h">
         <h2 id="in-h">What's in it</h2>
-        <dl class="facts"><div><dt>Base</dt><dd>Smoothie · blended fruit</dd></div><div><dt>Size</dt><dd>Medium</dd></div><div><dt>Temperature</dt><dd>Chiller</dd></div><div><dt>Flavors</dt><dd><ul class="flavors-inline"><li><span class="sw" style="--c:#FFB938"></span>Mango</li><li><span class="sw" style="--c:#F7D33E"></span>Pineapple</li></ul></dd></div><div><dt>Caffeine</dt><dd>None</dd></div></dl>
+        <dl class="facts" id="facts"><div><dt>Base</dt><dd>Smoothie · blended fruit</dd></div><div><dt>Size</dt><dd>Medium</dd></div><div><dt>Temperature</dt><dd>Chiller</dd></div><div><dt>Flavors</dt><dd><ul class="flavors-inline"><li><span class="sw" style="--c:#FFB938"></span>Mango</li><li><span class="sw" style="--c:#F7D33E"></span>Pineapple</li></ul></dd></div><div><dt>Caffeine</dt><dd>None</dd></div></dl>
       </section>
       <section aria-labelledby="var-h">
         <h2 id="var-h">Other ways to order it</h2>
-        <ul class="variations">
+        <ul class="variations" id="variations">
           <li><p class="label">Sugar-free</p><p>Can I get a medium smoothie with sugar-free mango and sugar-free pineapple?</p><button class="btn" type="button" data-say="Can I get a medium smoothie with sugar-free mango and sugar-free pineapple?"><span class="idle">Copy</span><span class="ok">Copied</span></button></li>
           <li><p class="label">Large</p><p>Can I get a large smoothie with mango and pineapple?</p><button class="btn" type="button" data-say="Can I get a large smoothie with mango and pineapple?"><span class="idle">Copy</span><span class="ok">Copied</span></button></li>
         </ul>
@@ -119,27 +120,28 @@
       <ol class="combo-list">
     <li><a href="/drinks/raspberry-peach-smoothie">
       <span class="mini" aria-hidden="true" style="--a:#D8315B;--b:#FFAD7A;--c:#FFAD7A"></span>
-      <span class="nm"><b>Raspberry Peach Smoothie</b><span>Medium Smoothie · no caffeine</span></span>
-      <span class="ln">Can I get a medium smoothie with raspberry and peach?</span>
+      <span class="nm"><b>Raspberry Peach Smoothie</b><span data-q="drink=smoothie&amp;temp=frozen&amp;size=medium&amp;f=Raspberry%2CPeach" data-show="base" data-suffix=" · no caffeine">Medium Smoothie · no caffeine</span></span>
+      <span class="ln" data-q="drink=smoothie&amp;temp=frozen&amp;size=medium&amp;f=Raspberry%2CPeach">Can I get a medium smoothie with raspberry and peach?</span>
     </a></li>
     <li><a href="/drinks/cookie-butter-shake">
       <span class="mini" aria-hidden="true" style="--a:#F3E4CE;--b:#B98049;--c:#B98049"></span>
-      <span class="nm"><b>Cookie Butter Shake</b><span>Medium Shake · no caffeine</span></span>
-      <span class="ln">Can I get a medium shake with cookie butter, plus whipped cream and caramel drizzle?</span>
+      <span class="nm"><b>Cookie Butter Shake</b><span data-q="drink=shake&amp;temp=frozen&amp;size=medium&amp;f=Cookie+Butter&amp;x=whip%2Ccaramel" data-show="base" data-suffix=" · no caffeine">Medium Shake · no caffeine</span></span>
+      <span class="ln" data-q="drink=shake&amp;temp=frozen&amp;size=medium&amp;f=Cookie+Butter&amp;x=whip%2Ccaramel">Can I get a medium shake with cookie butter, plus whipped cream and caramel drizzle?</span>
     </a></li>
     <li><a href="/drinks/banana-cream-shake">
       <span class="mini" aria-hidden="true" style="--a:#F3E4CE;--b:#F3E07A;--c:#F1E2B3"></span>
-      <span class="nm"><b>Banana Cream Shake</b><span>Medium Shake · no caffeine</span></span>
-      <span class="ln">Can I get a medium shake with banana and vanilla, plus whipped cream?</span>
+      <span class="nm"><b>Banana Cream Shake</b><span data-q="drink=shake&amp;temp=frozen&amp;size=medium&amp;f=Banana%2CVanilla&amp;x=whip" data-show="base" data-suffix=" · no caffeine">Medium Shake · no caffeine</span></span>
+      <span class="ln" data-q="drink=shake&amp;temp=frozen&amp;size=medium&amp;f=Banana%2CVanilla&amp;x=whip">Can I get a medium shake with banana and vanilla, plus whipped cream?</span>
     </a></li>
     <li><a href="/drinks/salted-caramel-shake">
       <span class="mini" aria-hidden="true" style="--a:#F3E4CE;--b:#B9772F;--c:#B9772F"></span>
-      <span class="nm"><b>Salted Caramel Shake</b><span>Medium Shake · no caffeine</span></span>
-      <span class="ln">Can I get a medium shake with salted caramel, plus whipped cream and caramel drizzle?</span>
+      <span class="nm"><b>Salted Caramel Shake</b><span data-q="drink=shake&amp;temp=frozen&amp;size=medium&amp;f=Salted+Caramel&amp;x=whip%2Ccaramel" data-show="base" data-suffix=" · no caffeine">Medium Shake · no caffeine</span></span>
+      <span class="ln" data-q="drink=shake&amp;temp=frozen&amp;size=medium&amp;f=Salted+Caramel&amp;x=whip%2Ccaramel">Can I get a medium shake with salted caramel, plus whipped cream and caramel drizzle?</span>
     </a></li>
   </ol>
     </section>
 
+    <script type="application/json" id="combo-data">{"slug":"mango-pineapple-smoothie","name":"Mango Pineapple Smoothie","combo":{"drink":"smoothie","temp":"frozen","size":"medium","milk":"","flavors":["Mango","Pineapple"],"extras":[],"sweet":"regular","sf":false}}</script>
     <aside class="nudge">
       <p><strong>Not quite your mood?</strong> Describe it in a few words and get three drinks made for it.</p>
       <a class="btn primary" href="/">Mix from a vibe</a>
@@ -157,6 +159,7 @@ document.addEventListener('click', async e => {
 </script>
 <script type="module" src="/assets/settings.js"></script>
 <script type="module" src="/assets/share.js"></script>
+<script type="module" src="/assets/drink-page.js"></script>
 <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments) };</script>
 <script defer src="/_vercel/insights/script.js"></script>
 </body>

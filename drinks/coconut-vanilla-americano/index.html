@@ -87,7 +87,7 @@
         <p class="label">Coffee</p>
         <h1>Coconut Vanilla Americano</h1>
         <p class="lede">A light, lower-sugar coffee. Coconut and vanilla at half sweetness add flavor without covering up the espresso.</p>
-        <div class="say">
+        <div class="say" id="order">
           <p class="label">Say this at the window</p>
           <p class="line">Can I get a medium iced Americano with coconut and vanilla, plus half sweet?</p>
           <div class="actions">
@@ -96,6 +96,7 @@
             <button class="btn quiet" type="button" data-share="/drinks/coconut-vanilla-americano" data-title="Coconut Vanilla Americano" data-text="Can I get a medium iced Americano with coconut and vanilla, plus half sweet?" data-card="https://brewcombos.com/card.png?drink=americano&amp;temp=iced&amp;size=medium&amp;f=Coconut%2CVanilla&amp;sweet=half&amp;n=Coconut%20Vanilla%20Americano" data-story="https://brewcombos.com/card.png?drink=americano&amp;temp=iced&amp;size=medium&amp;f=Coconut%2CVanilla&amp;sweet=half&amp;n=Coconut%20Vanilla%20Americano&amp;format=story" data-filename="coconut-vanilla-americano.png">Share</button>
           </div>
         </div>
+        <p class="prefs-note" id="prefs-note" hidden></p>
         
       </div>
     </article>
@@ -103,11 +104,11 @@
     <div class="drink-more">
       <section aria-labelledby="in-h">
         <h2 id="in-h">What's in it</h2>
-        <dl class="facts"><div><dt>Base</dt><dd>Americano · espresso and water</dd></div><div><dt>Size</dt><dd>Medium</dd></div><div><dt>Temperature</dt><dd>Iced</dd></div><div><dt>Flavors</dt><dd><ul class="flavors-inline"><li><span class="sw" style="--c:#F5F2EA"></span>Coconut</li><li><span class="sw" style="--c:#F1E2B3"></span>Vanilla</li></ul></dd></div><div><dt>Sweetness</dt><dd>half sweet</dd></div><div><dt>Caffeine</dt><dd>Yes</dd></div></dl>
+        <dl class="facts" id="facts"><div><dt>Base</dt><dd>Americano · espresso and water</dd></div><div><dt>Size</dt><dd>Medium</dd></div><div><dt>Temperature</dt><dd>Iced</dd></div><div><dt>Flavors</dt><dd><ul class="flavors-inline"><li><span class="sw" style="--c:#F5F2EA"></span>Coconut</li><li><span class="sw" style="--c:#F1E2B3"></span>Vanilla</li></ul></dd></div><div><dt>Sweetness</dt><dd>half sweet</dd></div><div><dt>Caffeine</dt><dd>Yes</dd></div></dl>
       </section>
       <section aria-labelledby="var-h">
         <h2 id="var-h">Other ways to order it</h2>
-        <ul class="variations">
+        <ul class="variations" id="variations">
           <li><p class="label">Sugar-free</p><p>Can I get a medium iced Americano with sugar-free coconut and sugar-free vanilla?</p><button class="btn" type="button" data-say="Can I get a medium iced Americano with sugar-free coconut and sugar-free vanilla?"><span class="idle">Copy</span><span class="ok">Copied</span></button></li>
           <li><p class="label">Hot</p><p>Can I get a medium hot Americano with coconut and vanilla, plus half sweet?</p><button class="btn" type="button" data-say="Can I get a medium hot Americano with coconut and vanilla, plus half sweet?"><span class="idle">Copy</span><span class="ok">Copied</span></button></li>
           <li><p class="label">Large</p><p>Can I get a large iced Americano with coconut and vanilla, plus half sweet?</p><button class="btn" type="button" data-say="Can I get a large iced Americano with coconut and vanilla, plus half sweet?"><span class="idle">Copy</span><span class="ok">Copied</span></button></li>
@@ -120,27 +121,28 @@
       <ol class="combo-list">
     <li><a href="/drinks/cookie-butter-mocha-chiller">
       <span class="mini" aria-hidden="true" style="--a:#8C5B3D;--b:#B98049;--c:#B98049"></span>
-      <span class="nm"><b>Cookie Butter Mocha Chiller</b><span>Medium Mocha Chiller</span></span>
-      <span class="ln">Can I get a medium mocha chiller with cookie butter, plus whipped cream and caramel drizzle?</span>
+      <span class="nm"><b>Cookie Butter Mocha Chiller</b><span data-q="drink=mocha&amp;temp=frozen&amp;size=medium&amp;milk=whole&amp;f=Cookie+Butter&amp;x=whip%2Ccaramel" data-show="base">Medium Mocha Chiller</span></span>
+      <span class="ln" data-q="drink=mocha&amp;temp=frozen&amp;size=medium&amp;milk=whole&amp;f=Cookie+Butter&amp;x=whip%2Ccaramel">Can I get a medium mocha chiller with cookie butter, plus whipped cream and caramel drizzle?</span>
     </a></li>
     <li><a href="/drinks/birthday-cake-breve">
       <span class="mini" aria-hidden="true" style="--a:#D8B089;--b:#F1E2B3;--c:#E2C9A0"></span>
-      <span class="nm"><b>Birthday Cake Breve</b><span>Medium iced Breve</span></span>
-      <span class="ln">Can I get a medium iced breve with vanilla, white chocolate, and almond, plus whipped cream?</span>
+      <span class="nm"><b>Birthday Cake Breve</b><span data-q="drink=breve&amp;temp=iced&amp;size=medium&amp;f=Vanilla%2CWhite+Chocolate%2CAlmond&amp;x=whip" data-show="base">Medium iced Breve</span></span>
+      <span class="ln" data-q="drink=breve&amp;temp=iced&amp;size=medium&amp;f=Vanilla%2CWhite+Chocolate%2CAlmond&amp;x=whip">Can I get a medium iced breve with vanilla, white chocolate, and almond, plus whipped cream?</span>
     </a></li>
     <li><a href="/drinks/strawberry-shortcake-breve">
       <span class="mini" aria-hidden="true" style="--a:#D8B089;--b:#F0506E;--c:#F1E2B3"></span>
-      <span class="nm"><b>Strawberry Shortcake Breve</b><span>Medium iced Breve</span></span>
-      <span class="ln">Can I get a medium iced breve with strawberry and vanilla, plus soft top?</span>
+      <span class="nm"><b>Strawberry Shortcake Breve</b><span data-q="drink=breve&amp;temp=iced&amp;size=medium&amp;f=Strawberry%2CVanilla&amp;x=softtop" data-show="base">Medium iced Breve</span></span>
+      <span class="ln" data-q="drink=breve&amp;temp=iced&amp;size=medium&amp;f=Strawberry%2CVanilla&amp;x=softtop">Can I get a medium iced breve with strawberry and vanilla, plus soft top?</span>
     </a></li>
     <li><a href="/drinks/creme-brulee-breve">
       <span class="mini" aria-hidden="true" style="--a:#D8B089;--b:#E0B060;--c:#C7852F"></span>
-      <span class="nm"><b>Crème Brûlée Breve</b><span>Medium iced Breve</span></span>
-      <span class="ln">Can I get a medium iced breve with crème brûlée and caramel, plus caramel drizzle?</span>
+      <span class="nm"><b>Crème Brûlée Breve</b><span data-q="drink=breve&amp;temp=iced&amp;size=medium&amp;f=Cr%C3%A8me+Br%C3%BBl%C3%A9e%2CCaramel&amp;x=caramel" data-show="base">Medium iced Breve</span></span>
+      <span class="ln" data-q="drink=breve&amp;temp=iced&amp;size=medium&amp;f=Cr%C3%A8me+Br%C3%BBl%C3%A9e%2CCaramel&amp;x=caramel">Can I get a medium iced breve with crème brûlée and caramel, plus caramel drizzle?</span>
     </a></li>
   </ol>
     </section>
 
+    <script type="application/json" id="combo-data">{"slug":"coconut-vanilla-americano","name":"Coconut Vanilla Americano","combo":{"drink":"americano","temp":"iced","size":"medium","milk":"","flavors":["Coconut","Vanilla"],"extras":[],"sweet":"half","sf":false}}</script>
     <aside class="nudge">
       <p><strong>Not quite your mood?</strong> Describe it in a few words and get three drinks made for it.</p>
       <a class="btn primary" href="/">Mix from a vibe</a>
@@ -158,6 +160,7 @@ document.addEventListener('click', async e => {
 </script>
 <script type="module" src="/assets/settings.js"></script>
 <script type="module" src="/assets/share.js"></script>
+<script type="module" src="/assets/drink-page.js"></script>
 <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments) };</script>
 <script defer src="/_vercel/insights/script.js"></script>
 </body>

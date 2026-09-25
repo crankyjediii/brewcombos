@@ -87,7 +87,7 @@
         <p class="label">Coffee · seasonal</p>
         <h1>Peppermint Mocha</h1>
         <p class="lede">The holiday standard: mocha, peppermint, whip and dark chocolate drizzle.</p>
-        <div class="say">
+        <div class="say" id="order">
           <p class="label">Say this at the window</p>
           <p class="line">Can I get a medium hot mocha with peppermint, plus whipped cream and dark chocolate drizzle?</p>
           <div class="actions">
@@ -96,6 +96,7 @@
             <button class="btn quiet" type="button" data-share="/drinks/peppermint-mocha" data-title="Peppermint Mocha" data-text="Can I get a medium hot mocha with peppermint, plus whipped cream and dark chocolate drizzle?" data-card="https://brewcombos.com/card.png?drink=mocha&amp;temp=hot&amp;size=medium&amp;milk=whole&amp;f=Peppermint&amp;x=whip%2Cchocolate&amp;n=Peppermint%20Mocha" data-story="https://brewcombos.com/card.png?drink=mocha&amp;temp=hot&amp;size=medium&amp;milk=whole&amp;f=Peppermint&amp;x=whip%2Cchocolate&amp;n=Peppermint%20Mocha&amp;format=story" data-filename="peppermint-mocha.png">Share</button>
           </div>
         </div>
+        <p class="prefs-note" id="prefs-note" hidden></p>
         <p class="note">Seasonal flavor: not every stand carries it year-round. If yours is out, ask what's close.</p>
       </div>
     </article>
@@ -103,11 +104,11 @@
     <div class="drink-more">
       <section aria-labelledby="in-h">
         <h2 id="in-h">What's in it</h2>
-        <dl class="facts"><div><dt>Base</dt><dd>Mocha · espresso, chocolate, milk</dd></div><div><dt>Size</dt><dd>Medium</dd></div><div><dt>Temperature</dt><dd>Hot</dd></div><div><dt>Milk</dt><dd>Whole</dd></div><div><dt>Flavors</dt><dd><ul class="flavors-inline"><li><span class="sw" style="--c:#F2B8C2"></span>Peppermint</li></ul></dd></div><div><dt>Extras</dt><dd>Whipped cream, Dark chocolate drizzle</dd></div><div><dt>Caffeine</dt><dd>Yes</dd></div></dl>
+        <dl class="facts" id="facts"><div><dt>Base</dt><dd>Mocha · espresso, chocolate, milk</dd></div><div><dt>Size</dt><dd>Medium</dd></div><div><dt>Temperature</dt><dd>Hot</dd></div><div><dt>Milk</dt><dd>Whole</dd></div><div><dt>Flavors</dt><dd><ul class="flavors-inline"><li><span class="sw" style="--c:#F2B8C2"></span>Peppermint</li></ul></dd></div><div><dt>Extras</dt><dd>Whipped cream, Dark chocolate drizzle</dd></div><div><dt>Caffeine</dt><dd>Yes</dd></div></dl>
       </section>
       <section aria-labelledby="var-h">
         <h2 id="var-h">Other ways to order it</h2>
-        <ul class="variations">
+        <ul class="variations" id="variations">
           <li><p class="label">Iced</p><p>Can I get a medium iced mocha with peppermint, plus whipped cream and dark chocolate drizzle?</p><button class="btn" type="button" data-say="Can I get a medium iced mocha with peppermint, plus whipped cream and dark chocolate drizzle?"><span class="idle">Copy</span><span class="ok">Copied</span></button></li>
           <li><p class="label">Chiller</p><p>Can I get a medium mocha chiller with peppermint, plus whipped cream and dark chocolate drizzle?</p><button class="btn" type="button" data-say="Can I get a medium mocha chiller with peppermint, plus whipped cream and dark chocolate drizzle?"><span class="idle">Copy</span><span class="ok">Copied</span></button></li>
           <li><p class="label">Large</p><p>Can I get a large hot mocha with peppermint, plus whipped cream and dark chocolate drizzle?</p><button class="btn" type="button" data-say="Can I get a large hot mocha with peppermint, plus whipped cream and dark chocolate drizzle?"><span class="idle">Copy</span><span class="ok">Copied</span></button></li>
@@ -120,27 +121,28 @@
       <ol class="combo-list">
     <li><a href="/drinks/caramel-apple-breve">
       <span class="mini" aria-hidden="true" style="--a:#D8B089;--b:#8CD34B;--c:#C7852F"></span>
-      <span class="nm"><b>Caramel Apple Breve</b><span>Medium iced Breve</span></span>
-      <span class="ln">Can I get a medium iced breve with green apple and caramel, plus caramel drizzle?</span>
+      <span class="nm"><b>Caramel Apple Breve</b><span data-q="drink=breve&amp;temp=iced&amp;size=medium&amp;f=Green+Apple%2CCaramel&amp;x=caramel" data-show="base">Medium iced Breve</span></span>
+      <span class="ln" data-q="drink=breve&amp;temp=iced&amp;size=medium&amp;f=Green+Apple%2CCaramel&amp;x=caramel">Can I get a medium iced breve with green apple and caramel, plus caramel drizzle?</span>
     </a></li>
     <li><a href="/drinks/pumpkin-pie-latte">
       <span class="mini" aria-hidden="true" style="--a:#E4C8A4;--b:#D9772B;--c:#A0602D"></span>
-      <span class="nm"><b>Pumpkin Pie Latte</b><span>Medium hot Latte</span></span>
-      <span class="ln">Can I get a medium hot latte with pumpkin spice and brown sugar cinnamon, plus whipped cream?</span>
+      <span class="nm"><b>Pumpkin Pie Latte</b><span data-q="drink=latte&amp;temp=hot&amp;size=medium&amp;milk=whole&amp;f=Pumpkin+Spice%2CBrown+Sugar+Cinnamon&amp;x=whip" data-show="base">Medium hot Latte</span></span>
+      <span class="ln" data-q="drink=latte&amp;temp=hot&amp;size=medium&amp;milk=whole&amp;f=Pumpkin+Spice%2CBrown+Sugar+Cinnamon&amp;x=whip">Can I get a medium hot latte with pumpkin spice and brown sugar cinnamon, plus whipped cream?</span>
     </a></li>
     <li><a href="/drinks/gingerbread-latte">
       <span class="mini" aria-hidden="true" style="--a:#E4C8A4;--b:#9A5B2C;--c:#F1E2B3"></span>
-      <span class="nm"><b>Gingerbread Latte</b><span>Medium hot Latte</span></span>
-      <span class="ln">Can I get a medium hot latte with gingerbread and vanilla, plus whipped cream?</span>
+      <span class="nm"><b>Gingerbread Latte</b><span data-q="drink=latte&amp;temp=hot&amp;size=medium&amp;milk=whole&amp;f=Gingerbread%2CVanilla&amp;x=whip" data-show="base">Medium hot Latte</span></span>
+      <span class="ln" data-q="drink=latte&amp;temp=hot&amp;size=medium&amp;milk=whole&amp;f=Gingerbread%2CVanilla&amp;x=whip">Can I get a medium hot latte with gingerbread and vanilla, plus whipped cream?</span>
     </a></li>
     <li><a href="/drinks/english-toffee-breve">
       <span class="mini" aria-hidden="true" style="--a:#D8B089;--b:#A56A2A;--c:#B9772F"></span>
-      <span class="nm"><b>English Toffee Breve</b><span>Medium iced Breve</span></span>
-      <span class="ln">Can I get a medium iced breve with english toffee and salted caramel, plus caramel drizzle?</span>
+      <span class="nm"><b>English Toffee Breve</b><span data-q="drink=breve&amp;temp=iced&amp;size=medium&amp;f=English+Toffee%2CSalted+Caramel&amp;x=caramel" data-show="base">Medium iced Breve</span></span>
+      <span class="ln" data-q="drink=breve&amp;temp=iced&amp;size=medium&amp;f=English+Toffee%2CSalted+Caramel&amp;x=caramel">Can I get a medium iced breve with english toffee and salted caramel, plus caramel drizzle?</span>
     </a></li>
   </ol>
     </section>
 
+    <script type="application/json" id="combo-data">{"slug":"peppermint-mocha","name":"Peppermint Mocha","combo":{"drink":"mocha","temp":"hot","size":"medium","milk":"whole","flavors":["Peppermint"],"extras":["whip","chocolate"],"sweet":"regular","sf":false}}</script>
     <aside class="nudge">
       <p><strong>Not quite your mood?</strong> Describe it in a few words and get three drinks made for it.</p>
       <a class="btn primary" href="/">Mix from a vibe</a>
@@ -158,6 +160,7 @@ document.addEventListener('click', async e => {
 </script>
 <script type="module" src="/assets/settings.js"></script>
 <script type="module" src="/assets/share.js"></script>
+<script type="module" src="/assets/drink-page.js"></script>
 <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments) };</script>
 <script defer src="/_vercel/insights/script.js"></script>
 </body>
