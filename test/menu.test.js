@@ -121,10 +121,11 @@ test('parseCombos: accepts custom flavors only when sent', () => {
 });
 
 test('parseCombos: sugar-free strips whip, drizzle and half sweet', () => {
-  const c = [{ ...good[0], drink: 'mocha', extras: ['whip', 'caramel', 'halfsweet', 'shot'] }];
+  const c = [{ ...good[0], drink: 'mocha', extras: ['whip', 'caramel', 'whitechoc', 'halfsweet', 'shot'] }];
   const [o] = M.parseCombos(reply(c), { sf: true });
   assert.equal(o.sf, true);
   assert.deepEqual(o.extras, ['shot']);
+  assert.equal(o.sweet, 'regular');
 });
 
 test('parseCombos: trims long names and reasons', () => {
@@ -148,4 +149,35 @@ test('parseCombos: drops drinks that break the drink-type filter', () => {
   assert.deepEqual(M.parseCombos(reply(mixed), { kind: 'nocaf' }).map(o => o.drink), ['fizz']);
   assert.equal(M.parseCombos(reply(mixed), { kind: 'any' }).length, 3);
   assert.throws(() => M.parseCombos(reply([good[0]]), { kind: 'nocaf' }), /no usable drinks/);
+});
+
+test('orderLine: blended drinks are Chillers', () => {
+  assert.equal(M.orderLine(combo({ drink: 'energy', temp: 'frozen', flavors: ['Mango'] })), 'Can I get a medium 7 Energy chiller with mango?');
+  assert.equal(M.orderLine(combo({ drink: 'latte', temp: 'frozen', milk: 'oat', flavors: ['Vanilla'] })), 'Can I get a medium oat milk latte chiller with vanilla?');
+  assert.equal(M.orderLine(combo({ drink: 'energy', temp: 'frozen', sf: true, flavors: ['Peach'] })), 'Can I get a medium sugar-free 7 Energy chiller with peach?');
+  // smoothies and shakes only come blended, so no extra word
+  assert.equal(M.orderLine(combo({ drink: 'smoothie', flavors: ['Strawberry'] })), 'Can I get a medium smoothie with strawberry?');
+  assert.equal(M.baseLabel(combo({ drink: 'lemonade', temp: 'frozen' })), 'Medium Lemonade Chiller');
+});
+
+test('orderLine: soft top, drizzle names and sweetness', () => {
+  const o = combo({ drink: 'energy', flavors: ['Strawberry'], extras: ['softtop', 'whitechoc'], sweet: 'half' });
+  assert.equal(M.orderLine(o), 'Can I get a medium 7 Energy with strawberry, plus soft top, white chocolate drizzle, and half sweet?');
+  assert.equal(M.orderLine(combo({ sweet: 'extra' })), 'Can I get a medium iced breve with extra sweet?');
+  assert.equal(M.orderLine(combo({ extras: ['chocolate'] })), 'Can I get a medium iced breve with dark chocolate drizzle?');
+  assert.deepEqual(combo({ drink: 'latte', temp: 'hot', extras: ['softtop'] }).extras, []);
+});
+
+test('fixCombo: sweetness defaults to regular and resets for sugar-free', () => {
+  assert.equal(combo({}).sweet, 'regular');
+  assert.equal(combo({ sweet: 'bogus' }).sweet, 'regular');
+  assert.equal(combo({ sweet: 'quarter' }).sweet, 'quarter');
+  assert.equal(combo({ sweet: 'quarter', sf: true }).sweet, 'regular');
+});
+
+test('parseCombos: reads sweetness from the sweet field or from old-style extras', () => {
+  assert.equal(M.parseCombos(reply([{ ...good[0], sweet: 'Half' }]))[0].sweet, 'half');
+  const [o] = M.parseCombos(reply([{ ...good[0], extras: ['halfsweet', 'coldfoam'] }]));
+  assert.equal(o.sweet, 'half');
+  assert.deepEqual(o.extras, ['coldfoam']);
 });

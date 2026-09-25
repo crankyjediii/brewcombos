@@ -11,10 +11,17 @@
 <meta property="og:site_name" content="Brew Combos">
 <meta property="og:title" content="Brew Combos · 7 Brew drink combos and how to order them">
 <meta property="og:description" content="Find a 7 Brew drink combo for any mood, or build your own, and get the exact words to say at the window.">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://brewcombos.com/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Brew Combos: a 7 Brew order card reading 'Can I get a medium 7 Energy chiller with strawberry and peach, plus soft top?'">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://brewcombos.com/assets/og.png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <meta name="theme-color" content="#F5EFE6" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#17110E" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><path d='M6 8h20l-2.6 20.5a2 2 0 0 1-2 1.5H10.6a2 2 0 0 1-2-1.5z' fill='%23C8432B'/><path d='M6.9 15h18.2' stroke='%23F5EFE6' stroke-width='2'/><rect x='4' y='5' width='24' height='4' rx='2' fill='%23221610'/></svg>">
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebSite", "name": "Brew Combos", "url": "https://brewcombos.com/"}, {"@context": "https://schema.org", "@type": "WebApplication", "name": "Brew Combos", "url": "https://brewcombos.com/", "applicationCategory": "LifestyleApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "description": "Find a 7 Brew drink combo for any mood, or build your own flavor by flavor, and get the exact words to say at the window."}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How do I order a secret menu drink at 7 Brew?", "acceptedAnswer": {"@type": "Answer", "text": "Say it in this order: size, hot or iced (or Chiller), the base drink, then your flavors and any extras. Every order this site writes follows that pattern. If your Brewista doesn't know a drink by its nickname, just read them the flavors."}}, {"@type": "Question", "name": "What is a Chiller at 7 Brew?", "acceptedAnswer": {"@type": "Answer", "text": "A Chiller is 7 Brew's blended, slushy version of a drink. Coffee drinks, 7 Energy, lemonade and more can be made as a Chiller."}}, {"@type": "Question", "name": "What is a soft top?", "acceptedAnswer": {"@type": "Answer", "text": "Soft top is 7 Brew's creamy topping for cold drinks, similar to cold foam. Add it to iced drinks and Chillers."}}, {"@type": "Question", "name": "Can I get any drink sugar-free?", "acceptedAnswer": {"@type": "Answer", "text": "Most flavors come in a sugar-free version, and 7 Energy has a sugar-free base. Tick sugar-free here and the order line says it for you. Sugar-free options vary by stand, so ask if yours is missing."}}, {"@type": "Question", "name": "How many flavors can I add?", "acceptedAnswer": {"@type": "Answer", "text": "Three flavors is the usual limit. You can also ask for ¼, ½ or extra sweetness to change how strong the syrups taste."}}]}]</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
@@ -279,6 +286,15 @@ textarea::placeholder{color:color-mix(in srgb,var(--muted) 70%,transparent)}
 .result.loading .cup .body{animation:swirl 1.2s ease-in-out infinite}
 @keyframes swirl{0%,100%{transform:scale(var(--s,.92)) rotate(-3deg)}50%{transform:scale(var(--s,.92)) rotate(3deg)}}
 
+/* ---------- FAQ ---------- */
+.faq{margin-top:96px;max-width:900px}
+.faq h2{margin:0 0 8px;font-size:clamp(1.5rem,3vw,2rem);font-weight:750;font-variation-settings:"wdth" 85,"opsz" 48;letter-spacing:-.01em}
+.faq dl{margin:0}
+.faq dl > div{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:6px 40px;padding:18px 0;border-top:1px solid var(--line)}
+.faq dt{font-weight:700}
+.faq dd{margin:0;color:var(--muted);max-width:52ch}
+@media (max-width:700px){ .faq{margin-top:72px} .faq dl > div{grid-template-columns:1fr} }
+
 /* ---------- Footer ---------- */
 footer{margin-top:72px;padding-top:18px;border-top:1px solid var(--line);color:var(--muted);font-size:.85rem;max-width:44rem}
 
@@ -373,6 +389,7 @@ footer{margin-top:72px;padding-top:18px;border-top:1px solid var(--line);color:v
           <div><p class="label" id="temp-h">Temperature</p><div class="seg" id="temps" role="group" aria-labelledby="temp-h"></div></div>
           <div><p class="label" id="size-h">Size</p><div class="seg" id="sizes" role="group" aria-labelledby="size-h"></div></div>
           <div id="milk-wrap"><p class="label" id="milk-h">Milk</p><div class="seg" id="milks" role="group" aria-labelledby="milk-h"></div></div>
+          <div><p class="label" id="sweet-h">Sweetness</p><div class="seg" id="sweets" role="group" aria-labelledby="sweet-h"></div></div>
         </div>
         <div class="step">
           <div class="step-head">
@@ -410,9 +427,22 @@ footer{margin-top:72px;padding-top:18px;border-top:1px solid var(--line);color:v
     </div>
   </section>
 
+  <section class="faq" aria-labelledby="faq-h">
+    <h2 id="faq-h">Ordering at 7 Brew</h2>
+    <dl>
+    <div><dt>How do I order a secret menu drink at 7 Brew?</dt><dd>Say it in this order: size, hot or iced (or Chiller), the base drink, then your flavors and any extras. Every order this site writes follows that pattern. If your Brewista doesn't know a drink by its nickname, just read them the flavors.</dd></div>
+    <div><dt>What is a Chiller at 7 Brew?</dt><dd>A Chiller is 7 Brew's blended, slushy version of a drink. Coffee drinks, 7 Energy, lemonade and more can be made as a Chiller.</dd></div>
+    <div><dt>What is a soft top?</dt><dd>Soft top is 7 Brew's creamy topping for cold drinks, similar to cold foam. Add it to iced drinks and Chillers.</dd></div>
+    <div><dt>Can I get any drink sugar-free?</dt><dd>Most flavors come in a sugar-free version, and 7 Energy has a sugar-free base. Tick sugar-free here and the order line says it for you. Sugar-free options vary by stand, so ask if yours is missing.</dd></div>
+    <div><dt>How many flavors can I add?</dt><dd>Three flavors is the usual limit. You can also ask for ¼, ½ or extra sweetness to change how strong the syrups taste.</dd></div>
+    </dl>
+  </section>
+
   <footer>Not affiliated with 7 Brew. Flavors change by stand and season, so if your Brewista doesn't have one, ask what's close.</footer>
 </div>
 
+<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments) };</script>
+<script defer src="/_vercel/insights/script.js"></script>
 <script type="module">
 import * as M from './lib/menu.js';
 
@@ -510,11 +540,11 @@ function createCup(){
     body.classList.toggle('is-iced', o.temp === 'iced');
     body.classList.toggle('is-frozen', o.temp === 'frozen');
     body.classList.toggle('is-bubbly', !!d.bubbly && o.temp !== 'frozen');
-    body.classList.toggle('has-foam', o.extras.includes('coldfoam'));
+    body.classList.toggle('has-foam', o.extras.includes('coldfoam') || o.extras.includes('softtop'));
     body.classList.toggle('has-whip', o.extras.includes('whip'));
-    body.classList.toggle('has-drizzle', o.extras.includes('caramel') || o.extras.includes('chocolate'));
+    body.classList.toggle('has-drizzle', ['caramel', 'chocolate', 'whitechoc'].some(x => o.extras.includes(x)));
     body.classList.toggle('has-straw', o.temp !== 'hot');
-    body.style.setProperty('--drizzle', o.extras.includes('chocolate') ? '#4A2616' : '#B8742A');
+    body.style.setProperty('--drizzle', o.extras.includes('chocolate') ? '#4A2616' : o.extras.includes('caramel') ? '#B8742A' : '#F4EAD7');
     body.style.setProperty('--s', {small:.8, medium:.9, large:1}[o.size]);
     straw.style.fill = cols[0] || '#C8432B';
 
@@ -589,7 +619,7 @@ async function copyText(text, btn){
 }
 
 /* ================= Builder ================= */
-let state = M.fixCombo({drink:'breve', temp:'iced', size:'medium', milk:'', flavors:[], extras:[], sf:false});
+let state = M.fixCombo({drink:'breve', temp:'iced', size:'medium', milk:'', flavors:[], extras:[], sweet:'regular', sf:false});
 const ticketCup = createCup();
 $('#ticket-cup').appendChild(ticketCup.el);
 
@@ -607,7 +637,12 @@ function syncSeg(el, current, disabled = []){
 $('#drinks').innerHTML = M.DRINKS.map(d =>
   `<button type="button" class="drink" data-id="${d.id}" style="--c:${d.color}"><b>${d.name}</b><span>${d.desc}</span></button>`).join('');
 $('#drinks').onclick = e => { const b = e.target.closest('.drink'); if(!b) return; state.drink = b.dataset.id; render() };
-seg($('#temps'), [['hot','Hot'],['iced','Iced'],['frozen','Frozen']], v => { state.temp = v; render() });
+seg($('#temps'), Object.entries(M.TEMP_LABELS), v => { state.temp = v; render() });
+seg($('#sweets'), M.SWEETS.map(([v, l]) => [v, l]), v => { state.sweet = v; render() });
+$('#sweets').querySelectorAll('button').forEach(b => {
+  const words = M.SWEETS.find(w => w[0] === b.dataset.v)[2];
+  if(words) b.setAttribute('aria-label', words);
+});
 seg($('#sizes'), M.SIZES.map(s => [s, s[0].toUpperCase() + s.slice(1)]), v => { state.size = v; render() });
 
 let milkType = null, extrasKey = '';
@@ -640,6 +675,7 @@ function render(){
   document.querySelectorAll('.drink').forEach(b => b.setAttribute('aria-pressed', b.dataset.id === state.drink));
   syncSeg($('#temps'), state.temp, ['hot','iced','frozen'].filter(t => !d.temps.includes(t)));
   syncSeg($('#sizes'), state.size);
+  syncSeg($('#sweets'), state.sweet, state.sf ? M.SWEETS.map(w => w[0]).filter(v => v !== 'regular') : []);
 
   if(milkType !== d.milk){
     milkType = d.milk;
@@ -669,6 +705,7 @@ function render(){
   if(d.milk === 'fixed') rows.push(['Milk', 'Half & half']);
   rows.push(['Flavors', n ? state.flavors.join(', ') : 'None yet']);
   if(state.extras.length) rows.push(['Extras', state.extras.map(id => M.EXTRA[id].label).join(', ')]);
+  if(state.sweet !== 'regular') rows.push(['Sweetness', M.SWEETS.find(w => w[0] === state.sweet)[2]]);
   if(state.sf) rows.push(['Syrups', 'Sugar-free']);
   $('#details').innerHTML = rows.map(([k, v]) => `<dt>${k}</dt><dd>${esc(v)}</dd>`).join('');
 
@@ -699,7 +736,7 @@ $('#extras').onclick = e => {
 };
 $('#sf').onchange = e => { state.sf = e.target.checked; render() };
 $('#copy').onclick = e => copyText(M.orderLine(state), e.currentTarget);
-$('#clear').onclick = () => { state.flavors = []; state.extras = []; state.sf = false; render() };
+$('#clear').onclick = () => { state.flavors = []; state.extras = []; state.sf = false; state.sweet = 'regular'; render() };
 
 $('#add-form').onsubmit = e => {
   e.preventDefault();
