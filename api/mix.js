@@ -97,7 +97,7 @@ export default async function handler(req, res) {
         const message = j.choices?.[0]?.message || {};
         const text = message.content || message.reasoning || '';
         try {
-          const combos = parseCombos(text, { sf, custom });
+          const combos = parseCombos(text, { sf, custom, kind });
           return res.status(200).json({ combos });
         } catch (e) {
           console.error(`[mix] ${model}: ${e.message}. Reply started: ${String(text).slice(0, 300)}`);

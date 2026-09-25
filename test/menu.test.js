@@ -140,3 +140,12 @@ test('prompts list every flavor and respect the drink-type filter', () => {
   assert.match(M.userPrompt('x', 'nocaf', true), /caffeine-free[\s\S]*sugar-free/);
   assert.match(M.userPrompt('x', 'bogus', false), /Any drink type/);
 });
+
+test('parseCombos: drops drinks that break the drink-type filter', () => {
+  const mixed = [good[0], good[1], { ...good[0], name: 'Pop', drink: 'fizz', flavors: ['Cherry'] }];
+  assert.deepEqual(M.parseCombos(reply(mixed), { kind: 'coffee' }).map(o => o.drink), ['latte']);
+  assert.deepEqual(M.parseCombos(reply(mixed), { kind: 'energy' }).map(o => o.drink), ['energy']);
+  assert.deepEqual(M.parseCombos(reply(mixed), { kind: 'nocaf' }).map(o => o.drink), ['fizz']);
+  assert.equal(M.parseCombos(reply(mixed), { kind: 'any' }).length, 3);
+  assert.throws(() => M.parseCombos(reply([good[0]]), { kind: 'nocaf' }), /no usable drinks/);
+});

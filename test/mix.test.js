@@ -64,7 +64,7 @@ test('happy path: one call, reasoning off, JSON mode, drinks normalized', async 
   replies.push(ok(drinks));
   const r = await call(JSON.stringify({ vibe: '  rainy\n\nday ', kind: 'coffee', sf: true, custom: ['Honey'] }));
   assert.equal(r.code, 200);
-  assert.equal(r.body.combos.length, 2);
+  assert.deepEqual(r.body.combos.map(c => c.drink), ['latte']);   // the energy drink breaks the coffee filter
   assert.equal(r.body.combos[0].sf, true);
   assert.equal(calls.length, 1);
   const { body, headers } = calls[0];
@@ -136,5 +136,19 @@ test('per-visitor rate limit', async () => {
   for (let i = 0; i < 3; i++) { replies.push(ok(drinks)); assert.equal((await call({ vibe: 'x' }, { addr })).code, 200); }
   const r = await call({ vibe: 'x' }, { addr });
   assert.equal(r.code, 429);
+  assert.equal(calls.length, 3);
+});
+
+test('moves to the next model when every drink breaks the drink-type filter', async () => {
+  replies.push(ok(drinks), ok(drinks));
+  const r = await call({ vibe: 'x', kind: 'coffee' });
+  assert.equal(r.code, 200);
+  assert.deepEqual(r.body.combos.map(c => c.drink), ['latte']);
+  assert.equal(calls.length, 1);
+  replies.length = 0;
+  replies.push(ok(drinks), ok(drinks.replace(/latte/, 'fizz').replace('Vanilla', 'Cherry').replace(', \"Cinnamon\"', '')));
+  const r2 = await call({ vibe: 'x', kind: 'nocaf' });
+  assert.equal(r2.code, 200);
+  assert.deepEqual(r2.body.combos.map(c => c.drink), ['fizz']);
   assert.equal(calls.length, 3);
 });
