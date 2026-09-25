@@ -11,24 +11,43 @@ api/mix.js      serverless function that calls OpenRouter with your key
 test/           unit tests for the menu logic and the API (no network needed)
 ```
 
-## Deploy on Vercel
+## Settings
 
-1. Push this folder to a GitHub repo and import it in Vercel (framework preset: **Other**, no build command).
-2. In **Project > Settings > Environment Variables**, add:
-   - `OPENROUTER_API_KEY` = your key
-   - `OPENROUTER_MODEL` = the model id, e.g. `meta-llama/llama-3.3-70b-instruct:free`
-   - optional: `OPENROUTER_FALLBACK_MODELS` (comma-separated), `RATE_LIMIT_PER_MIN`, `SITE_URL`
-3. Redeploy so the variables take effect.
+The server reads these environment variables. In production they live in **Vercel > brewcombos > Settings > Environment Variables**; locally they go in `.env.local` (git ignores it).
+
+| Variable | Required | What it does |
+|---|---|---|
+| `OPENROUTER_API_KEY` | yes | Your OpenRouter key |
+| `OPENROUTER_MODEL` | yes | Model id to try first, e.g. `nvidia/nemotron-3-super-120b-a12b` |
+| `OPENROUTER_FALLBACK_MODELS` | no | Comma-separated models to try if the first one fails or is busy |
+| `RATE_LIMIT_PER_MIN` | no | Requests per minute per visitor (default 6) |
+| `SITE_URL` | no | Sent to OpenRouter for attribution, e.g. `https://brewcombos.com` |
+
+Change a variable in Vercel, then redeploy for it to take effect.
+
+## Deploy
+
+Pushing to `main` on GitHub deploys to https://brewcombos.com automatically. There is no build step.
 
 ## Run locally
 
+Create `.env.local` with at least the two required variables above:
+
+```
+OPENROUTER_API_KEY=sk-or-...
+OPENROUTER_MODEL=nvidia/nemotron-3-super-120b-a12b
+```
+
+Then:
+
 ```
 npm i -g vercel
-cp .env.example .env.local   # fill in your key + model
 vercel dev
 ```
 
-Opening `index.html` straight from disk won't work anymore: the page loads `lib/menu.js` as a module and needs `/api/mix`.
+The key is stored as a sensitive variable in Vercel, so `vercel env pull` won't fill it in; copy it from OpenRouter instead.
+
+Opening `index.html` straight from disk won't work: the page loads `lib/menu.js` as a module and needs `/api/mix`.
 
 ## Tests
 
