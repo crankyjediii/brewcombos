@@ -46,39 +46,67 @@ export default async function handler(req, res) {
   const custom = cleanCustom(body.custom);
 
   let lastStatus = 502;
+  const deadline = Date.now() + 52_000;          // stay under maxDuration (60s) in vercel.json
+  const sleep = ms => new Promise(r => setTimeout(r, ms));
+
   for (const model of models) {
-    try {
-      const r = await fetch('https://openrouter.ai/api/v1/chat/completions', {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${key}`,
-          'Content-Type': 'application/json',
-          'X-Title': 'Three Pumps',
-          ...(process.env.SITE_URL ? { 'HTTP-Referer': process.env.SITE_URL } : {}),
-        },
-        body: JSON.stringify({
-          model,
-          temperature: 0.9,
-          max_tokens: 1500,
-          // One user message instead of system + user: some free models
-          // (Gemma on Google's provider, for example) reject system prompts with a 400.
-          messages: [
-            { role: 'user', content: `${systemPrompt(custom)}\n\n---\n\n${userPrompt(vibe, kind, sf)}` },
-          ],
-        }),
-        signal: AbortSignal.timeout(25_000),
-      });
-      const j = await r.json().catch(() => null);
-      if (!r.ok || !j || j.error) {
-        lastStatus = r.status === 429 ? 429 : 502;
-        console.error(`[mix] ${model}: ${r.status} ${j?.error?.message || ''}`);
-        continue;
+    for (let attempt = 1; attempt <= 2; attempt++) {
+      const left = deadline - Date.now();
+      if (left < 4_000) break;
+      try {
+        const r = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${key}`,
+            'Content-Type': 'application/json',
+            'X-Title': 'Three Pumps',
+            ...(process.env.SITE_URL ? { 'HTTP-Referer': process.env.SITE_URL } : {}),
+          },
+          body: JSON.stringify({
+            model,
+            temperature: 0.8,
+            max_tokens: 1500,
+            response_format: { type: 'json_object' },   // ignored by models that don't support it
+            // Reasoning models spend 20-30s thinking before they answer, which blows the timeout.
+            // With it off, the same model replies in about 5s. Ignored by models without reasoning.
+            reasoning: { enabled: false },
+            // One user message instead of system + user: some free models
+            // (Gemma on Google's provider, for example) reject system prompts with a 400.
+            messages: [
+              { role: 'user', content: `${systemPrompt(custom)}\n\n---\n\n${userPrompt(vibe, kind, sf)}` },
+            ],
+          }),
+          signal: AbortSignal.timeout(Math.min(20_000, left)),
+        });
+        const raw = await r.text();
+        let j = null;
+        try { j = JSON.parse(raw); } catch { /* logged below */ }
+
+        // OpenRouter can return HTTP 200 with an error in the body if the provider fails mid-request.
+        if (!r.ok || !j || j.error) {
+          const code = (j && j.error && j.error.code) || r.status;
+          const msg = j && j.error ? (j.error.message || JSON.stringify(j.error)) : `unreadable body: ${raw.slice(0, 200)}`;
+          console.error(`[mix] ${model} (try ${attempt}): ${code} ${msg}`);
+          if (code === 429) {
+            lastStatus = 429;
+            if (attempt === 1) { await sleep(1_500); continue; }   // one quick retry, then next model
+          }
+          break;
+        }
+
+        const message = j.choices?.[0]?.message || {};
+        const text = message.content || message.reasoning || '';
+        try {
+          const combos = parseCombos(text, { sf, custom });
+          return res.status(200).json({ combos });
+        } catch (e) {
+          console.error(`[mix] ${model}: ${e.message}. Reply started: ${String(text).slice(0, 300)}`);
+          break;
+        }
+      } catch (e) {
+        console.error(`[mix] ${model} (try ${attempt}): ${e.message}`);
+        break;
       }
-      const text = j.choices?.[0]?.message?.content || '';
-      const combos = parseCombos(text, { sf, custom });
-      return res.status(200).json({ combos });
-    } catch (e) {
-      console.error(`[mix] ${model}: ${e.message}`);
     }
   }
 

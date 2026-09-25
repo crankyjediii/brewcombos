@@ -6,6 +6,7 @@ Turn a vibe into a 7 Brew drink, or pick flavors and get the exact words to orde
 index.html      the whole front end
 lib/menu.js     drinks, flavors, extras, order wording, AI prompt (shared by page + API)
 api/mix.js      serverless function that calls OpenRouter with your key
+test/           unit tests for the menu logic and the API (no network needed)
 ```
 
 ## Deploy on Vercel
@@ -26,6 +27,15 @@ vercel dev
 ```
 
 Opening `index.html` straight from disk won't work anymore: the page loads `lib/menu.js` as a module and needs `/api/mix`.
+
+## Tests
+
+```
+npm test            # menu logic, order wording, AI reply parsing, API fallbacks (mocked, no key needed)
+npm run test:live   # sends real vibes through the API with the key in .env.local
+```
+
+The API turns off model "reasoning" on purpose. Reasoning models otherwise think for 20 to 30 seconds before answering and hit the timeout; with it off, a reply takes about 5 seconds.
 
 ## Editing the menu
 
