@@ -2,7 +2,21 @@
   "functions": {
     "api/mix.js": {
       "maxDuration": 60
+    },
+    "api/card.js": {
+      "includeFiles": "lib/fonts/**",
+      "memory": 1024
     }
   },
-  "trailingSlash": false
+  "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/s",
+      "destination": "/api/share"
+    },
+    {
+      "source": "/card.png",
+      "destination": "/api/card"
+    }
+  ]
 }

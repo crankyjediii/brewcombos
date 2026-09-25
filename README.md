@@ -12,6 +12,8 @@ lib/cup.js        the cup drawing, shared by the app and the drink pages
 lib/drinks.js     named combos that get their own page
 scripts/build-pages.js   generates drinks/*, the collection pages and sitemap.xml
 api/mix.js        serverless function that calls OpenRouter with your key
+api/share.js      /s?drink=...  page for a shared drink
+api/card.js       /card.png?drink=...  preview image for a shared drink (lib/card.js, fonts in lib/fonts)
 test/             unit tests (no network needed)
 ```
 

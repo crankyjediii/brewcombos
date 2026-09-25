@@ -6,15 +6,12 @@ import { writeFileSync, mkdirSync, rmSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import * as M from '../lib/menu.js';
-import { cupSVG, cupLook } from '../lib/cup.js';
+import { SITE, esc, page, cup, mini, swatches, copyBtn, shareBtn, resetCups } from '../lib/layout.js';
 import { COMBOS, GROUPS } from '../lib/drinks.js';
 
-const SITE = 'https://brewcombos.com';
 const UPDATED = '2026-09-24';
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 
-const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-const colorOf = n => M.flavorColor(n);
 const drinks = COMBOS.map(c => ({ ...c, combo: M.fixCombo(c.combo) }));
 const D = c => M.DRINK[c.combo.drink];
 const inGroup = (g, c) => g.fits(c.combo, D(c));
@@ -22,76 +19,8 @@ const PRIMARY = GROUPS.filter(g => ['energy', 'coffee', 'tea-chai-matcha', 'no-c
 const primaryOf = c => PRIMARY.find(g => inGroup(g, c));
 const sfOk = c => GROUPS.find(g => g.sugarFree).fits(c.combo, D(c));
 const caffeine = c => D(c).cat !== 'nocaf';
+export const cardURL = (o, name) => `${SITE}/card.png?${M.comboToQuery(o)}${name ? `&n=${encodeURIComponent(name)}` : ''}`;
 
-/* ---------- Shared pieces ---------- */
-
-function page({ path, title, description, body, crumbs = [] }) {
-  const url = SITE + path;
-  const ld = crumbs.length ? `<script type="application/ld+json">${JSON.stringify({
-    '@context': 'https://schema.org', '@type': 'BreadcrumbList',
-    itemListElement: crumbs.map(([name, p], i) => ({ '@type': 'ListItem', position: i + 1, name, item: SITE + p })),
-  })}</script>\n` : '';
-  return `<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>${esc(title)}</title>
-<meta name="description" content="${esc(description)}">
-<link rel="canonical" href="${url}">
-<meta property="og:type" content="website">
-<meta property="og:url" content="${url}">
-<meta property="og:site_name" content="Brew Combos">
-<meta property="og:title" content="${esc(title)}">
-<meta property="og:description" content="${esc(description)}">
-<meta property="og:image" content="${SITE}/assets/og.png">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#F5EFE6" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#17110E" media="(prefers-color-scheme: dark)">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><path d='M6 8h20l-2.6 20.5a2 2 0 0 1-2 1.5H10.6a2 2 0 0 1-2-1.5z' fill='%23C8432B'/><path d='M6.9 15h18.2' stroke='%23F5EFE6' stroke-width='2'/><rect x='4' y='5' width='24' height='4' rx='2' fill='%23221610'/></svg>">
-<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
-${ld}<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/site.css">
-</head>
-<body>
-<div class="wrap">
-  <header class="site-top">
-    <a class="mark" href="/">Brew Combos</a>
-    <nav aria-label="Site">
-      <a href="/">From a vibe</a>
-      <a href="/#build">Build my own</a>
-      <a href="/drinks"${path.startsWith('/drinks') ? ' aria-current="page"' : ''}>All drinks</a>
-    </nav>
-  </header>
-${crumbs.length > 1 ? `  <nav class="crumbs" aria-label="Breadcrumb">${crumbs.slice(0, -1).map(([n, p]) => `<a href="${p}">${esc(n)}</a>`).join('<span aria-hidden="true">/</span>')}</nav>\n` : ''}${body}
-  <footer>Not affiliated with 7 Brew. Flavors change by stand and season, so if your Brewista doesn't have one, ask what's close.</footer>
-</div>
-<script>
-document.addEventListener('click', async e => {
-  const b = e.target.closest('[data-say]'); if (!b) return;
-  try { await navigator.clipboard.writeText(b.dataset.say) } catch { prompt('Copy your order:', b.dataset.say); return }
-  b.classList.add('done'); clearTimeout(b._t); b._t = setTimeout(() => b.classList.remove('done'), 1600);
-});
-</script>
-<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments) };</script>
-<script defer src="/_vercel/insights/script.js"></script>
-</body>
-</html>
-`;
-}
-
-let cupId = 0;
-const cup = o => `<div class="cup">${cupSVG(`s${++cupId}`, cupLook(o, colorOf))}</div>`;
-const mini = o => {
-  const s = cupLook(o, colorOf).stops;
-  return `<span class="mini" aria-hidden="true" style="--a:${s[1]};--b:${s[2]};--c:${s[4]}"></span>`;
-};
-const swatches = flavors => `<ul class="flavors-inline">${flavors.map(f =>
-  `<li><span class="sw" style="--c:${colorOf(f)}"></span>${esc(f)}</li>`).join('')}</ul>`;
-const copyBtn = (line, label = 'Copy order') =>
-  `<button class="btn" type="button" data-say="${esc(line)}"><span class="idle">${label}</span><span class="ok">Copied</span></button>`;
 const sayLine = o => sfLine(o, false);
 function sfLine(o, sf) { return M.orderLine(M.fixCombo({ ...o, sf })) }
 
@@ -152,6 +81,7 @@ function drinkPage(c, i) {
           <div class="actions">
             ${copyBtn(line)}
             <a class="btn quiet" href="${esc(`/?${M.comboToQuery(o)}#build`)}">Tweak it</a>
+            ${shareBtn(`/drinks/${c.slug}`, c.name, line)}
           </div>
         </div>
         ${seasonal ? '<p class="note">Seasonal flavor: not every stand carries it year-round. If yours is out, ask what\'s close.</p>' : ''}
@@ -188,6 +118,7 @@ function drinkPage(c, i) {
     title: `${c.name}: how to order it at 7 Brew`,
     description: desc.length > 160 ? desc.slice(0, 157).replace(/\s+\S*$/, '') + '…' : desc,
     crumbs: [['Brew Combos', '/'], ['All drinks', '/drinks'], [group.short, `/drinks/${group.slug}`], [c.name, `/drinks/${c.slug}`]],
+    image: cardURL(o, c.name),
     body,
   });
 }
@@ -244,7 +175,7 @@ ${paths.map(p => `  <url>
 
 /* Every generated file, as { 'relative/path': contents }. */
 export function buildPages() {
-  cupId = 0;
+  resetCups();
   const files = {};
   const paths = ['/', '/drinks'];
   files['drinks/index.html'] = allPage();

@@ -117,6 +117,7 @@
         <p class="warn" id="warn" hidden>Three flavors is the usual limit. Check with your Brewista before adding more.</p>
         <div class="actions">
           <button class="btn" id="copy" type="button"><span class="idle">Copy order</span><span class="ok">Copied</span></button>
+          <button class="btn quiet" id="share" type="button"><span class="idle">Share</span><span class="ok">Link copied</span></button>
           <button class="btn quiet" id="clear" type="button">Clear</button>
         </div>
         <dl class="details" id="details"></dl>
@@ -241,7 +242,18 @@ document.fonts?.ready.then(placeBar);
 addEventListener('resize', placeBar);
 placeBar();
 
-async function copyText(text, btn){
+/* Share a drink: the phone's share sheet on touch devices, otherwise copy the link.
+   /s?... is a page with a preview image of this exact drink. */
+async function shareDrink(o, name, btn){
+  const url = `${location.origin}/s?${M.comboToQuery(o)}${name ? `&n=${encodeURIComponent(name)}` : ''}`;
+  if(navigator.share && matchMedia('(pointer: coarse)').matches){
+    try{ await navigator.share({ title: M.comboTitle(o, name), text: M.orderLine(o), url }) }catch{}
+    return;
+  }
+  copyText(url, btn, 'Copy this link:');
+}
+
+async function copyText(text, btn, label = 'Copy your order:'){
   let ok = true;
   try{ await navigator.clipboard.writeText(text) }
   catch{
@@ -249,7 +261,7 @@ async function copyText(text, btn){
     document.body.appendChild(t); t.select();
     try{ ok = document.execCommand('copy') }catch{ ok = false } t.remove();
   }
-  if(!ok){ prompt('Copy your order:', text); return }
+  if(!ok){ prompt(label, text); return }
   btn.classList.add('done');
   clearTimeout(btn._t);
   btn._t = setTimeout(() => btn.classList.remove('done'), 1600);
@@ -373,6 +385,7 @@ $('#extras').onclick = e => {
 };
 $('#sf').onchange = e => { state.sf = e.target.checked; render() };
 $('#copy').onclick = e => copyText(M.orderLine(state), e.currentTarget);
+$('#share').onclick = e => shareDrink(state, '', e.currentTarget);
 $('#clear').onclick = () => { state.flavors = []; state.extras = []; state.sf = false; state.sweet = 'regular'; render() };
 
 $('#add-form').onsubmit = e => {
@@ -509,6 +522,7 @@ function renderResults(vibe, combos){
         <div class="actions">
           <button class="btn" data-copy="${i}" type="button"><span class="idle">Copy order</span><span class="ok">Copied</span></button>
           <button class="btn quiet" data-edit="${i}" type="button">Tweak it</button>
+          <button class="btn quiet" data-share="${i}" type="button"><span class="idle">Share</span><span class="ok">Link copied</span></button>
         </div>
       </div>`);
     results.appendChild(row);
@@ -526,7 +540,8 @@ function renderProblem(vibe, message){
 }
 
 results.onclick = e => {
-  const c = e.target.closest('[data-copy]'), ed = e.target.closest('[data-edit]');
+  const c = e.target.closest('[data-copy]'), ed = e.target.closest('[data-edit]'), sh = e.target.closest('[data-share]');
+  if(sh){ const o = lastCombos[+sh.dataset.share]; shareDrink(o, o.name, sh) }
   if(e.target.closest('[data-again]')){ mix(lastVibe); return }
   if(c){ copyText(M.orderLine(lastCombos[+c.dataset.copy]), c) }
   if(ed){

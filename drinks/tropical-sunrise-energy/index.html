@@ -11,7 +11,9 @@
 <meta property="og:site_name" content="Brew Combos">
 <meta property="og:title" content="Tropical Sunrise Energy: how to order it at 7 Brew">
 <meta property="og:description" content="Mango and passion fruit up top, pomegranate settling to the bottom, so it looks like a sunrise and tastes like a vacation. Order it by saying: &quot;Can I get a…">
-<meta property="og:image" content="https://brewcombos.com/assets/og.png">
+<meta property="og:image" content="https://brewcombos.com/card.png?drink=energy&amp;temp=iced&amp;size=medium&amp;f=Mango%2CPassion+Fruit%2CPomegranate&amp;n=Tropical%20Sunrise%20Energy">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#F5EFE6" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#17110E" media="(prefers-color-scheme: dark)">
@@ -89,6 +91,7 @@
           <div class="actions">
             <button class="btn" type="button" data-say="Can I get a medium 7 Energy with mango, passion fruit, and pomegranate?"><span class="idle">Copy order</span><span class="ok">Copied</span></button>
             <a class="btn quiet" href="/?drink=energy&amp;temp=iced&amp;size=medium&amp;f=Mango%2CPassion+Fruit%2CPomegranate#build">Tweak it</a>
+            <button class="btn quiet" type="button" data-share="/drinks/tropical-sunrise-energy" data-title="Tropical Sunrise Energy" data-text="Can I get a medium 7 Energy with mango, passion fruit, and pomegranate?"><span class="idle">Share</span><span class="ok">Link copied</span></button>
           </div>
         </div>
         
@@ -144,10 +147,16 @@
   <footer>Not affiliated with 7 Brew. Flavors change by stand and season, so if your Brewista doesn't have one, ask what's close.</footer>
 </div>
 <script>
+const done = b => { b.classList.add('done'); clearTimeout(b._t); b._t = setTimeout(() => b.classList.remove('done'), 1600) };
+const copy = async (text, label) => { try { await navigator.clipboard.writeText(text); return true } catch { prompt(label, text); return false } };
 document.addEventListener('click', async e => {
-  const b = e.target.closest('[data-say]'); if (!b) return;
-  try { await navigator.clipboard.writeText(b.dataset.say) } catch { prompt('Copy your order:', b.dataset.say); return }
-  b.classList.add('done'); clearTimeout(b._t); b._t = setTimeout(() => b.classList.remove('done'), 1600);
+  const b = e.target.closest('[data-say]');
+  if (b && await copy(b.dataset.say, 'Copy your order:')) done(b);
+  const s = e.target.closest('[data-share]'); if (!s) return;
+  const url = new URL(s.dataset.share, location.href).href;
+  if (navigator.share && matchMedia('(pointer: coarse)').matches) {
+    try { await navigator.share({ title: s.dataset.title, text: s.dataset.text, url }) } catch {}
+  } else if (await copy(url, 'Copy this link:')) done(s);
 });
 </script>
 <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments) };</script>

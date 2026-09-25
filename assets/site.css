@@ -374,3 +374,5 @@ main h2{font-size:1.15rem;font-weight:750;margin:0}
   .combo-list a{grid-template-columns:22px minmax(0,1fr)}
   .combo-list .ln{grid-column:2}
 }
+.nudge a,.lede a{color:inherit;text-underline-offset:3px;text-decoration-thickness:1px}
+.nudge a:hover,.lede a:hover{color:var(--accent)}

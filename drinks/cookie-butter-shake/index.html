@@ -11,7 +11,9 @@
 <meta property="og:site_name" content="Brew Combos">
 <meta property="og:title" content="Cookie Butter Shake: how to order it at 7 Brew">
 <meta property="og:description" content="A shake with cookie butter, whipped cream and caramel drizzle. Dessert, no caffeine. Order it by saying: &quot;Can I get a medium shake with cookie butter, plus…">
-<meta property="og:image" content="https://brewcombos.com/assets/og.png">
+<meta property="og:image" content="https://brewcombos.com/card.png?drink=shake&amp;temp=frozen&amp;size=medium&amp;f=Cookie+Butter&amp;x=whip%2Ccaramel&amp;n=Cookie%20Butter%20Shake">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#F5EFE6" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#17110E" media="(prefers-color-scheme: dark)">
@@ -89,6 +91,7 @@
           <div class="actions">
             <button class="btn" type="button" data-say="Can I get a medium shake with cookie butter, plus whipped cream and caramel drizzle?"><span class="idle">Copy order</span><span class="ok">Copied</span></button>
             <a class="btn quiet" href="/?drink=shake&amp;temp=frozen&amp;size=medium&amp;f=Cookie+Butter&amp;x=whip%2Ccaramel#build">Tweak it</a>
+            <button class="btn quiet" type="button" data-share="/drinks/cookie-butter-shake" data-title="Cookie Butter Shake" data-text="Can I get a medium shake with cookie butter, plus whipped cream and caramel drizzle?"><span class="idle">Share</span><span class="ok">Link copied</span></button>
           </div>
         </div>
         
@@ -142,10 +145,16 @@
   <footer>Not affiliated with 7 Brew. Flavors change by stand and season, so if your Brewista doesn't have one, ask what's close.</footer>
 </div>
 <script>
+const done = b => { b.classList.add('done'); clearTimeout(b._t); b._t = setTimeout(() => b.classList.remove('done'), 1600) };
+const copy = async (text, label) => { try { await navigator.clipboard.writeText(text); return true } catch { prompt(label, text); return false } };
 document.addEventListener('click', async e => {
-  const b = e.target.closest('[data-say]'); if (!b) return;
-  try { await navigator.clipboard.writeText(b.dataset.say) } catch { prompt('Copy your order:', b.dataset.say); return }
-  b.classList.add('done'); clearTimeout(b._t); b._t = setTimeout(() => b.classList.remove('done'), 1600);
+  const b = e.target.closest('[data-say]');
+  if (b && await copy(b.dataset.say, 'Copy your order:')) done(b);
+  const s = e.target.closest('[data-share]'); if (!s) return;
+  const url = new URL(s.dataset.share, location.href).href;
+  if (navigator.share && matchMedia('(pointer: coarse)').matches) {
+    try { await navigator.share({ title: s.dataset.title, text: s.dataset.text, url }) } catch {}
+  } else if (await copy(url, 'Copy this link:')) done(s);
 });
 </script>
 <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments) };</script>
