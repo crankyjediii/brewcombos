@@ -13,7 +13,11 @@ export default async function handler(req, res) {
     return res.end();
   }
   try {
-    const png = await cardPNG(o, cleanName(url.searchParams.get('n')), { format: url.searchParams.get('format'), label: url.searchParams.get('l') });
+    const q = url.searchParams;
+    // Drink-of-the-day pins: a date like "Friday, September 25" and the day's reason line
+    const date = /^[A-Za-z]+, [A-Za-z]+ \d{1,2}$/.test(q.get('date') || '') ? q.get('date') : '';
+    const why = String(q.get('why') || '').replace(/[^\p{L}\p{N} '’.,!?:()&-]/gu, '').replace(/\s+/g, ' ').trim().slice(0, 110);
+    const png = await cardPNG(o, cleanName(q.get('n')), { format: q.get('format'), label: q.get('l'), date, why });
     res.setHeader('Content-Type', 'image/png');
     res.setHeader('Cache-Control', 'public, max-age=86400, s-maxage=31536000, immutable');
     res.end(png);
