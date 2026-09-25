@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
+<script>try{var u=new URL(location.href),h=new URLSearchParams(u.hash.slice(1));if(u.searchParams.has('code')||u.searchParams.has('error')||h.has('error')){var cb={code:u.searchParams.get('code'),error:u.searchParams.has('error')||h.has('error')};['code','error','error_code','error_description','sb_flow_id'].forEach(k=>u.searchParams.delete(k));u.hash='account';history.replaceState(Object.assign({},history.state,{bcAuthCallback:cb}),'',u.pathname+u.search+u.hash)}}catch(e){}</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Brew Combos · 7 Brew drink combos and how to order them</title>
@@ -15,31 +16,48 @@
 <meta property="og:image" content="https://brewcombos.com/assets/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Brew Combos: a 7 Brew order card reading 'Can I get a medium 7 Energy chiller with strawberry and peach, plus soft top?'">
+<meta property="og:image:alt" content="Brew Combos: Your next usual. An illustrated strawberry and peach drink on lilac.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://brewcombos.com/assets/og.png">
-<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
-<meta name="theme-color" content="#F5EFE6" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#17110E" media="(prefers-color-scheme: dark)">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><path d='M6 8h20l-2.6 20.5a2 2 0 0 1-2 1.5H10.6a2 2 0 0 1-2-1.5z' fill='%23C8432B'/><path d='M6.9 15h18.2' stroke='%23F5EFE6' stroke-width='2'/><rect x='4' y='5' width='24' height='4' rx='2' fill='%23221610'/></svg>">
-<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebSite", "name": "Brew Combos", "url": "https://brewcombos.com/"}, {"@context": "https://schema.org", "@type": "WebApplication", "name": "Brew Combos", "url": "https://brewcombos.com/", "applicationCategory": "LifestyleApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "description": "Find a 7 Brew drink combo for any mood, or build your own flavor by flavor, and get the exact words to say at the window."}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How do I order a secret menu drink at 7 Brew?", "acceptedAnswer": {"@type": "Answer", "text": "Say it in this order: size, hot or iced (or Chiller), the base drink, then your flavors and any extras. Every order this site writes follows that pattern. If your Brewista doesn't know a drink by its nickname, just read them the flavors."}}, {"@type": "Question", "name": "What is a Chiller at 7 Brew?", "acceptedAnswer": {"@type": "Answer", "text": "A Chiller is 7 Brew's blended, slushy version of a drink. Coffee drinks, 7 Energy, lemonade and more can be made as a Chiller."}}, {"@type": "Question", "name": "What is a soft top?", "acceptedAnswer": {"@type": "Answer", "text": "Soft top is 7 Brew's creamy topping for cold drinks, similar to cold foam. Add it to iced drinks and Chillers."}}, {"@type": "Question", "name": "Can I get any drink sugar-free?", "acceptedAnswer": {"@type": "Answer", "text": "Most flavors come in a sugar-free version, and 7 Energy has a sugar-free base. Tick sugar-free here and the order line says it for you. Sugar-free options vary by stand, so ask if yours is missing."}}, {"@type": "Question", "name": "How many flavors can I add?", "acceptedAnswer": {"@type": "Answer", "text": "Three flavors is the usual limit. You can also ask for ¼, ½ or extra sweetness to change how strong the syrups taste."}}]}]</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" sizes="180x180">
+<meta name="theme-color" content="#f8f8f2" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#15241f" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/assets/favicon.ico" sizes="16x16 32x32 48x48">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="manifest" href="/assets/site.webmanifest">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Brew Combos","url":"https://brewcombos.com/","description":"Find 7 Brew drink combinations and the exact words to order them."}</script>
+
 <script>try{var s=JSON.parse(localStorage.getItem('bc_settings')||'{}'),r=document.documentElement;if(s.theme==='light'||s.theme==='dark')r.dataset.theme=s.theme;if(s.motion==='reduce')r.dataset.motion='reduce'}catch(e){}</script>
 <link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/overhaul.css">
 </head>
-<body>
+<body class="home">
+<a class="skip-link" href="#main">Skip to content</a>
 <div class="wrap">
-  <header>
-    <h1>Brew Combos</h1>
-    <p class="sub">Turn a mood into a 7 Brew order, or build one flavor by flavor. You get the exact sentence to say at the window.</p>
-    <button class="icon-btn settings-btn" type="button" data-settings aria-label="Settings"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></button>
+  <header class="site-top brand-header">
+    <a class="mark" href="/" aria-label="Brew Combos home"><span class="brand-icon" aria-hidden="true">b.</span>brew<span>combos</span><span class="brand-dot">✳</span></a>
+    <nav aria-label="Site"><a href="/" data-nav="discover">Discover</a><a href="/#vibe" data-nav="vibe">The mixer</a><a href="/#community" data-nav="community">Community</a><a href="/#saved" data-nav="saved">My drinks <span data-saved-count>0</span></a></nav>
+    <div class="header-actions"><button class="account-btn" type="button" data-account>Sign in <span aria-hidden="true">↗</span></button><button class="icon-btn" data-settings type="button" aria-label="Settings">⚙</button></div>
   </header>
-
-  <section class="daily" id="daily" aria-labelledby="daily-h" hidden></section>
-
-  <div class="tabs-row">
+<main id="main" tabindex="-1">
+<section id="view-discover" data-view="discover">
+  <div class="home-hero">
+    <div class="hero-copy"><p class="eyebrow"><span class="tiny-star">✳</span> A little less “the usual.”</p><h1>Your next<br><em>usual.</em></h1><p class="hero-intro">Find your kind of 7 Brew drink. Make it your own.<br class="desktop-break"> Know exactly what to order.</p><div class="hero-actions"><a class="btn primary" href="#recipe-book">Find a drink <span aria-hidden="true">↘</span></a><a class="hero-link" href="#build">Build my own <span aria-hidden="true">↗</span></a></div><div class="hero-note"><span class="overlap-dots" aria-hidden="true"><i></i><i></i><i></i></span><span><b id="recipe-total">60+</b> recipes. Plenty of possibilities.</span></div></div>
+    <section class="daily-feature" id="daily" aria-labelledby="daily-h"><p class="eyebrow">A fresh pick, every day</p><div id="daily-art"></div><div class="daily-bottom"><div><p class="eyebrow" id="daily-date">Drink of the day</p><h2 id="daily-h">Something good is brewing.</h2></div><a class="round-link" id="daily-link" href="/drinks" aria-label="View today's drink">↗</a></div></section>
+  </div>
+  <section class="discovery" id="recipe-book" aria-labelledby="discover-h"><div class="section-heading"><div><p class="eyebrow">The recipe book</p><h2 id="discover-h">What sounds good?</h2></div><button class="text-btn" id="surprise-discover" type="button">Surprise me <span aria-hidden="true">↗</span></button></div>
+    <div class="search-row"><div class="search-field"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><input id="search-drinks" type="search" placeholder="Try strawberry, cold brew, or a drink name…" aria-label="Search drinks"><kbd aria-hidden="true">/</kbd></div><button class="filter-toggle" type="button" id="toggle-filters" aria-expanded="false" aria-controls="advanced-filters">Filters <span aria-hidden="true">☷</span></button></div>
+    <div class="category-filters" id="categories" role="group" aria-label="Drink category"><button data-category="any" aria-pressed="true">All drinks</button><button data-category="energy" aria-pressed="false">7 Energy</button><button data-category="coffee" aria-pressed="false">Coffee</button><button data-category="tea" aria-pressed="false">Tea & matcha</button><button data-category="nocaf" aria-pressed="false">Without coffee or energy</button></div>
+    <div class="advanced-filters" id="advanced-filters" hidden><label>Temperature<select id="filter-temp"><option value="any">Any temperature</option><option value="iced">Iced</option><option value="hot">Hot</option><option value="frozen">Blended</option></select></label><label>Flavor mood<select id="filter-taste"><option value="any">Every mood</option><option value="fruity">Fruity</option><option value="creamy">Creamy</option><option value="tropical">Tropical</option><option value="chocolate">Chocolate</option><option value="seasonal">Seasonal</option></select></label><label>Leave out a flavor<input id="filter-exclude" placeholder="e.g. coconut, banana" aria-describedby="exclude-note"></label><p id="exclude-note">Filters match recipe ingredients, not allergens. Check ingredients and availability with your stand.</p></div>
+    <div class="results-meta"><p id="discovery-count" role="status"></p><div><button class="text-btn" type="button" id="reset-filters" hidden>Reset filters</button><label class="sort-label">Sort <select id="sort-drinks"><option value="featured">Recipe book order</option><option value="name">Name A–Z</option></select></label></div></div>
+    <div class="recipe-grid" id="discovery-grid"></div><button class="btn quiet load-more" id="load-more" type="button">More to explore ↓</button>
+    <noscript><p><a href="/drinks">Browse every recipe and its ordering instructions.</a></p></noscript>
+  </section>
+  <section class="mixer-callout"><div><p class="eyebrow">You bring the mood. We’ll bring the mix.</p><h2>Very specific craving?<br>We’re listening.</h2><p>A rainy-day coffee. Something that tastes like summer.<br>Tell the mixer what you’re in the mood for.</p><a class="btn" href="#vibe">Find my mix <span aria-hidden="true">↗</span></a></div><div class="callout-art" aria-hidden="true"><span>sweet<br>little<br>plot twist.</span><i>✳</i></div></section>
+  <section class="community-callout"><div><p class="eyebrow">Good drinks get passed around.</p><h2>Got an order worth sharing?</h2><p>Give your creation a name and send it to the community recipe book. We review each recipe before it goes live.</p></div><a class="btn quiet" href="#community">Meet the community ↗</a></section>
+  <section class="ordering-guide" aria-labelledby="guide-h"><div><p class="eyebrow">First time here?</p><h2 id="guide-h">A good order,<br>in a few words.</h2><p>Every recipe comes with a sentence to read at the window. Nicknames are optional.</p></div><div class="guide-questions"><details><summary>How do I order a custom drink?</summary><p>Start with the size and temperature, then the base, flavors and extras. Open any recipe for the complete order, or use the builder to write your own.</p></details><details><summary>Can I request sugar-free flavors?</summary><p>Ask your stand which sugar-free flavors it carries. A sugar-free syrup request does not make the whole drink sugar-free: milk, the base and toppings may still contain sugar. <a href="https://7brew.com/nutrition" target="_blank" rel="noopener">See 7 Brew’s nutrition guide.</a></p></details><details><summary>Are these official 7 Brew recipes?</summary><p>This is an independent collection of drink ideas. Availability varies by location and season. Community recipes are reviewed for completeness, not verified by 7 Brew.</p></details><details><summary>What is a Chiller?</summary><p>Chiller is the blended option used for several 7 Brew drinks. Recipes show the available temperatures for their base.</p></details></div></section>
+</section>
+<section id="view-tools" data-view="tools" hidden><div class="page-intro"><p class="eyebrow">Make room for a new favorite.</p><h1 id="tools-heading">Made to your mood.</h1><p>A few words or a few flavors. We’ll write the order.</p></div>  <div class="tabs-row">
   <div class="tabs" role="tablist" aria-label="How do you want to order?">
     <button role="tab" id="tab-vibe" aria-selected="true" aria-controls="panel-vibe">From a vibe</button>
     <button role="tab" id="tab-build" aria-selected="false" aria-controls="panel-build" tabindex="-1">Build my own</button>
@@ -64,7 +82,7 @@
           <span class="label" id="kind-label">Drink type</span>
           <div class="seg" id="kind" role="group" aria-labelledby="kind-label"></div>
         </div>
-        <label class="check"><input type="checkbox" id="vibe-sf"><span class="box"><svg viewBox="0 0 16 16"><path d="M3 8.5l3 3 7-7"/></svg></span>Sugar-free</label>
+        <label class="check"><input type="checkbox" id="vibe-sf"><span class="box"><svg viewBox="0 0 16 16"><path d="M3 8.5l3 3 7-7"/></svg></span>Request sugar-free flavors</label>
       </div>
 
       <div class="go-row">
@@ -111,7 +129,7 @@
         </div>
         <div class="step">
           <label class="check"><input type="checkbox" id="sf"><span class="box"><svg viewBox="0 0 16 16"><path d="M3 8.5l3 3 7-7"/></svg></span>
-            <span>Sugar-free syrups<small>Most flavors come in a sugar-free version. Ask if yours doesn't.</small></span></label>
+            <span>Sugar-free syrups<small>Ask which flavors are available. Milk, bases and toppings may still contain sugar.</small></span></label>
         </div>
       </div>
 
@@ -119,10 +137,13 @@
         <div id="ticket-cup"></div>
         <p class="label">Say this at the window</p>
         <p class="script" id="script" aria-live="polite"></p>
-        <p class="warn" id="warn" hidden>Three flavors is the usual limit. Check with your Brewista before adding more.</p>
+        <p class="warn" id="warn" hidden>More flavors can make an order harder to balance. Ask your Brewista what works.</p>
         <div class="actions">
           <button class="btn" id="copy" type="button"><span class="idle">Copy order</span><span class="ok">Copied</span></button>
           <button class="btn quiet" id="share" type="button"><span class="idle">Share</span><span class="ok">Link copied</span></button>
+          <button class="btn quiet" id="save-build" type="button">Save drink</button>
+          <button class="btn quiet" id="window-build" type="button">Order mode</button>
+          <button class="btn quiet" id="submit-build" type="button">Submit recipe</button>
           <button class="btn quiet" id="clear" type="button">Clear</button>
         </div>
         <dl class="details" id="details"></dl>
@@ -130,536 +151,13 @@
     </div>
   </section>
 
-  <section class="faq" aria-labelledby="faq-h">
-    <h2 id="faq-h">Ordering at 7 Brew</h2>
-    <dl>
-    <div><dt>How do I order a secret menu drink at 7 Brew?</dt><dd>Say it in this order: size, hot or iced (or Chiller), the base drink, then your flavors and any extras. Every order this site writes follows that pattern. If your Brewista doesn't know a drink by its nickname, just read them the flavors.</dd></div>
-    <div><dt>What is a Chiller at 7 Brew?</dt><dd>A Chiller is 7 Brew's blended, slushy version of a drink. Coffee drinks, 7 Energy, lemonade and more can be made as a Chiller.</dd></div>
-    <div><dt>What is a soft top?</dt><dd>Soft top is 7 Brew's creamy topping for cold drinks, similar to cold foam. Add it to iced drinks and Chillers.</dd></div>
-    <div><dt>Can I get any drink sugar-free?</dt><dd>Most flavors come in a sugar-free version, and 7 Energy has a sugar-free base. Tick sugar-free here and the order line says it for you. Sugar-free options vary by stand, so ask if yours is missing.</dd></div>
-    <div><dt>How many flavors can I add?</dt><dd>Three flavors is the usual limit. You can also ask for ¼, ½ or extra sweetness to change how strong the syrups taste.</dd></div>
-    </dl>
-  </section>
-
-  <footer>Not affiliated with 7 Brew. Flavors change by stand and season, so if your Brewista doesn't have one, ask what's close.</footer>
+</section>
+<section id="view-saved" data-view="saved" hidden><div class="page-intro"><p class="eyebrow">Your personal recipe book</p><h1>The good ones,<br><em>kept close.</em></h1><p>Save an order for next time. Sign in to keep your drinks across devices.</p></div><div class="saved-toolbar"><div class="category-filters" id="saved-filters" role="group" aria-label="Saved drinks"><button data-saved-filter="all" aria-pressed="true">All saved</button><button data-saved-filter="saved" aria-pressed="false">Want to try</button><button data-saved-filter="tried" aria-pressed="false">Tried it</button></div><button class="text-btn" type="button" id="export-library">Export my drinks ↗</button></div><p id="sync-status" class="muted" role="status"></p><div id="saved-grid" class="recipe-grid"></div></section>
+<section id="view-community" data-view="community" hidden><div class="page-intro"><p class="eyebrow">The community recipe book</p><h1>Good taste.<br><em>Better shared.</em></h1><p>Drink ideas from people who have a very specific order. Each submission gets a review before it’s published.</p></div><div class="community-layout"><div><div class="section-heading"><h2>From the community</h2><button class="text-btn" type="button" id="refresh-community">Refresh ↻</button></div><p id="community-status" role="status"></p><div id="community-grid" class="recipe-grid community-grid"></div><section id="my-submissions" hidden><h2>Your submissions</h2><div id="submission-list"></div></section><section id="moderation" hidden><h2>Awaiting your review</h2><div id="moderation-list"></div></section></div><aside class="submission-card"><p class="eyebrow">Put your name on it.</p><h2>Share your usual.</h2><p>Start with a drink in the builder, then give it a name and tell us what it tastes like.</p><a href="#build" class="text-btn">Open the builder ↗</a><div id="submission-preview"></div><form id="submission-form"><label for="submission-name">Drink name</label><input id="submission-name" minlength="2" maxlength="60" required placeholder="Your drink’s name"><label for="submission-author">Your public name</label><input id="submission-author" minlength="2" maxlength="40" required placeholder="A name or nickname"><label for="submission-description">What makes it good?</label><textarea id="submission-description" minlength="10" maxlength="280" rows="3" required placeholder="Describe the flavors and your favorite way to order it."></textarea><p class="form-note">Your name and recipe will be public if approved. Your email stays private.</p><button class="btn primary" id="submit-community" type="submit">Send for review ↗</button><p id="submission-status" role="status"></p></form></aside></div></section>
+</main>
+<footer class="brand-footer"><a class="mark" href="/">brew<span>combos</span><span class="brand-dot">✳</span></a><p>An independent corner of the internet for your next 7 Brew order.<br>Not affiliated with 7 Brew. Flavors vary by stand and season.</p><nav aria-label="Footer"><a href="/drinks">All recipes</a><a href="/#community">Community</a><a href="https://7brew.com/menu" target="_blank" rel="noopener">Official 7 Brew menu ↗</a></nav><span class="footer-note">Made for the “what should I get?” people.</span></footer>
 </div>
-
-<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments) };</script>
-<script defer src="/_vercel/insights/script.js"></script>
-<script type="module">
-import * as M from './lib/menu.js';
-import { cupSVG, cupLook } from './lib/cup.js';
-import { drinkOfTheDay } from './lib/daily.js';
-import { getSettings, onSettings, reducedMotion } from './assets/settings.js';
-import { openShare } from './assets/share.js';
-
-const reduce = () => reducedMotion();   // follows the device setting and the Animations setting
-const $ = (s, r = document) => r.querySelector(s);
-const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const store = {
-  get(k, f){ try{ const v = localStorage.getItem(k); return v == null ? f : JSON.parse(v) }catch{ return f } },
-  set(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)) }catch{} },
-};
-const rand = a => a[Math.floor(Math.random() * a.length)];
-
-let custom = M.cleanCustom(store.get('tp_custom', []));
-const flavorList = () => M.allFlavors(custom);
-const colorOf = n => M.flavorColor(n, custom);
-
-/* Readable text color on a flavor swatch */
-function textOn(c){
-  if(!c.startsWith('#')) return '#221610';
-  const n = parseInt(c.slice(1), 16), r = n >> 16, g = (n >> 8) & 255, b = n & 255;
-  return (0.299*r + 0.587*g + 0.114*b) / 255 > .62 ? '#221610' : '#FFFFFF';
-}
-const swatches = flavors => `<ul class="flavors-inline">${flavors.map(f =>
-  `<li><span class="sw" style="--c:${colorOf(f)}"></span>${esc(f)}</li>`).join('')}</ul>`;
-
-/* ================= The cup ================= */
-let cupN = 0;
-function createCup(){
-  const n = ++cupN;
-  const el = document.createElement('div'); el.className = 'cup';
-  el.innerHTML = cupSVG(n);
-  const body = el.querySelector('.body');
-  const stops = [...el.querySelectorAll('stop')], level = el.querySelector('.level');
-  const straw = el.querySelector('.straw'), drop = el.querySelector('.drop');
-  let prevFlavors = [];
-
-  function update(o, { quiet = false } = {}){
-    const look = cupLook(o, colorOf);
-    stops.forEach((st, i) => st.style.stopColor = look.stops[i]);
-    Object.entries(look.classes).forEach(([k, v]) => body.classList.toggle(k, v));
-    body.style.setProperty('--drizzle', look.drizzle);
-    body.style.setProperty('--s', look.scale);
-    straw.style.fill = look.straw;
-
-    const added = o.flavors.filter(f => !prevFlavors.includes(f));
-    prevFlavors = [...o.flavors];
-    if(added.length && !quiet) pour(colorOf(added[added.length-1]));
-  }
-  function pour(color){
-    if(reduce()) return;
-    drop.style.fill = color;
-    drop.animate([
-      {transform:'translateY(0) scale(1,1.2)', opacity:1},
-      {transform:'translateY(110px) scale(.9,1.35)', opacity:1, offset:.8},
-      {transform:'translateY(118px) scale(1.6,.3)', opacity:0},
-    ], {duration:480, easing:'cubic-bezier(.5,0,.9,.6)'}).onfinish = () => {
-      level.classList.remove('slosh'); void level.offsetWidth; level.classList.add('slosh');
-    };
-  }
-  return {el, update};
-}
-
-/* ================= Tabs ================= */
-const tabs = [$('#tab-vibe'), $('#tab-build')];
-const bar = $('.tabs .bar');
-function placeBar(){
-  const b = tabs.find(t => t.getAttribute('aria-selected') === 'true');
-  bar.style.width = b.offsetWidth + 'px';
-  bar.style.transform = `translateX(${b.offsetLeft}px)`;
-}
-function showTab(which, { focus = false } = {}){
-  const vibe = which === 'vibe';
-  tabs.forEach(t => {
-    const on = (t.id === 'tab-vibe') === vibe;
-    t.setAttribute('aria-selected', on);
-    t.tabIndex = on ? 0 : -1;
-  });
-  const show = vibe ? $('#panel-vibe') : $('#panel-build');
-  const hide = vibe ? $('#panel-build') : $('#panel-vibe');
-  if(!show.hidden) return placeBar();
-  hide.hidden = true; show.hidden = false;
-  show.classList.remove('enter'); void show.offsetWidth; show.classList.add('enter');
-  placeBar();
-  if(focus) tabs[vibe ? 0 : 1].focus();
-  if(!vibe) render();
-  history.replaceState(null, '', vibe ? location.pathname : '#build');
-}
-tabs[0].onclick = () => showTab('vibe');
-tabs[1].onclick = () => showTab('build');
-$('.tabs').addEventListener('keydown', e => {
-  if(!['ArrowLeft','ArrowRight','Home','End'].includes(e.key)) return;
-  e.preventDefault();
-  const onVibe = tabs[0].getAttribute('aria-selected') === 'true';
-  const next = e.key === 'Home' ? 'vibe' : e.key === 'End' ? 'build' : onVibe ? 'build' : 'vibe';
-  showTab(next, { focus:true });
-});
-document.fonts?.ready.then(placeBar);
-addEventListener('resize', placeBar);
-placeBar();
-
-/* Share a drink: opens the share panel with a preview image of this exact drink.
-   /s?... is the page the link opens; /card.png draws the preview and the story image. */
-function shareDrink(o, name, { page, label } = {}){
-  const q = `${M.comboToQuery(o)}${name ? `&n=${encodeURIComponent(name)}` : ''}`;
-  const title = M.comboTitle(o, name);
-  openShare({
-    url: page || `/s?${q}`, title, text: M.orderLine(o),
-    card: `/card.png?${q}`, story: `/card.png?${q}&format=story${label ? `&l=${label}` : ''}`,
-    filename: `${title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}.png`,
-  });
-}
-
-async function copyText(text, btn, label = 'Copy your order:'){
-  let ok = true;
-  try{ await navigator.clipboard.writeText(text) }
-  catch{
-    const t = document.createElement('textarea'); t.value = text; t.setAttribute('readonly', ''); t.style.cssText = 'position:fixed;opacity:0';
-    document.body.appendChild(t); t.select();
-    try{ ok = document.execCommand('copy') }catch{ ok = false } t.remove();
-  }
-  if(!ok){ prompt(label, text); return }
-  btn.classList.add('done');
-  clearTimeout(btn._t);
-  btn._t = setTimeout(() => btn.classList.remove('done'), 1600);
-}
-
-/* ================= Builder ================= */
-let prefs = getSettings();
-let state = M.applyPrefs(M.fixCombo({drink:'breve', temp:'iced', size:'medium', milk:'', flavors:[], extras:[], sweet:'regular', sf:false}), prefs);
-const ticketCup = createCup();
-$('#ticket-cup').appendChild(ticketCup.el);
-
-function seg(el, items, onPick){
-  el.innerHTML = items.map(([v, l]) => `<button type="button" data-v="${v}">${l}</button>`).join('');
-  el.onclick = e => { const b = e.target.closest('button'); if(b && !b.disabled) onPick(b.dataset.v) };
-}
-function syncSeg(el, current, disabled = []){
-  el.querySelectorAll('button').forEach(b => {
-    b.setAttribute('aria-pressed', b.dataset.v === current);
-    b.disabled = disabled.includes(b.dataset.v);
-  });
-}
-
-$('#drinks').innerHTML = M.DRINKS.map(d =>
-  `<button type="button" class="drink" data-id="${d.id}" style="--c:${d.color}"><b>${d.name}</b><span>${d.desc}</span></button>`).join('');
-$('#drinks').onclick = e => {
-  const b = e.target.closest('.drink'); if(!b || b.dataset.id === state.drink) return;
-  // New drink, new milk options: start from their saved milk preference
-  state = M.applyPrefs({ ...state, drink: b.dataset.id, milk: '' }, { milk: prefs.milk });
-  render();
-};
-seg($('#temps'), Object.entries(M.TEMP_LABELS), v => { state.temp = v; render() });
-seg($('#sweets'), M.SWEETS.map(([v, l]) => [v, l]), v => { state.sweet = v; render() });
-$('#sweets').querySelectorAll('button').forEach(b => {
-  const words = M.SWEETS.find(w => w[0] === b.dataset.v)[2];
-  if(words) b.setAttribute('aria-label', words);
-});
-seg($('#sizes'), M.SIZES.map(s => [s, s[0].toUpperCase() + s.slice(1)]), v => { state.size = v; render() });
-
-let milkType = null, extrasKey = '';
-function buildFlavors(){
-  const fl = flavorList();
-  $('#flavors').innerHTML = Object.entries(M.FAMILIES).map(([fam, label]) => {
-    const items = fl.filter(f => f.family === fam);
-    if(!items.length) return '';
-    return `<div class="fam" role="group" aria-label="${label} flavors"><p class="label">${label}</p><div class="chips">${items.map(f => {
-      const chip = `<button type="button" class="chip" data-f="${esc(f.name)}" style="--c:${f.color};--on:${textOn(f.color)}"><span class="sw"></span>${esc(f.name)}</button>`;
-      return fam === 'yours'
-        ? `<span class="mine">${chip}<button type="button" class="rm" data-rm="${esc(f.name)}" aria-label="Remove ${esc(f.name)}">×</button></span>`
-        : chip;
-    }).join('')}</div></div>`;
-  }).join('');
-}
-buildFlavors();
-
-function setScript(el, text){
-  const prev = new Set((el.dataset.prev || '').split(' '));
-  el.innerHTML = text.split(' ').map((w, i) =>
-    `<span class="w${prev.has(w) ? '' : ' fresh'}" style="--i:${i}">${esc(w)}</span>`).join(' ');
-  el.dataset.prev = text;
-}
-
-function render(){
-  state = M.fixCombo(state);
-  const d = M.DRINK[state.drink];
-
-  document.querySelectorAll('.drink').forEach(b => b.setAttribute('aria-pressed', b.dataset.id === state.drink));
-  syncSeg($('#temps'), state.temp, ['hot','iced','frozen'].filter(t => !d.temps.includes(t)));
-  syncSeg($('#sizes'), state.size);
-  syncSeg($('#sweets'), state.sweet, state.sf ? M.SWEETS.map(w => w[0]).filter(v => v !== 'regular') : []);
-
-  if(milkType !== d.milk){
-    milkType = d.milk;
-    const list = M.MILKS[d.milk];
-    $('#milk-wrap').hidden = !list;
-    if(list) seg($('#milks'), list, v => { state.milk = v; render() });
-  }
-  if(M.MILKS[d.milk]) syncSeg($('#milks'), state.milk);
-
-  document.querySelectorAll('#flavors .chip').forEach(c => c.setAttribute('aria-pressed', state.flavors.includes(c.dataset.f)));
-  const n = state.flavors.length;
-  $('#count').textContent = n ? `${n} picked · 3 is the usual max` : 'Pick up to 3';
-
-  const avail = M.EXTRAS.filter(e => e.ok(d, state.temp));
-  const key = avail.map(e => e.id).join();
-  if(key !== extrasKey){
-    extrasKey = key;
-    $('#extras').innerHTML = avail.map(e => `<button type="button" class="chip" data-e="${e.id}">${e.label}</button>`).join('');
-  }
-  document.querySelectorAll('#extras [data-e]').forEach(b => b.setAttribute('aria-pressed', state.extras.includes(b.dataset.e)));
-  $('#sf').checked = state.sf;
-
-  setScript($('#script'), M.orderLine(state));
-  $('#warn').hidden = n <= 3;
-
-  const rows = [['Drink', M.baseLabel(state)]];
-  if(d.milk === 'fixed') rows.push(['Milk', 'Half & half']);
-  rows.push(['Flavors', n ? state.flavors.join(', ') : 'None yet']);
-  if(state.extras.length) rows.push(['Extras', state.extras.map(id => M.EXTRA[id].label).join(', ')]);
-  if(state.sweet !== 'regular') rows.push(['Sweetness', M.SWEETS.find(w => w[0] === state.sweet)[2]]);
-  if(state.sf) rows.push(['Syrups', 'Sugar-free']);
-  $('#details').innerHTML = rows.map(([k, v]) => `<dt>${k}</dt><dd>${esc(v)}</dd>`).join('');
-
-  ticketCup.update(state);
-}
-
-$('#flavors').onclick = e => {
-  const rm = e.target.closest('[data-rm]');
-  if(rm){
-    const name = rm.dataset.rm;
-    custom = custom.filter(c => c !== name); store.set('tp_custom', custom);
-    state.flavors = state.flavors.filter(f => f !== name);
-    buildFlavors(); render();
-    $('#custom-flavor').focus();
-    return;
-  }
-  const b = e.target.closest('.chip'); if(!b) return;
-  const name = b.dataset.f, on = !state.flavors.includes(name);
-  state.flavors = on ? [...state.flavors, name] : state.flavors.filter(f => f !== name);
-  if(on){ b.classList.remove('pop'); void b.offsetWidth; b.classList.add('pop') }
-  render();
-};
-$('#extras').onclick = e => {
-  const b = e.target.closest('[data-e]'); if(!b) return;
-  const id = b.dataset.e;
-  state.extras = state.extras.includes(id) ? state.extras.filter(x => x !== id) : [...state.extras, id];
-  render();
-};
-$('#sf').onchange = e => { state.sf = e.target.checked; render() };
-$('#copy').onclick = e => copyText(M.orderLine(state), e.currentTarget);
-$('#share').onclick = () => shareDrink(state, '');
-$('#clear').onclick = () => { state.flavors = []; state.extras = []; state.sf = false; state.sweet = 'regular'; render() };
-
-$('#add-form').onsubmit = e => {
-  e.preventDefault();
-  const inp = $('#custom-flavor'), note = $('#add-note');
-  note.textContent = '';
-  const raw = M.cleanCustom([inp.value])[0];
-  if(!raw){ inp.value = ''; return }
-  const title = raw.replace(/(^|\s)\p{L}/gu, c => c.toUpperCase());
-  let match = flavorList().find(f => f.name.toLowerCase() === title.toLowerCase());
-  if(!match){
-    if(custom.length >= 12){ note.textContent = 'You can save up to 12 of your own. Remove one to add another.'; return }
-    custom.push(title); store.set('tp_custom', custom); buildFlavors();
-    match = flavorList().find(f => f.name === title);
-  }
-  if(!state.flavors.includes(match.name)) state.flavors.push(match.name);
-  inp.value = ''; render();
-};
-
-/* Surprise me: a short shuffle that slows down, then lands on a sensible combo */
-function randomCombo(){
-  const d = rand(M.DRINKS);
-  const fruity = d.tinted || d.id === 'smoothie';
-  const pool = flavorList().filter(f => fruity ? f.family === 'fruit' : ['classic','dessert'].includes(f.family));
-  const n = 1 + Math.floor(Math.random() * 2) + (Math.random() > .7 ? 1 : 0);
-  const flavors = [];
-  while(flavors.length < n){ const f = rand(pool).name; if(!flavors.includes(f)) flavors.push(f) }
-  const temp = rand(d.temps);
-  const extras = M.EXTRAS.filter(e => e.ok(d, temp) && Math.random() > .75).map(e => e.id).slice(0, 2);
-  return M.applyPrefs({drink:d.id, temp, size:rand(M.SIZES), milk:rand((M.MILKS[d.milk] || [['']]).map(m => m[0])), flavors, extras, sf:false}, prefs);
-}
-let spinning = false;
-$('#surprise').onclick = () => {
-  if(spinning) return;
-  if(reduce()){ state = randomCombo(); render(); return }
-  spinning = true;
-  let tick = 0;
-  (function step(){
-    state = randomCombo(); render();
-    if(++tick < 7) setTimeout(step, 60 + tick * tick * 6);
-    else spinning = false;
-  })();
-};
-
-/* ================= Vibe ================= */
-const EXAMPLES = [
-  "Friday night football, it's cold, we won",
-  'tastes like a sunset at the lake',
-  'Halloween but no pumpkin',
-  'need energy, hate coffee',
-  'rainy day, studying for a math test',
-];
-const ta = $('#vibe-input');
-$('#examples').insertAdjacentHTML('beforeend', EXAMPLES.map(x => `<li><button type="button">${esc(x)}</button></li>`).join(''));
-$('#examples').onclick = e => {
-  const b = e.target.closest('button'); if(!b) return;
-  ta.value = b.textContent; grow(); ta.focus();
-  setStatus('');
-};
-
-function grow(){
-  ta.style.height = 'auto';
-  ta.style.height = ta.scrollHeight + 'px';
-  ta.style.overflowY = ta.scrollHeight > ta.clientHeight + 2 ? 'auto' : 'hidden';
-  const left = 280 - ta.value.length, c = $('#counter');
-  c.textContent = `${left} left`;
-  c.classList.toggle('show', left <= 60);
-  c.classList.toggle('near', left <= 20);
-}
-ta.addEventListener('input', () => { grow(); if($('#status').classList.contains('err')) setStatus('') });
-ta.placeholder = 'a mood, a song, the day you’re having…';
-
-let kind = prefs.kind;
-$('#vibe-sf').checked = prefs.sf;
-seg($('#kind'), M.KINDS, v => { kind = v; syncSeg($('#kind'), kind) });
-syncSeg($('#kind'), kind);
-
-function setStatus(text, err = false){
-  const s = $('#status');
-  s.textContent = text;
-  s.classList.toggle('err', err);
-}
-
-let lastCombos = [], lastVibe = '', inflight = null;
-const results = $('#results');
-
-function head(title, vibe, { busy = false, again = true } = {}){
-  return `<div class="results-head"><h2>${title} for <q>${esc(vibe)}</q></h2>
-    ${again ? `<button class="again" type="button" data-again ${busy ? 'disabled' : ''}>Mix again</button>` : ''}</div>`;
-}
-
-function showLoading(vibe){
-  results.setAttribute('aria-busy', 'true');
-  results.innerHTML = head('Mixing', vibe, { busy:true });
-  const cups = [];
-  for(let i = 0; i < 3; i++){
-    const row = document.createElement('article');
-    row.className = 'result loading'; row.style.setProperty('--i', i); row.setAttribute('aria-hidden', 'true');
-    const cup = createCup(); cups.push(cup);
-    row.appendChild(cup.el);
-    row.insertAdjacentHTML('beforeend', `<div><div class="ph" style="width:60%;height:28px;margin-top:6px"></div><div class="ph" style="width:40%"></div><div class="ph" style="width:75%;margin-top:22px"></div><div class="ph" style="width:55%"></div></div><div class="say"></div>`);
-    results.appendChild(row);
-  }
-  const shuffle = () => cups.forEach(c => c.update(randomCombo(), { quiet:true }));
-  shuffle();
-  const started = Date.now();
-  const timer = setInterval(() => {
-    shuffle();
-    const s = (Date.now() - started) / 1000;
-    if(s > 25) setStatus('Still going. The AI is busy right now; this can take up to a minute.');
-    else if(s > 10) setStatus('Taking longer than usual…');
-  }, 1100);
-  return () => { clearInterval(timer); results.setAttribute('aria-busy', 'false') };
-}
-
-function renderResults(vibe, combos){
-  lastCombos = combos;
-  results.innerHTML = head(['One drink', 'Two drinks', 'Three drinks'][combos.length - 1], vibe);
-  combos.forEach((o, i) => {
-    const row = document.createElement('article');
-    row.className = 'result'; row.style.setProperty('--i', i);
-    row.setAttribute('aria-labelledby', `r${i}`);
-    const cup = createCup();
-    row.appendChild(cup.el);
-    row.insertAdjacentHTML('beforeend', `
-      <div>
-        <h3 id="r${i}">${esc(o.name)}</h3>
-        <p class="base">${esc(M.baseLabel(o))}${o.sf ? ' · sugar-free' : ''}</p>
-        ${swatches(o.flavors)}
-        ${o.why ? `<p class="why">${esc(o.why)}</p>` : ''}
-      </div>
-      <div class="say">
-        <p class="label">Say this at the window</p>
-        <p class="line">${esc(M.orderLine(o))}</p>
-        <div class="actions">
-          <button class="btn" data-copy="${i}" type="button"><span class="idle">Copy order</span><span class="ok">Copied</span></button>
-          <button class="btn quiet" data-edit="${i}" type="button">Tweak it</button>
-          <button class="btn quiet" data-share="${i}" type="button"><span class="idle">Share</span><span class="ok">Link copied</span></button>
-        </div>
-      </div>`);
-    results.appendChild(row);
-    cup.update({...o, flavors:[]}, { quiet:true });
-    setTimeout(() => cup.update(o), reduce() ? 0 : 300 + i * 160);
-  });
-}
-
-function renderProblem(vibe, message){
-  results.innerHTML = head('No drinks yet', vibe, { again:false }) + `
-    <div class="problem" role="alert">
-      <p><strong>That one didn't pour.</strong>${esc(message)}</p>
-      <button class="btn" type="button" data-again>Try again</button>
-    </div>`;
-}
-
-results.onclick = e => {
-  const c = e.target.closest('[data-copy]'), ed = e.target.closest('[data-edit]'), sh = e.target.closest('[data-share]');
-  if(sh){ const o = lastCombos[+sh.dataset.share]; shareDrink(o, o.name) }
-  if(e.target.closest('[data-again]')){ mix(lastVibe); return }
-  if(c){ copyText(M.orderLine(lastCombos[+c.dataset.copy]), c) }
-  if(ed){
-    state = M.fixCombo(lastCombos[+ed.dataset.edit]);
-    showTab('build');
-    scrollTo({top:0, behavior: reduce() ? 'auto' : 'smooth'});
-  }
-};
-
-async function mix(vibe){
-  if(inflight) return;
-  const btn = $('#go');
-  if(!vibe){
-    setStatus('Type a vibe first, or pick one of the examples.', true);
-    ta.focus(); return;
-  }
-  lastVibe = vibe;
-  btn.setAttribute('aria-busy', 'true'); btn.textContent = 'Mixing…';
-  const stop = showLoading(vibe);
-  const ctrl = new AbortController();
-  inflight = ctrl;
-  const giveUp = setTimeout(() => ctrl.abort(), 65_000);
-  if(innerWidth < 900) results.scrollIntoView({ behavior: reduce() ? 'auto' : 'smooth', block:'start' });
-  try{
-    const r = await fetch('/api/mix', {
-      method:'POST', headers:{'Content-Type':'application/json'}, signal: ctrl.signal,
-      body: JSON.stringify({vibe, kind, sf: $('#vibe-sf').checked, custom}),
-    });
-    const j = await r.json().catch(() => ({}));
-    if(!r.ok || !Array.isArray(j.combos) || !j.combos.length) throw new Error(j.error || 'Something went wrong on our end. Give it another try.');
-    stop(); setStatus('');
-    // Saved size / milk / sugar-free preferences apply to AI drinks too
-    renderResults(vibe, j.combos.map(c => ({ ...M.applyPrefs(M.fixCombo(c), prefs), name:c.name, why:c.why })));
-  }catch(err){
-    stop();
-    const msg = err.name === 'AbortError' ? 'The AI took too long to answer. It usually works on a second try.'
-      : err instanceof TypeError ? "Couldn't reach the server. Check your connection and try again."
-      : err.message;
-    setStatus('');
-    renderProblem(vibe, ' ' + msg);
-  }finally{
-    clearTimeout(giveUp); inflight = null;
-    btn.removeAttribute('aria-busy'); btn.textContent = 'Mix three drinks';
-  }
-}
-$('#ask').onsubmit = e => { e.preventDefault(); mix(ta.value.replace(/\s+/g, ' ').trim()) };
-ta.onkeydown = e => {
-  if(e.key === 'Enter' && (e.metaKey || e.ctrlKey || !e.shiftKey)){ e.preventDefault(); $('#ask').requestSubmit() }
-};
-
-render();
-grow();
-document.fonts?.ready.then(grow);
-addEventListener('resize', grow);
-// "Tweak it" links from drink pages (and shared links) carry the drink in the query string.
-const linked = M.comboFromQuery(location.search, custom);
-if(linked){
-  state = linked;
-  history.replaceState(null, '', '/#build');
-}
-if(linked || location.hash === '#build') showTab('build');
-
-/* Settings changed in the panel: update what's on screen */
-onSettings((next, key) => {
-  prefs = next;
-  if(key === 'size' || key === 'milk' || key === 'sf'){ state = M.applyPrefs(state, { [key]: next[key] }); render() }
-  if(key === 'sf') $('#vibe-sf').checked = next.sf;
-  if(key === 'kind'){ kind = next.kind; syncSeg($('#kind'), kind) }
-  if(key === 'flavors'){ custom = []; state.flavors = state.flavors.filter(f => M.FLAVORS.some(x => x.name === f)); buildFlavors(); render() }
-});
-
-/* ================= Drink of the day ================= */
-const today = drinkOfTheDay(new Date());
-function renderDaily(){
-  const c = today.drink, o = M.applyPrefs(M.fixCombo(c.combo), prefs), line = M.orderLine(o);
-  const el = $('#daily');
-  el.innerHTML = `
-    <div id="daily-cup"></div>
-    <div>
-      <p class="label">Drink of the day <span>· ${esc(today.label)}</span></p>
-      <h2 id="daily-h"><a href="/drinks/${c.slug}">${esc(c.name)}</a></h2>
-      <p class="why">${esc(today.why)}</p>
-    </div>
-    <div>
-      <p class="order">${esc(line)}</p>
-      <div class="actions">
-        <button class="btn" type="button" id="daily-copy"><span class="idle">Copy order</span><span class="ok">Copied</span></button>
-        <button class="btn quiet" type="button" id="daily-share">Share</button>
-        <a class="btn quiet" href="/?${esc(M.comboToQuery(o))}#build">Tweak it</a>
-      </div>
-    </div>`;
-  const cup = createCup();
-  $('#daily-cup').replaceWith(cup.el);
-  cup.update({ ...o, flavors: [] }, { quiet:true });
-  setTimeout(() => cup.update(o), reduce() ? 0 : 500);
-  $('#daily-copy').onclick = e => copyText(line, e.currentTarget);
-  $('#daily-share').onclick = () => shareDrink(o, c.name, { page: `/drinks/${c.slug}`, label: 'day' });
-  el.hidden = false;
-}
-renderDaily();
-onSettings((next, key) => { if(['size', 'milk', 'sf'].includes(key)) renderDaily() });
-addEventListener('hashchange', () => showTab(location.hash === '#build' ? 'build' : 'vibe'));
-</script>
-</body>
-</html>
+<script type="module" src="/assets/home.js"></script>
+<script type="module" src="/assets/builder.js"></script>
+<script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};</script><script defer src="/_vercel/insights/script.js"></script>
+</body></html>

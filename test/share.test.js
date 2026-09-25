@@ -38,6 +38,20 @@ test('share page: names are cleaned, bad drinks go home', async () => {
   assert.equal(bad.headers.location, '/');
 });
 
+test('share page and card retain a custom flavor without local storage', async () => {
+  const o = M.fixCombo({ drink: 'latte', flavors: ['Honey'], sf: true, sweet: 'half' });
+  const query = M.comboToQuery(o);
+  const page = await call(share, `/s?${query}`);
+  assert.match(page.body, /sugar-free honey, plus half sweet/);
+  assert.match(page.body, /custom flavor/);
+  assert.match(page.body, /still contain sugar/);
+  assert.match(page.body, /c=Honey/);
+  const image = await call(card, `/card.png?${query}`);
+  assert.equal(image.code, 200);
+  assert.equal(image.headers['content-type'], 'image/png');
+  assert.equal(image.body.subarray(1, 4).toString(), 'PNG');
+});
+
 test('card: PNG, cached for a year, falls back to the default image', async () => {
   const r = await call(card, `/card.png?${Q}`);
   assert.equal(r.code, 200);

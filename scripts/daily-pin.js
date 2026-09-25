@@ -30,7 +30,7 @@ export function dailyPin(date = new Date()) {
   const seasonal = day.holiday || o.flavors.some(f => (M.FLAVORS.find(x => x.name === f) || {}).family === 'seasonal');
   const group = GROUPS.find(g => SECTIONS[g.slug] && g.fits(o, D));
   const q = new URLSearchParams({ n: c.name, format: 'pin', l: 'day', date: day.label, why: day.why });
-  const variations = M.orderVariations(o).map(v => v[0] === 'Chiller' ? 'Chiller' : v[0].toLowerCase());
+  const variations = M.orderVariations(o).map(v => v[0] === 'Chiller' ? 'Chiller' : v[0] === 'Ask for sugar-free syrups' ? 'sugar-free syrup request' : v[0].toLowerCase());
   const also = variations.length ? ` The page also has ${M.joinList(variations)} versions.` : '';
   return {
     date: ymd(date),

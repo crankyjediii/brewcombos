@@ -11,7 +11,7 @@ let data = null;
 try { data = dataEl && JSON.parse(dataEl.textContent) } catch { /* no drink data on this page */ }
 let showStandard = false;
 
-const prefsOf = s => ({ size: s.size, milk: s.milk, sf: s.sf });
+const prefsOf = s => ({ size: s.size, milk: s.milk, sf: s.sf || undefined });
 
 function lists(prefs) {
   document.querySelectorAll('[data-q]').forEach(el => {

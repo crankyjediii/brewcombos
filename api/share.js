@@ -27,12 +27,15 @@ export default function handler(req, res) {
     noindex: true,
     body: `
   <main class="drink-page">
+    <script type="application/json" id="shared-combo-data">${JSON.stringify({name:title,combo:o}).replace(/</g, '\\u003c')}</script>
     <article class="drink-hero">
       ${cup(o)}
       <div>
         <p class="label">Shared with you</p>
         <h1>${esc(title)}</h1>
-        <p class="lede">${esc(M.baseLabel(o))}${o.sf ? ', sugar-free' : ''}. Read the line below at any 7 Brew window.</p>
+        <p class="lede">${esc(M.baseLabel(o))}${o.sf ? ', sugar-free syrups requested' : ''}. Use the order line at your 7 Brew stand.</p>
+        ${o.sf ? '<p class="note">Sugar-free syrup availability varies. Bases, milk and toppings can still contain sugar.</p>' : ''}
+        ${o.flavors.some(f => !M.FLAVORS.some(x => x.name === f)) ? '<p class="note">This recipe includes a custom flavor. Check that your stand carries it.</p>' : ''}
         <div class="say">
           <p class="label">Say this at the window</p>
           <p class="line">${esc(line)}</p>
@@ -40,6 +43,8 @@ export default function handler(req, res) {
             ${copyBtn(line)}
             <a class="btn quiet" href="${esc(`/?${M.comboToQuery(o)}#build`)}">Tweak it</a>
             ${shareBtn(`/s?${query}`, title, line, cardURL(o, name))}
+            <button class="btn quiet" type="button" data-page-save>Save drink</button>
+            <button class="btn quiet" type="button" data-page-order>Order mode</button>
           </div>
         </div>
       </div>

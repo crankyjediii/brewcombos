@@ -17,6 +17,18 @@
     {
       "source": "/card.png",
       "destination": "/api/card"
+    },
+    {
+      "source": "/community",
+      "destination": "/api/community-page"
+    },
+    {
+      "source": "/community/:id",
+      "destination": "/api/community-page?id=:id"
+    },
+    {
+      "source": "/community-sitemap.xml",
+      "destination": "/api/community-page?format=sitemap"
     }
   ]
 }

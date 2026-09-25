@@ -9,7 +9,7 @@ import * as M from '../lib/menu.js';
 import { SITE, esc, page, cup, mini, copyBtn, shareBtn, resetCups, factsHTML, variationsHTML } from '../lib/layout.js';
 import { COMBOS, GROUPS } from '../lib/drinks.js';
 
-const UPDATED = '2026-09-24';
+const UPDATED = '2026-09-25';
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 
 const drinks = COMBOS.map(c => ({ ...c, combo: M.fixCombo(c.combo) }));
@@ -48,9 +48,8 @@ function drinkPage(c, i) {
   const group = primaryOf(c);
   const seasonal = o.flavors.some(f => (M.FLAVORS.find(x => x.name === f) || {}).family === 'seasonal');
 
-  const same = drinks.filter(x => x !== c && primaryOf(x) === group);
-  const start = same.length ? i % same.length : 0;
-  const related = [...same.slice(start), ...same.slice(0, start)].slice(0, 4);
+  const similarity = x => x.combo.flavors.filter(f => c.combo.flavors.includes(f)).length * 3 + (x.combo.drink === c.combo.drink ? 2 : 0) + (x.combo.temp === c.combo.temp ? 1 : 0);
+  const related = drinks.filter(x => x !== c && primaryOf(x) === group).sort((a,b) => similarity(b)-similarity(a)).slice(0, 4);
 
   const body = `
   <main class="drink-page">
@@ -67,8 +66,11 @@ function drinkPage(c, i) {
             ${copyBtn(line)}
             <a class="btn quiet" href="${esc(`/?${M.comboToQuery(o)}#build`)}">Tweak it</a>
             ${shareBtn(`/drinks/${c.slug}`, c.name, line, cardURL(o, c.name))}
+            <button class="btn quiet" type="button" data-page-save>Save drink</button>
+            <button class="btn quiet" type="button" data-page-order>Order mode</button>
           </div>
         </div>
+        <p class="availability-note">An independent drink idea. Confirm flavors and toppings with your stand. Sugar-free flavor requests do not make the entire drink sugar-free.</p>
         <p class="prefs-note" id="prefs-note" hidden></p>
         ${seasonal ? '<p class="note">Seasonal flavor: not every stand carries it year-round. If yours is out, ask what\'s close.</p>' : ''}
       </div>
@@ -94,7 +96,7 @@ function drinkPage(c, i) {
     <script type="application/json" id="combo-data">${JSON.stringify({ slug: c.slug, name: c.name, combo: o }).replace(/</g, '\\u003c')}</script>
     <aside class="nudge">
       <p><strong>Not quite your mood?</strong> Describe it in a few words and get three drinks made for it.</p>
-      <a class="btn primary" href="/">Mix from a vibe</a>
+      <a class="btn primary" href="/#vibe">Mix from a vibe</a>
     </aside>
   </main>`;
 
@@ -137,7 +139,7 @@ function allPage() {
     body: `
   <main class="collection">
     <h1>7 Brew drink combos</h1>
-    <p class="lede">${drinks.length} combos you can order at any 7 Brew stand, each with the exact sentence to say at the window. Tap one for sugar-free and Chiller versions.</p>
+    <p class="lede">${drinks.length} drink ideas, each with the exact words to say at the window. Explore the flavors, adjust your order, and check availability with your stand.</p>
     ${groupNav('')}
     ${PRIMARY.map(g => `
     <section aria-labelledby="g-${g.slug}">

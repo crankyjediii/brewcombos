@@ -76,7 +76,7 @@ test('happy path: one call, reasoning off, JSON mode, drinks normalized', async 
   const prompt = body.messages[0].content;
   assert.match(prompt, /Vibe: rainy day\n/);
   assert.match(prompt, /must be coffee drinks/);
-  assert.match(prompt, /sugar-free friendly/);
+  assert.match(prompt, /Request sugar-free syrups/);
   assert.match(prompt, /Honey/);
 });
 

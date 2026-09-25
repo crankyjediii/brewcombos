@@ -25,9 +25,9 @@ test('orderLine: plain breve', () => {
   assert.equal(M.orderLine(combo({ flavors: ['Caramel'] })), 'Can I get a medium iced breve with caramel?');
 });
 
-test('orderLine: energy drops "iced" (the default) and puts sugar-free on the base', () => {
+test('orderLine: energy requests both the sugar-free base and sugar-free syrups', () => {
   const o = combo({ drink: 'energy', flavors: ['Strawberry', 'Peach'], sf: true });
-  assert.equal(M.orderLine(o), 'Can I get a medium sugar-free 7 Energy with strawberry and peach?');
+  assert.equal(M.orderLine(o), 'Can I get a medium sugar-free 7 Energy with sugar-free strawberry and sugar-free peach?');
 });
 
 test('orderLine: sugar-free on each syrup for non-energy drinks', () => {
@@ -70,7 +70,7 @@ test('cleanCustom strips markup, trims and caps the list', () => {
 });
 
 test('allFlavors adds custom flavors once and skips menu duplicates', () => {
-  const all = M.allFlavors(['Honey', 'vanilla']);
+  const all = M.allFlavors(['Honey', 'vanilla', 'Honey', 'HONEY']);
   assert.equal(all.length, M.FLAVORS.length + 1);
   assert.equal(all.at(-1).family, 'yours');
   assert.match(M.flavorColor('Honey', ['Honey']), /^hsl/);
@@ -120,12 +120,12 @@ test('parseCombos: accepts custom flavors only when sent', () => {
   assert.deepEqual(M.parseCombos(reply(c), { custom: ['Honey'] })[0].flavors, ['Honey']);
 });
 
-test('parseCombos: sugar-free strips whip, drizzle and half sweet', () => {
-  const c = [{ ...good[0], drink: 'mocha', extras: ['whip', 'caramel', 'whitechoc', 'halfsweet', 'shot'] }];
+test('parseCombos: sugar-free strips sweet toppings and preserves requested sweetness', () => {
+  const c = [{ ...good[0], drink: 'mocha', extras: ['whip', 'caramel', 'whitechoc', 'softtop', 'coldfoam', 'halfsweet', 'shot'] }];
   const [o] = M.parseCombos(reply(c), { sf: true });
   assert.equal(o.sf, true);
   assert.deepEqual(o.extras, ['shot']);
-  assert.equal(o.sweet, 'regular');
+  assert.equal(o.sweet, 'half');
 });
 
 test('parseCombos: trims long names and reasons', () => {
@@ -154,7 +154,7 @@ test('parseCombos: drops drinks that break the drink-type filter', () => {
 test('orderLine: blended drinks are Chillers', () => {
   assert.equal(M.orderLine(combo({ drink: 'energy', temp: 'frozen', flavors: ['Mango'] })), 'Can I get a medium 7 Energy chiller with mango?');
   assert.equal(M.orderLine(combo({ drink: 'latte', temp: 'frozen', milk: 'oat', flavors: ['Vanilla'] })), 'Can I get a medium oat milk latte chiller with vanilla?');
-  assert.equal(M.orderLine(combo({ drink: 'energy', temp: 'frozen', sf: true, flavors: ['Peach'] })), 'Can I get a medium sugar-free 7 Energy chiller with peach?');
+  assert.equal(M.orderLine(combo({ drink: 'energy', temp: 'frozen', sf: true, flavors: ['Peach'] })), 'Can I get a medium sugar-free 7 Energy chiller with sugar-free peach?');
   // smoothies and shakes only come blended, so no extra word
   assert.equal(M.orderLine(combo({ drink: 'smoothie', flavors: ['Strawberry'] })), 'Can I get a medium smoothie with strawberry?');
   assert.equal(M.baseLabel(combo({ drink: 'lemonade', temp: 'frozen' })), 'Medium Lemonade Chiller');
@@ -168,11 +168,12 @@ test('orderLine: soft top, drizzle names and sweetness', () => {
   assert.deepEqual(combo({ drink: 'latte', temp: 'hot', extras: ['softtop'] }).extras, []);
 });
 
-test('fixCombo: sweetness defaults to regular and resets for sugar-free', () => {
+test('fixCombo: sweetness defaults to regular and is independent of syrup type', () => {
   assert.equal(combo({}).sweet, 'regular');
   assert.equal(combo({ sweet: 'bogus' }).sweet, 'regular');
   assert.equal(combo({ sweet: 'quarter' }).sweet, 'quarter');
-  assert.equal(combo({ sweet: 'quarter', sf: true }).sweet, 'regular');
+  assert.equal(combo({ sweet: 'quarter', sf: true }).sweet, 'quarter');
+  assert.match(M.orderLine(combo({ flavors: ['Vanilla'], sweet: 'half', sf: true })), /sugar-free vanilla, plus half sweet/);
 });
 
 test('parseCombos: reads sweetness from the sweet field or from old-style extras', () => {
@@ -193,7 +194,10 @@ test('applyPrefs: size, milk where allowed, sugar-free', () => {
   assert.equal(M.applyPrefs(combo({ drink: 'coldbrew', milk: 'cream' }), { milk: 'skim' }).milk, 'cream');  // not offered on cold brew
   const sf = M.applyPrefs(combo({ sweet: 'half' }), { sf: true });
   assert.equal(sf.sf, true);
-  assert.equal(sf.sweet, 'regular');
+  assert.equal(sf.sweet, 'half');
+  assert.equal(M.applyPrefs(sf, { sf: false }).sf, false);
+  assert.equal(M.applyPrefs(sf, { size: 'large' }).sf, true);
+  assert.equal(M.applyPrefs(sf).sf, true);
 });
 
 test('orderFacts and orderVariations follow the combo', () => {
@@ -205,7 +209,33 @@ test('orderFacts and orderVariations follow the combo', () => {
   assert.equal(facts.Sweetness, 'half sweet');
   assert.equal(facts.Caffeine, 'Yes');
   assert.equal(Object.fromEntries(M.orderFacts({ ...o, sf: true })).Syrups, 'Sugar-free');
-  assert.deepEqual(M.orderVariations(o).map(v => v[0]), ['Sugar-free', 'Hot', 'Chiller', 'Large']);
+  assert.deepEqual(M.orderVariations(o).map(v => v[0]), ['Ask for sugar-free syrups', 'Hot', 'Chiller', 'Large']);
   assert.deepEqual(M.orderVariations(M.fixCombo({ ...o, size: 'large', sf: true })).map(v => v[0]), ['Hot', 'Chiller']);
   assert.deepEqual(M.orderVariations(combo({ extras: ['whip'] })).map(v => v[0]), ['Hot', 'Chiller', 'Large']);  // whip: no sugar-free version
+  assert.match(Object.fromEntries(M.orderFacts(combo({ drink: 'fizz' }))).Caffeine, /check add-ins/);
+  assert.equal(Object.fromEntries(M.orderFacts(combo({ drink: 'tea' }))).Caffeine, 'Varies with tea choice');
+});
+
+test('recipe URLs restore declared custom flavors on another device', () => {
+  const original = combo({ drink: 'latte', flavors: ['Vanilla', 'Honey'], extras: ['whip'], sweet: 'half', sf: true });
+  const query = M.comboToQuery(original);
+  assert.equal(new URLSearchParams(query).get('c'), 'Honey');
+  assert.deepEqual(M.comboFromQuery(query), original);
+  // A recipient's full custom list must not crowd out the shared recipe.
+  assert.deepEqual(M.comboFromQuery(query, Array.from({ length: 12 }, (_, i) => `Mine ${i}`)), original);
+  assert.deepEqual(M.comboFromQuery('drink=latte&f=Vanilla,Honey').flavors, ['Vanilla']);
+  assert.equal(new URLSearchParams(M.comboToQuery(combo({ flavors: ['Vanilla'] }))).has('c'), false);
+});
+
+test('recipe URL input stays sanitized, deduplicated and bounded', () => {
+  const query = new URLSearchParams({ drink: 'latte', c: '<script>,Honey,HONEY', f: '<script>,Honey,HONEY,Vanilla', x: 'whip,whip,invalid' });
+  const parsed = M.comboFromQuery(query.toString());
+  assert.deepEqual(parsed.flavors, ['script', 'Honey', 'Vanilla']);
+  assert.deepEqual(parsed.extras, ['whip']);
+  assert.doesNotMatch(M.orderLine(parsed), /[<>]/);
+  const many = combo({ flavors: M.FLAVORS.slice(0, 10).map(f => f.name) });
+  assert.equal(many.flavors.length, M.MAX_FLAVORS);
+  assert.deepEqual(M.comboFromQuery(M.comboToQuery(many)), many);
+  assert.equal(M.comboFromQuery('drink=latte&f=' + 'x'.repeat(8192)), null);
+  assert.deepEqual(M.cleanCustom([null, {}, 42, ' Honey ', 'honey']), ['Honey']);
 });

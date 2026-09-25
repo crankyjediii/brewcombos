@@ -5,11 +5,17 @@
   "scripts": {
     "test": "node --test test/*.test.js",
     "test:live": "node --env-file=.env.local test/live.js",
-    "pages": "node scripts/build-pages.js"
+    "pages": "node scripts/build-pages.js",
+    "brand": "node scripts/build-brand-assets.js",
+    "dev": "node --env-file-if-exists=.env.local scripts/dev.js",
+    "check": "npm run pages && npm test"
   },
   "dependencies": {
     "@resvg/resvg-js": "^2.6.2",
     "@vercel/analytics": "^2.0.1",
     "satori": "^0.33.5"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "^0.5.8"
   }
 }

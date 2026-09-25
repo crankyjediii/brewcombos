@@ -3,3 +3,5 @@ Allow: /
 Disallow: /api/
 
 Sitemap: https://brewcombos.com/sitemap.xml
+
+Sitemap: https://brewcombos.com/community-sitemap.xml

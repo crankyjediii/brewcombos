@@ -44,7 +44,7 @@ function apply() {
   const dark = settings.theme === 'dark' || (settings.theme === 'system' && matchMedia('(prefers-color-scheme: dark)').matches);
   document.querySelectorAll('meta[name="theme-color"]').forEach(m => {
     m.removeAttribute('media');
-    m.content = dark ? '#17110E' : '#F5EFE6';
+    m.content = dark ? '#15241f' : '#f8f8f2';
   });
 }
 
@@ -79,7 +79,7 @@ function build() {
       ${seg('milk', 'Milk')}
       <p class="setting-note">Used in the builder and on AI drinks. Milk only changes drinks that come with a choice; a breve is always half &amp; half.</p>
       <label class="check"><input type="checkbox" data-k="sf"><span class="box"><svg viewBox="0 0 16 16"><path d="M3 8.5l3 3 7-7"/></svg></span>
-        <span>Sugar-free by default<small>Starts every drink with sugar-free syrups.</small></span></label>
+        <span>Request sugar-free syrups<small>Availability varies. Bases, milk and toppings can still contain sugar.</small></span></label>
       ${seg('kind', 'Drink type for vibes')}
     </section>
     <section aria-labelledby="set-data">
