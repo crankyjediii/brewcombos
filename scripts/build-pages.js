@@ -2,7 +2,7 @@
 //   npm run pages        write the files
 // The output is committed, so Vercel serves plain HTML with no build step.
 // test/pages.test.js fails if the committed files are out of date.
-import { writeFileSync, mkdirSync, rmSync } from 'node:fs';
+import { writeFileSync, readFileSync, existsSync, readdirSync, mkdirSync, rmSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import * as M from '../lib/menu.js';
@@ -173,10 +173,15 @@ export function buildPages() {
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const files = buildPages();
-  rmSync(join(ROOT, 'drinks'), { recursive: true, force: true });
+  // Update files in place and remove only pages that no longer exist. Deleting and recreating the whole
+  // folder makes iCloud Drive (this repo sits in ~/Documents) leave "name 2" copies behind.
   for (const [rel, text] of Object.entries(files)) {
-    mkdirSync(dirname(join(ROOT, rel)), { recursive: true });
-    writeFileSync(join(ROOT, rel), text);
+    const abs = join(ROOT, rel);
+    mkdirSync(dirname(abs), { recursive: true });
+    if (!existsSync(abs) || readFileSync(abs, 'utf8') !== text) writeFileSync(abs, text);
+  }
+  for (const dir of readdirSync(join(ROOT, 'drinks'), { withFileTypes: true })) {
+    if (dir.isDirectory() && !files[`drinks/${dir.name}/index.html`]) rmSync(join(ROOT, 'drinks', dir.name), { recursive: true, force: true });
   }
   console.log(`Wrote ${Object.keys(files).length} files (${drinks.length} drinks, ${GROUPS.length} collections).`);
 }

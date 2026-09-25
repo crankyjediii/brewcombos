@@ -1,6 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync, existsSync, readdirSync } from 'node:fs';
+import { execSync } from 'node:child_process';
 import * as M from '../lib/menu.js';
 import { COMBOS, GROUPS } from '../lib/drinks.js';
 import { buildPages } from '../scripts/build-pages.js';
@@ -72,4 +73,14 @@ test('sitemap lists the home page and every generated page', () => {
     const path = '/' + rel.replace(/\/index\.html$/, '');
     assert.ok(xml.includes(`<loc>https://brewcombos.com${path}</loc>`), path);
   }
+});
+
+test('git tracks exactly the generated pages (no iCloud "name 2" copies)', () => {
+  let tracked;
+  try { tracked = execSync('git ls-files -- drinks', { encoding: 'utf8' }).trim().split('\n').filter(Boolean) } catch { return }  // not a git checkout
+  const expected = pages.map(([p]) => p).filter(p => p.startsWith('drinks/'));
+  const staged = execSync('git diff --cached --name-status -- drinks', { encoding: 'utf8' });
+  if (staged) return;   // mid-commit; checked again after
+  assert.deepEqual(tracked.filter(p => !expected.includes(p)), [], 'tracked files that should not exist');
+  assert.deepEqual(expected.filter(p => !tracked.includes(p)), [], 'generated pages that git does not track');
 });
