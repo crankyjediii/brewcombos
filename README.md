@@ -1,4 +1,6 @@
-# Three Pumps
+# Brew Combos
+
+Live at https://brewcombos.com
 
 Turn a vibe into a 7 Brew drink, or pick flavors and get the exact words to order it.
 

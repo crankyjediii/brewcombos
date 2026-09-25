@@ -59,7 +59,7 @@ export default async function handler(req, res) {
           headers: {
             Authorization: `Bearer ${key}`,
             'Content-Type': 'application/json',
-            'X-Title': 'Three Pumps',
+            'X-Title': 'Brew Combos',
             ...(process.env.SITE_URL ? { 'HTTP-Referer': process.env.SITE_URL } : {}),
           },
           body: JSON.stringify({
