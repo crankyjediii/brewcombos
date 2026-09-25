@@ -25,6 +25,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<script>try{var s=JSON.parse(localStorage.getItem('bc_settings')||'{}'),r=document.documentElement;if(s.theme==='light'||s.theme==='dark')r.dataset.theme=s.theme;if(s.motion==='reduce')r.dataset.motion='reduce'}catch(e){}</script>
 <link rel="stylesheet" href="/assets/site.css">
 </head>
 <body>
@@ -32,7 +33,10 @@
   <header>
     <h1>Brew Combos</h1>
     <p class="sub">Turn a mood into a 7 Brew order, or build one flavor by flavor. You get the exact sentence to say at the window.</p>
+    <button class="icon-btn settings-btn" type="button" data-settings aria-label="Settings"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></button>
   </header>
+
+  <section class="daily" id="daily" aria-labelledby="daily-h" hidden></section>
 
   <div class="tabs-row">
   <div class="tabs" role="tablist" aria-label="How do you want to order?">
@@ -144,8 +148,11 @@
 <script type="module">
 import * as M from './lib/menu.js';
 import { cupSVG, cupLook } from './lib/cup.js';
+import { drinkOfTheDay } from './lib/daily.js';
+import { getSettings, onSettings, reducedMotion } from './assets/settings.js';
+import { openShare } from './assets/share.js';
 
-const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const reduce = () => reducedMotion();   // follows the device setting and the Animations setting
 const $ = (s, r = document) => r.querySelector(s);
 const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const store = {
@@ -191,7 +198,7 @@ function createCup(){
     if(added.length && !quiet) pour(colorOf(added[added.length-1]));
   }
   function pour(color){
-    if(reduce) return;
+    if(reduce()) return;
     drop.style.fill = color;
     drop.animate([
       {transform:'translateY(0) scale(1,1.2)', opacity:1},
@@ -242,15 +249,16 @@ document.fonts?.ready.then(placeBar);
 addEventListener('resize', placeBar);
 placeBar();
 
-/* Share a drink: the phone's share sheet on touch devices, otherwise copy the link.
-   /s?... is a page with a preview image of this exact drink. */
-async function shareDrink(o, name, btn){
-  const url = `${location.origin}/s?${M.comboToQuery(o)}${name ? `&n=${encodeURIComponent(name)}` : ''}`;
-  if(navigator.share && matchMedia('(pointer: coarse)').matches){
-    try{ await navigator.share({ title: M.comboTitle(o, name), text: M.orderLine(o), url }) }catch{}
-    return;
-  }
-  copyText(url, btn, 'Copy this link:');
+/* Share a drink: opens the share panel with a preview image of this exact drink.
+   /s?... is the page the link opens; /card.png draws the preview and the story image. */
+function shareDrink(o, name, { page, label } = {}){
+  const q = `${M.comboToQuery(o)}${name ? `&n=${encodeURIComponent(name)}` : ''}`;
+  const title = M.comboTitle(o, name);
+  openShare({
+    url: page || `/s?${q}`, title, text: M.orderLine(o),
+    card: `/card.png?${q}`, story: `/card.png?${q}&format=story${label ? `&l=${label}` : ''}`,
+    filename: `${title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}.png`,
+  });
 }
 
 async function copyText(text, btn, label = 'Copy your order:'){
@@ -268,7 +276,8 @@ async function copyText(text, btn, label = 'Copy your order:'){
 }
 
 /* ================= Builder ================= */
-let state = M.fixCombo({drink:'breve', temp:'iced', size:'medium', milk:'', flavors:[], extras:[], sweet:'regular', sf:false});
+let prefs = getSettings();
+let state = M.applyPrefs(M.fixCombo({drink:'breve', temp:'iced', size:'medium', milk:'', flavors:[], extras:[], sweet:'regular', sf:false}), prefs);
 const ticketCup = createCup();
 $('#ticket-cup').appendChild(ticketCup.el);
 
@@ -285,7 +294,12 @@ function syncSeg(el, current, disabled = []){
 
 $('#drinks').innerHTML = M.DRINKS.map(d =>
   `<button type="button" class="drink" data-id="${d.id}" style="--c:${d.color}"><b>${d.name}</b><span>${d.desc}</span></button>`).join('');
-$('#drinks').onclick = e => { const b = e.target.closest('.drink'); if(!b) return; state.drink = b.dataset.id; render() };
+$('#drinks').onclick = e => {
+  const b = e.target.closest('.drink'); if(!b || b.dataset.id === state.drink) return;
+  // New drink, new milk options: start from their saved milk preference
+  state = M.applyPrefs({ ...state, drink: b.dataset.id, milk: '' }, { milk: prefs.milk });
+  render();
+};
 seg($('#temps'), Object.entries(M.TEMP_LABELS), v => { state.temp = v; render() });
 seg($('#sweets'), M.SWEETS.map(([v, l]) => [v, l]), v => { state.sweet = v; render() });
 $('#sweets').querySelectorAll('button').forEach(b => {
@@ -385,7 +399,7 @@ $('#extras').onclick = e => {
 };
 $('#sf').onchange = e => { state.sf = e.target.checked; render() };
 $('#copy').onclick = e => copyText(M.orderLine(state), e.currentTarget);
-$('#share').onclick = e => shareDrink(state, '', e.currentTarget);
+$('#share').onclick = () => shareDrink(state, '');
 $('#clear').onclick = () => { state.flavors = []; state.extras = []; state.sf = false; state.sweet = 'regular'; render() };
 
 $('#add-form').onsubmit = e => {
@@ -415,12 +429,12 @@ function randomCombo(){
   while(flavors.length < n){ const f = rand(pool).name; if(!flavors.includes(f)) flavors.push(f) }
   const temp = rand(d.temps);
   const extras = M.EXTRAS.filter(e => e.ok(d, temp) && Math.random() > .75).map(e => e.id).slice(0, 2);
-  return M.fixCombo({drink:d.id, temp, size:rand(M.SIZES), milk:rand((M.MILKS[d.milk] || [['']]).map(m => m[0])), flavors, extras, sf:false});
+  return M.applyPrefs({drink:d.id, temp, size:rand(M.SIZES), milk:rand((M.MILKS[d.milk] || [['']]).map(m => m[0])), flavors, extras, sf:false}, prefs);
 }
 let spinning = false;
 $('#surprise').onclick = () => {
   if(spinning) return;
-  if(reduce){ state = randomCombo(); render(); return }
+  if(reduce()){ state = randomCombo(); render(); return }
   spinning = true;
   let tick = 0;
   (function step(){
@@ -458,7 +472,8 @@ function grow(){
 ta.addEventListener('input', () => { grow(); if($('#status').classList.contains('err')) setStatus('') });
 ta.placeholder = 'a mood, a song, the day you’re having…';
 
-let kind = 'any';
+let kind = prefs.kind;
+$('#vibe-sf').checked = prefs.sf;
 seg($('#kind'), M.KINDS, v => { kind = v; syncSeg($('#kind'), kind) });
 syncSeg($('#kind'), kind);
 
@@ -527,7 +542,7 @@ function renderResults(vibe, combos){
       </div>`);
     results.appendChild(row);
     cup.update({...o, flavors:[]}, { quiet:true });
-    setTimeout(() => cup.update(o), reduce ? 0 : 300 + i * 160);
+    setTimeout(() => cup.update(o), reduce() ? 0 : 300 + i * 160);
   });
 }
 
@@ -541,13 +556,13 @@ function renderProblem(vibe, message){
 
 results.onclick = e => {
   const c = e.target.closest('[data-copy]'), ed = e.target.closest('[data-edit]'), sh = e.target.closest('[data-share]');
-  if(sh){ const o = lastCombos[+sh.dataset.share]; shareDrink(o, o.name, sh) }
+  if(sh){ const o = lastCombos[+sh.dataset.share]; shareDrink(o, o.name) }
   if(e.target.closest('[data-again]')){ mix(lastVibe); return }
   if(c){ copyText(M.orderLine(lastCombos[+c.dataset.copy]), c) }
   if(ed){
     state = M.fixCombo(lastCombos[+ed.dataset.edit]);
     showTab('build');
-    scrollTo({top:0, behavior: reduce ? 'auto' : 'smooth'});
+    scrollTo({top:0, behavior: reduce() ? 'auto' : 'smooth'});
   }
 };
 
@@ -564,7 +579,7 @@ async function mix(vibe){
   const ctrl = new AbortController();
   inflight = ctrl;
   const giveUp = setTimeout(() => ctrl.abort(), 65_000);
-  if(innerWidth < 900) results.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block:'start' });
+  if(innerWidth < 900) results.scrollIntoView({ behavior: reduce() ? 'auto' : 'smooth', block:'start' });
   try{
     const r = await fetch('/api/mix', {
       method:'POST', headers:{'Content-Type':'application/json'}, signal: ctrl.signal,
@@ -573,7 +588,8 @@ async function mix(vibe){
     const j = await r.json().catch(() => ({}));
     if(!r.ok || !Array.isArray(j.combos) || !j.combos.length) throw new Error(j.error || 'Something went wrong on our end. Give it another try.');
     stop(); setStatus('');
-    renderResults(vibe, j.combos.map(c => ({ ...M.fixCombo(c), name:c.name, why:c.why })));
+    // Saved size / milk / sugar-free preferences apply to AI drinks too
+    renderResults(vibe, j.combos.map(c => ({ ...M.applyPrefs(M.fixCombo(c), prefs), name:c.name, why:c.why })));
   }catch(err){
     stop();
     const msg = err.name === 'AbortError' ? 'The AI took too long to answer. It usually works on a second try.'
@@ -602,6 +618,46 @@ if(linked){
   history.replaceState(null, '', '/#build');
 }
 if(linked || location.hash === '#build') showTab('build');
+
+/* Settings changed in the panel: update what's on screen */
+onSettings((next, key) => {
+  prefs = next;
+  if(key === 'size' || key === 'milk' || key === 'sf'){ state = M.applyPrefs(state, { [key]: next[key] }); render() }
+  if(key === 'sf') $('#vibe-sf').checked = next.sf;
+  if(key === 'kind'){ kind = next.kind; syncSeg($('#kind'), kind) }
+  if(key === 'flavors'){ custom = []; state.flavors = state.flavors.filter(f => M.FLAVORS.some(x => x.name === f)); buildFlavors(); render() }
+});
+
+/* ================= Drink of the day ================= */
+const today = drinkOfTheDay(new Date());
+function renderDaily(){
+  const c = today.drink, o = M.applyPrefs(M.fixCombo(c.combo), prefs), line = M.orderLine(o);
+  const el = $('#daily');
+  el.innerHTML = `
+    <div id="daily-cup"></div>
+    <div>
+      <p class="label">Drink of the day <span>· ${esc(today.label)}</span></p>
+      <h2 id="daily-h"><a href="/drinks/${c.slug}">${esc(c.name)}</a></h2>
+      <p class="why">${esc(today.why)}</p>
+    </div>
+    <div>
+      <p class="order">${esc(line)}</p>
+      <div class="actions">
+        <button class="btn" type="button" id="daily-copy"><span class="idle">Copy order</span><span class="ok">Copied</span></button>
+        <button class="btn quiet" type="button" id="daily-share">Share</button>
+        <a class="btn quiet" href="/?${esc(M.comboToQuery(o))}#build">Tweak it</a>
+      </div>
+    </div>`;
+  const cup = createCup();
+  $('#daily-cup').replaceWith(cup.el);
+  cup.update({ ...o, flavors: [] }, { quiet:true });
+  setTimeout(() => cup.update(o), reduce() ? 0 : 500);
+  $('#daily-copy').onclick = e => copyText(line, e.currentTarget);
+  $('#daily-share').onclick = () => shareDrink(o, c.name, { page: `/drinks/${c.slug}`, label: 'day' });
+  el.hidden = false;
+}
+renderDaily();
+onSettings((next, key) => { if(['size', 'milk', 'sf'].includes(key)) renderDaily() });
 addEventListener('hashchange', () => showTab(location.hash === '#build' ? 'build' : 'vibe'));
 </script>
 </body>

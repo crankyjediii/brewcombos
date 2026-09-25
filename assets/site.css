@@ -376,3 +376,78 @@ main h2{font-size:1.15rem;font-weight:750;margin:0}
 }
 .nudge a,.lede a{color:inherit;text-underline-offset:3px;text-decoration-thickness:1px}
 .nudge a:hover,.lede a:hover{color:var(--accent)}
+
+/* ---------- Reduced motion chosen in settings ---------- */
+:root[data-motion="reduce"] *,:root[data-motion="reduce"] *::before,:root[data-motion="reduce"] *::after{
+  animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important;animation-delay:0s !important}
+
+/* ---------- Icon buttons ---------- */
+.icon-btn{border:0;background:none;width:40px;height:40px;border-radius:10px;display:inline-grid;place-items:center;color:inherit;flex:none;transition:background-color .2s}
+.icon-btn:hover{background:var(--sunk)}
+.icon-btn svg{width:22px;height:22px;stroke:currentColor;stroke-width:1.8;fill:none;stroke-linecap:round;stroke-linejoin:round}
+header{position:relative}
+header .settings-btn{position:absolute;top:-6px;right:-8px;color:var(--muted)}
+header .settings-btn:hover{color:var(--ink)}
+.site-top nav{align-items:center}
+.site-top .icon-btn{width:36px;height:36px;margin-right:-8px;color:var(--muted)}
+
+/* ---------- Sheets (dialogs) ---------- */
+.sheet{border:0;padding:0;background:var(--paper);color:var(--ink);border-radius:16px;width:min(560px,calc(100% - 32px));max-width:none;
+  max-height:calc(100dvh - 48px);overflow:auto;overscroll-behavior:contain;box-shadow:0 30px 80px -24px rgba(20,10,5,.55)}
+.sheet::backdrop{background:rgba(20,12,8,.45)}
+.sheet[open]{animation:sheetIn .26s var(--ease)}
+@keyframes sheetIn{from{opacity:0;transform:translateY(10px)}}
+.sheet-head{position:sticky;top:0;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0;
+  padding:14px 12px 12px 20px;background:var(--paper);border-bottom:1px solid var(--line)}
+.sheet-head h2{margin:0;font-size:1.3rem;font-weight:750;font-variation-settings:"wdth" 85,"opsz" 36;letter-spacing:-.01em;min-width:0;overflow-wrap:anywhere}
+.sheet h3{margin:0 0 12px;font-size:1rem;font-weight:750}
+
+.share-body{padding:18px 20px 6px;display:grid;gap:14px}
+.share-preview{display:block;width:100%;height:auto;aspect-ratio:1200/630;border-radius:10px;background:var(--sunk);box-shadow:0 0 0 1px var(--line)}
+.share-line{margin:0;font-weight:600;line-height:1.3}
+.share-primary{display:flex;flex-wrap:wrap;gap:8px}
+.share-primary .btn.primary{font-size:1rem;padding:.7rem 1.2rem}
+.share-primary .btn:disabled{opacity:.55;cursor:progress}
+.share-hint{margin:0;font-size:.88rem;color:var(--muted);max-width:52ch}
+.share-to{padding:12px 20px 0}
+.share-targets{list-style:none;margin:8px 0 0;padding:0 20px 20px;display:grid;grid-template-columns:repeat(auto-fill,minmax(118px,1fr));gap:6px}
+.share-targets a,.share-targets button{display:block;width:100%;text-align:left;border:0;background:none;padding:.6rem .8rem;border-radius:8px;
+  box-shadow:inset 0 0 0 1px var(--line);color:inherit;text-decoration:none;font-weight:600;font-size:.95rem;transition:background-color .15s,box-shadow .15s}
+.share-targets a:hover,.share-targets button:hover{background:var(--sunk);box-shadow:inset 0 0 0 1px var(--line-strong)}
+
+.settings-sheet section{padding:18px 20px 6px}
+.settings-sheet section + section{border-top:1px solid var(--line)}
+.setting{margin-bottom:14px}
+.setting .label{margin-bottom:7px}
+.setting .seg{flex-wrap:wrap}
+.setting-note{font-size:.85rem;color:var(--muted);margin:-4px 0 16px;max-width:50ch}
+.settings-sheet .check{margin-bottom:16px}
+.setting-actions{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.setting-actions .btn{padding:.55rem .95rem;font-size:.95rem}
+
+@media (max-width:600px){
+  .sheet{width:100%;margin:auto 0 0;border-radius:16px 16px 0 0;max-height:90dvh;padding-bottom:env(safe-area-inset-bottom,0px)}
+  .sheet[open]{animation:sheetUp .3s var(--ease)}
+  @keyframes sheetUp{from{transform:translateY(32px);opacity:.5}}
+  .share-targets{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+
+/* ---------- Drink of the day ---------- */
+.daily{display:grid;grid-template-columns:80px minmax(0,1fr) minmax(0,1.15fr);gap:6px 30px;align-items:center;margin-top:26px;
+  padding:18px 22px 18px 16px;border-radius:14px;background:var(--sunk);box-shadow:inset 3px 0 0 var(--accent)}
+.daily[hidden]{display:none}
+.daily .cup{width:80px;align-self:center}
+.daily .label{color:var(--accent)}
+.daily .label span{color:var(--muted)}
+.daily h2{margin:4px 0 0;font-size:clamp(1.5rem,2.6vw,2rem);line-height:.95;font-weight:800;font-variation-settings:"wdth" 76,"opsz" 72;letter-spacing:-.015em;text-wrap:balance}
+.daily h2 a{color:inherit;text-decoration:none}
+.daily h2 a:hover{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:4px}
+.daily .why{margin:6px 0 0;color:var(--muted);font-size:.95rem;text-wrap:pretty}
+.daily .order{margin:0;font-weight:650;line-height:1.3;text-wrap:pretty}
+.daily .actions{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.daily .actions .btn{padding:.45rem .85rem;font-size:.9rem}
+@media (max-width:760px){
+  .daily{grid-template-columns:60px minmax(0,1fr);gap:4px 16px;padding:16px 16px 16px 12px}
+  .daily .cup{width:60px}
+  .daily > div:last-child{grid-column:1 / -1;margin-top:10px}
+}

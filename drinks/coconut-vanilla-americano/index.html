@@ -23,6 +23,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<script>try{var s=JSON.parse(localStorage.getItem('bc_settings')||'{}'),r=document.documentElement;if(s.theme==='light'||s.theme==='dark')r.dataset.theme=s.theme;if(s.motion==='reduce')r.dataset.motion='reduce'}catch(e){}</script>
 <link rel="stylesheet" href="/assets/site.css">
 </head>
 <body>
@@ -33,6 +34,7 @@
       <a href="/">From a vibe</a>
       <a href="/#build">Build my own</a>
       <a href="/drinks" aria-current="page">All drinks</a>
+      <button class="icon-btn" type="button" data-settings aria-label="Settings"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></button>
     </nav>
   </header>
   <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Brew Combos</a><span aria-hidden="true">/</span><a href="/drinks">All drinks</a><span aria-hidden="true">/</span><a href="/drinks/coffee">Coffee</a></nav>
@@ -91,7 +93,7 @@
           <div class="actions">
             <button class="btn" type="button" data-say="Can I get a medium iced Americano with coconut and vanilla, plus half sweet?"><span class="idle">Copy order</span><span class="ok">Copied</span></button>
             <a class="btn quiet" href="/?drink=americano&amp;temp=iced&amp;size=medium&amp;f=Coconut%2CVanilla&amp;sweet=half#build">Tweak it</a>
-            <button class="btn quiet" type="button" data-share="/drinks/coconut-vanilla-americano" data-title="Coconut Vanilla Americano" data-text="Can I get a medium iced Americano with coconut and vanilla, plus half sweet?"><span class="idle">Share</span><span class="ok">Link copied</span></button>
+            <button class="btn quiet" type="button" data-share="/drinks/coconut-vanilla-americano" data-title="Coconut Vanilla Americano" data-text="Can I get a medium iced Americano with coconut and vanilla, plus half sweet?" data-card="https://brewcombos.com/card.png?drink=americano&amp;temp=iced&amp;size=medium&amp;f=Coconut%2CVanilla&amp;sweet=half&amp;n=Coconut%20Vanilla%20Americano" data-story="https://brewcombos.com/card.png?drink=americano&amp;temp=iced&amp;size=medium&amp;f=Coconut%2CVanilla&amp;sweet=half&amp;n=Coconut%20Vanilla%20Americano&amp;format=story" data-filename="coconut-vanilla-americano.png">Share</button>
           </div>
         </div>
         
@@ -152,13 +154,10 @@ const copy = async (text, label) => { try { await navigator.clipboard.writeText(
 document.addEventListener('click', async e => {
   const b = e.target.closest('[data-say]');
   if (b && await copy(b.dataset.say, 'Copy your order:')) done(b);
-  const s = e.target.closest('[data-share]'); if (!s) return;
-  const url = new URL(s.dataset.share, location.href).href;
-  if (navigator.share && matchMedia('(pointer: coarse)').matches) {
-    try { await navigator.share({ title: s.dataset.title, text: s.dataset.text, url }) } catch {}
-  } else if (await copy(url, 'Copy this link:')) done(s);
 });
 </script>
+<script type="module" src="/assets/settings.js"></script>
+<script type="module" src="/assets/share.js"></script>
 <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments) };</script>
 <script defer src="/_vercel/insights/script.js"></script>
 </body>

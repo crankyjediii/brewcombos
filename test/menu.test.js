@@ -181,3 +181,17 @@ test('parseCombos: reads sweetness from the sweet field or from old-style extras
   assert.equal(o.sweet, 'half');
   assert.deepEqual(o.extras, ['coldfoam']);
 });
+
+test('applyPrefs: size, milk where allowed, sugar-free', () => {
+  const latte = combo({ drink: 'latte', milk: 'whole', flavors: ['Vanilla'] });
+  assert.deepEqual([M.applyPrefs(latte, { size: 'large', milk: 'oat' })].map(o => [o.size, o.milk]), [['large', 'oat']]);
+  assert.equal(M.applyPrefs(latte, {}).size, 'medium');
+  assert.equal(M.applyPrefs(combo({ flavors: ['Caramel'] }), { milk: 'oat' }).milk, '');          // breve stays half & half
+  assert.equal(M.applyPrefs(combo({ drink: 'coldbrew', milk: 'none' }), { milk: 'oat' }).milk, 'none');
+  assert.equal(M.applyPrefs({ ...combo({ drink: 'latte' }), drink: 'coldbrew', milk: '' }, { milk: 'oat' }).milk, 'none');   // switching to cold brew keeps it black
+  assert.equal(M.applyPrefs(combo({ drink: 'coldbrew', milk: 'cream' }), { milk: 'almond' }).milk, 'almond');
+  assert.equal(M.applyPrefs(combo({ drink: 'coldbrew', milk: 'cream' }), { milk: 'skim' }).milk, 'cream');  // not offered on cold brew
+  const sf = M.applyPrefs(combo({ sweet: 'half' }), { sf: true });
+  assert.equal(sf.sf, true);
+  assert.equal(sf.sweet, 'regular');
+});

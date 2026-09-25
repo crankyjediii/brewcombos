@@ -1,4 +1,5 @@
 // GET /card.png?drink=energy&temp=iced&f=Strawberry,Peach&n=Name  ->  1200x630 PNG preview for a shared drink.
+// Add &format=story for a 1080x1920 image for stories (&l=day labels it "Drink of the day").
 // The same query always draws the same image, so the CDN keeps it for a year.
 import { comboFromQuery } from '../lib/menu.js';
 import { cardPNG, cleanName } from '../lib/card.js';
@@ -12,7 +13,7 @@ export default async function handler(req, res) {
     return res.end();
   }
   try {
-    const png = await cardPNG(o, cleanName(url.searchParams.get('n')));
+    const png = await cardPNG(o, cleanName(url.searchParams.get('n')), { format: url.searchParams.get('format'), label: url.searchParams.get('l') });
     res.setHeader('Content-Type', 'image/png');
     res.setHeader('Cache-Control', 'public, max-age=86400, s-maxage=31536000, immutable');
     res.end(png);

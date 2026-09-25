@@ -39,7 +39,7 @@ export default function handler(req, res) {
           <div class="actions">
             ${copyBtn(line)}
             <a class="btn quiet" href="${esc(`/?${M.comboToQuery(o)}#build`)}">Tweak it</a>
-            ${shareBtn(`/s?${query}`, title, line)}
+            ${shareBtn(`/s?${query}`, title, line, cardURL(o, name))}
           </div>
         </div>
       </div>

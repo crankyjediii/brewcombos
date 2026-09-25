@@ -10,10 +10,13 @@ assets/site.css   styles for every page
 lib/menu.js       drinks, flavors, extras, order wording, AI prompt (shared by page + API)
 lib/cup.js        the cup drawing, shared by the app and the drink pages
 lib/drinks.js     named combos that get their own page
+lib/daily.js      drink of the day (holidays, season, day of the week)
+assets/share.js   share panel (platform links, story image via the phone's share menu)
+assets/settings.js  settings panel (theme, motion, usual size/milk/sugar-free), saved in localStorage
 scripts/build-pages.js   generates drinks/*, the collection pages and sitemap.xml
 api/mix.js        serverless function that calls OpenRouter with your key
 api/share.js      /s?drink=...  page for a shared drink
-api/card.js       /card.png?drink=...  preview image for a shared drink (lib/card.js, fonts in lib/fonts)
+api/card.js       /card.png?drink=...  preview image for a shared drink; &format=story for a 1080x1920 story image
 test/             unit tests (no network needed)
 ```
 

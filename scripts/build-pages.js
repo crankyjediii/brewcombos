@@ -81,7 +81,7 @@ function drinkPage(c, i) {
           <div class="actions">
             ${copyBtn(line)}
             <a class="btn quiet" href="${esc(`/?${M.comboToQuery(o)}#build`)}">Tweak it</a>
-            ${shareBtn(`/drinks/${c.slug}`, c.name, line)}
+            ${shareBtn(`/drinks/${c.slug}`, c.name, line, cardURL(o, c.name))}
           </div>
         </div>
         ${seasonal ? '<p class="note">Seasonal flavor: not every stand carries it year-round. If yours is out, ask what\'s close.</p>' : ''}
